@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+    <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/sisinventarios?zeroDateTimeBehavior=convertToNull</property>
+    <property name="hibernate.connection.username">root</property>
+    <property name="hibernate.connection.password">mysql</property>
+    <mapping resource="Modelo/Medidas.hbm.xml"/>
+    <mapping resource="Modelo/Transaccion.hbm.xml"/>
+    <mapping resource="Modelo/Deposito.hbm.xml"/>
+    <mapping resource="Modelo/Resortes.hbm.xml"/>
+    <mapping resource="Modelo/Dobleacolchado.hbm.xml"/>
+    <mapping resource="Modelo/Esponja.hbm.xml"/>
+    <mapping resource="Modelo/Acolchado.hbm.xml"/>
+    <mapping resource="Modelo/Colchon.hbm.xml"/>
+  </session-factory>
+</hibernate-configuration>

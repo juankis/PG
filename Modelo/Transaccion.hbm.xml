@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 08-feb-2014 17:42:54 by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="Modelo.Transaccion" table="transaccion" catalog="sisinventarios">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="colchon" class="Modelo.Colchon" fetch="select">
+            <column name="Colchon_id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="deposito" class="Modelo.Deposito" fetch="select">
+            <column name="Deposito_id" not-null="true" />
+        </many-to-one>
+        <property name="codigo" type="string">
+            <column name="Codigo" length="45" />
+        </property>
+        <property name="tipo" type="java.lang.Boolean">
+            <column name="tipo" />
+        </property>
+        <property name="fecha" type="timestamp">
+            <column name="fecha" length="19" />
+        </property>
+        <property name="detalle" type="string">
+            <column name="detalle" length="300" />
+        </property>
+        <property name="cantidad" type="java.lang.Double">
+            <column name="cantidad" precision="22" scale="0" />
+        </property>
+        <property name="costoUnitario" type="java.lang.Double">
+            <column name="costoUnitario" precision="22" scale="0" />
+        </property>
+        <property name="precioUnitario" type="java.lang.Double">
+            <column name="precioUnitario" precision="22" scale="0" />
+        </property>
+        <property name="totalCosto" type="java.lang.Double">
+            <column name="totalCosto" precision="22" scale="0" />
+        </property>
+        <property name="totalMayor" type="java.lang.Double">
+            <column name="totalMayor" precision="22" scale="0" />
+        </property>
+    </class>
+</hibernate-mapping>
