@@ -32,7 +32,6 @@ public class ColchonC {
     }
 
     public ColchonC(NuevoProductoV colchonV) {
-        
         colchon=new Colchon(colchonV.getEsponja(), colchonV.getMedidas(), colchonV.getNombre(), colchonV.getColor(), colchonV.getTela(), colchonV.getTipo(),null );
     }
     
@@ -93,7 +92,6 @@ public class ColchonC {
         setListaColchones(new ArrayList<Colchon>());
         conexion.getListaColchones(listaColchones);
         conexion.abrir();
-        
         for(int i=0;i<listaColchones.size();i++){
             addColchonATabla(listaColchones.get(i),(DefaultTableModel)jTableProductos.getModel(),i);
         }
@@ -102,7 +100,13 @@ public class ColchonC {
 
     private void addColchonATabla(Colchon c, DefaultTableModel TableModelProductos,int pos) {
        c=(Colchon)conexion.getObject(c);
-       String[] arr={c.getNombre(),c.getColor(),c.getTela(),c.getEsponja().getCodigo(),c.getMedidas().getCodigo(),c.getTipo()};
+       String  codigo;
+       try{
+           codigo=c.getEsponja().getCodigo();
+       }catch (NullPointerException e){
+           codigo=null;
+       }
+       String[] arr={c.getNombre(),c.getColor(),c.getTela(),codigo,c.getMedidas().getCodigo(),c.getTipo()};
        TableModelProductos.addRow(arr);
     }
 
@@ -120,11 +124,11 @@ public class ColchonC {
         this.listaColchones = listaColchones;
     }
 
-    public void llenarAtributosColchon(JComboBox jTextFieldColor,JComboBox jTextFieldTela,JComboBox Tipo) {
+    public void llenarAtributosColchon(JComboBox JComboBoxColor,JComboBox JComboBoxTela,JComboBox JComboBoxTipo) {
         for(Colchon c:listaColchones){
-            jTextFieldColor.addItem(c.getColor());
-            jTextFieldTela.addItem(c.getTela());
-            Tipo.addItem(c.getTipo());
+            JComboBoxColor.addItem(c.getColor());
+            JComboBoxTela.addItem(c.getTela());
+            JComboBoxTipo.addItem(c.getTipo());
         }
        // jTextFieldColor.addItem("");
         //jTextFieldTela.addItem("");

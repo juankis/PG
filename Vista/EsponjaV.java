@@ -91,12 +91,13 @@ public class EsponjaV extends javax.swing.JFrame {
 
         jLabel2.setText("color");
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(20, 138, 50, 14);
+        jLabel2.setBounds(20, 138, 50, 16);
 
         jLabel1.setText("material");
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(20, 107, 50, 14);
+        jLabel1.setBounds(20, 107, 50, 16);
 
+        botonCancelar.setMnemonic('c');
         botonCancelar.setText("Cancelar");
         botonCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -104,8 +105,9 @@ public class EsponjaV extends javax.swing.JFrame {
             }
         });
         jPanel1.add(botonCancelar);
-        botonCancelar.setBounds(119, 183, 90, 23);
+        botonCancelar.setBounds(119, 183, 90, 28);
 
+        botonGuardar.setMnemonic('g');
         botonGuardar.setText("Guardar");
         botonGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -113,11 +115,11 @@ public class EsponjaV extends javax.swing.JFrame {
             }
         });
         jPanel1.add(botonGuardar);
-        botonGuardar.setBounds(10, 183, 90, 23);
+        botonGuardar.setBounds(10, 183, 90, 28);
 
         jLabel3.setText("Esponja");
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(20, 11, 60, 14);
+        jLabel3.setBounds(20, 11, 60, 16);
 
         jTableEsponjas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -145,6 +147,7 @@ public class EsponjaV extends javax.swing.JFrame {
         jPanel1.add(jScrollPane1);
         jScrollPane1.setBounds(214, 11, 250, 227);
 
+        jButtonVer.setMnemonic('v');
         jButtonVer.setText("ver");
         jButtonVer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -152,8 +155,9 @@ public class EsponjaV extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButtonVer);
-        jButtonVer.setBounds(243, 249, 74, 23);
+        jButtonVer.setBounds(243, 249, 74, 28);
 
+        jButtonEliminar.setMnemonic('e');
         jButtonEliminar.setText("eliminar");
         jButtonEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -161,8 +165,9 @@ public class EsponjaV extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButtonEliminar);
-        jButtonEliminar.setBounds(330, 250, 90, 23);
+        jButtonEliminar.setBounds(330, 250, 90, 28);
 
+        jButtonModificar.setMnemonic('m');
         jButtonModificar.setText("Modificar");
         jButtonModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -170,8 +175,9 @@ public class EsponjaV extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButtonModificar);
-        jButtonModificar.setBounds(10, 209, 90, 23);
+        jButtonModificar.setBounds(10, 209, 90, 28);
 
+        jButtonActualizar.setMnemonic('a');
         jButtonActualizar.setText("Actualizar");
         jButtonActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -179,18 +185,18 @@ public class EsponjaV extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButtonActualizar);
-        jButtonActualizar.setBounds(10, 33, 100, 23);
+        jButtonActualizar.setBounds(10, 33, 100, 28);
 
         jLabel4.setText("Codigo");
         jPanel1.add(jLabel4);
-        jLabel4.setBounds(20, 77, 50, 14);
+        jLabel4.setBounds(20, 77, 50, 16);
         jPanel1.add(codigoCombo);
         codigoCombo.setBounds(85, 74, 91, 27);
 
         fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fondo.jpg"))); // NOI18N
         fondo.setText("jLabel5");
         jPanel1.add(fondo);
-        fondo.setBounds(0, 0, 1718, 1050);
+        fondo.setBounds(0, 0, 1725, 1050);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

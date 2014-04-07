@@ -67,6 +67,7 @@ public class Menu extends javax.swing.JFrame {
         jPanel1.add(jScrollPane1);
         jScrollPane1.setBounds(120, 100, 492, 402);
 
+        jButton1.setMnemonic('t');
         jButton1.setText("Transaccion");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -76,6 +77,7 @@ public class Menu extends javax.swing.JFrame {
         jPanel1.add(jButton1);
         jButton1.setBounds(0, 100, 110, 28);
 
+        jButtonCrearProducto.setMnemonic('p');
         jButtonCrearProducto.setText("Crear Producto");
         jButtonCrearProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -85,6 +87,7 @@ public class Menu extends javax.swing.JFrame {
         jPanel1.add(jButtonCrearProducto);
         jButtonCrearProducto.setBounds(117, 11, 130, 65);
 
+        jButtonEditar.setMnemonic('d');
         jButtonEditar.setText("Editar");
         jButtonEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -94,6 +97,7 @@ public class Menu extends javax.swing.JFrame {
         jPanel1.add(jButtonEditar);
         jButtonEditar.setBounds(0, 130, 110, 28);
 
+        jButtonEliminar.setMnemonic('e');
         jButtonEliminar.setText("Eliminar");
         jButtonEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

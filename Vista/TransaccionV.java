@@ -79,6 +79,8 @@ public class TransaccionV extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jTextFieldCostoUnitario = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox();
         fondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -141,6 +143,7 @@ public class TransaccionV extends javax.swing.JFrame {
         jPanel1.add(jTextFieldPrecioMayor);
         jTextFieldPrecioMayor.setBounds(100, 230, 87, 27);
 
+        jButtonGuardar.setMnemonic('g');
         jButtonGuardar.setText("Guardar");
         jButtonGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -148,8 +151,9 @@ public class TransaccionV extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButtonGuardar);
-        jButtonGuardar.setBounds(146, 299, 90, 28);
+        jButtonGuardar.setBounds(150, 340, 90, 28);
 
+        jButtonCancelar.setMnemonic('c');
         jButtonCancelar.setText("Cancelar");
         jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -157,8 +161,9 @@ public class TransaccionV extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButtonCancelar);
-        jButtonCancelar.setBounds(250, 299, 100, 28);
+        jButtonCancelar.setBounds(250, 340, 100, 28);
 
+        jButtonAceptar.setMnemonic('a');
         jButtonAceptar.setText("Aceptar");
         jButtonAceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -166,7 +171,7 @@ public class TransaccionV extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButtonAceptar);
-        jButtonAceptar.setBounds(44, 299, 90, 28);
+        jButtonAceptar.setBounds(50, 340, 90, 28);
 
         jPanel1.add(jComboBoxProducto);
         jComboBoxProducto.setBounds(100, 80, 110, 26);
@@ -181,6 +186,7 @@ public class TransaccionV extends javax.swing.JFrame {
         jPanel1.add(jTextFieldPrecioCosto);
         jTextFieldPrecioCosto.setBounds(100, 200, 86, 27);
 
+        jButton1.setMnemonic('d');
         jButton1.setText("add");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -200,9 +206,17 @@ public class TransaccionV extends javax.swing.JFrame {
         jPanel1.add(jTextFieldCostoUnitario);
         jTextFieldCostoUnitario.setBounds(100, 140, 86, 27);
 
+        jLabel3.setText("Deposito");
+        jPanel1.add(jLabel3);
+        jLabel3.setBounds(10, 294, 60, 16);
+
+        jComboBox1.setEditable(true);
+        jPanel1.add(jComboBox1);
+        jComboBox1.setBounds(100, 290, 130, 28);
+
         fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fondo.jpg"))); // NOI18N
         jPanel1.add(fondo);
-        fondo.setBounds(0, 0, 1730, 1050);
+        fondo.setBounds(-140, -20, 1730, 1050);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -217,7 +231,7 @@ public class TransaccionV extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 349, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 385, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -291,12 +305,14 @@ public class TransaccionV extends javax.swing.JFrame {
     private javax.swing.JButton jButtonAceptar;
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonGuardar;
+    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JComboBox jComboBoxProducto;
     private com.toedter.calendar.JDateChooser jDateChooser;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;

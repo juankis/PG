@@ -7,6 +7,7 @@ package Controlador;
  */
 
 import Modelo.Colchon;
+import Modelo.Deposito;
 import Modelo.Esponja;
 import Modelo.Medidas;
 import Modelo.Transaccion;
@@ -117,6 +118,13 @@ public class Conexion {
         session = sessionFactory.openSession();
         query = session.createQuery("SELECT t FROM Transaccion t");
         transacciones.addAll(query.list());
+        session.close();
+    }
+
+    void getListaDepositos(ArrayList<Deposito> listaDepositos) {
+        session = sessionFactory.openSession();
+        query = session.createQuery("SELECT d FROM Deposito d");
+        listaDepositos.addAll(query.list());
         session.close();
     }
 

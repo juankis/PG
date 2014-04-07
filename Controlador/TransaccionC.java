@@ -28,7 +28,9 @@ public class TransaccionC {
     
     public void guardar(TransaccionV transaccionV) {
         //transaccion = new Transaccion(transaccionV.getProducto(), transaccionV.getCodigo(), transaccionV.isTipo(), transaccionV.getFecha(), transaccionV.getDetalle(), transaccionV.getPrecioUnitario(), transaccionV.getCantidad(), transaccionV.getPrecioCosto(), transaccionV.getPrecioMayor());
-        transaccion = new Transaccion(transaccionV.getProducto(), null, transaccionV.getCodigo(), transaccionV.isTipo(), transaccionV.getFecha(), transaccionV.getDetalle(), transaccionV.getCantidad(), transaccionV.getCostoUnitario(), transaccionV.getPrecioUnitario(), transaccionV.getPrecioCosto(), transaccionV.getPrecioMayor());
+        transaccion = new Transaccion(transaccionV.getProducto(), null, transaccionV.getCodigo(), transaccionV.isTipo(),
+                transaccionV.getFecha(), transaccionV.getDetalle(), transaccionV.getCantidad(), transaccionV.getCostoUnitario(),
+                transaccionV.getPrecioUnitario(), transaccionV.getPrecioCosto(), transaccionV.getPrecioMayor());
     }
     public void guardar() {
         conexion.guardar(transaccion);

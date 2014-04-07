@@ -141,6 +141,7 @@ public class NuevoProductoV extends javax.swing.JFrame {
         jPanel1.add(jButtonVistaMedidas);
         jButtonVistaMedidas.setBounds(208, 216, 35, 28);
 
+        botonGuardar.setMnemonic('g');
         botonGuardar.setText("Guardar");
         botonGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -150,6 +151,7 @@ public class NuevoProductoV extends javax.swing.JFrame {
         jPanel1.add(botonGuardar);
         botonGuardar.setBounds(40, 271, 100, 28);
 
+        botonCancelar.setMnemonic('c');
         botonCancelar.setText("Cancelar");
         botonCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -172,6 +174,7 @@ public class NuevoProductoV extends javax.swing.JFrame {
         jPanel1.add(jLabel7);
         jLabel7.setBounds(20, 22, 110, 16);
 
+        buttonActualizar.setMnemonic('a');
         buttonActualizar.setText("Actualizar");
         buttonActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -211,8 +214,9 @@ public class NuevoProductoV extends javax.swing.JFrame {
         jPanel1.add(jLabel1);
         jLabel1.setBounds(20, 86, 50, 16);
         jPanel1.add(jTextFieldNombre);
-        jTextFieldNombre.setBounds(75, 83, 127, 27);
+        jTextFieldNombre.setBounds(77, 80, 125, 27);
 
+        jButtonVer.setMnemonic('v');
         jButtonVer.setText("Ver");
         jButtonVer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -222,6 +226,7 @@ public class NuevoProductoV extends javax.swing.JFrame {
         jPanel1.add(jButtonVer);
         jButtonVer.setBounds(330, 300, 77, 28);
 
+        jButtonEliminar.setMnemonic('e');
         jButtonEliminar.setText("Eliminar");
         jButtonEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -231,6 +236,7 @@ public class NuevoProductoV extends javax.swing.JFrame {
         jPanel1.add(jButtonEliminar);
         jButtonEliminar.setBounds(430, 300, 90, 28);
 
+        jButton1.setMnemonic('m');
         jButton1.setText("Modificar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -241,8 +247,9 @@ public class NuevoProductoV extends javax.swing.JFrame {
         jButton1.setBounds(40, 300, 100, 28);
 
         fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fondo.jpg"))); // NOI18N
+        fondo.setText("de3");
         jPanel1.add(fondo);
-        fondo.setBounds(0, 0, 1680, 1050);
+        fondo.setBounds(0, 0, 1705, 1050);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -268,7 +275,7 @@ public class NuevoProductoV extends javax.swing.JFrame {
         if(validar()){
             colchon= new Controlador.ColchonC(this);
             colchon.guardar();
-            limpiarCampos();
+            seleccionarCamposVacios();
             limpiarTabla();
             llenarjTableProductos();//transaccion.setProducto(colchon.get);
         }
@@ -376,11 +383,11 @@ public class NuevoProductoV extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private boolean validar() {
-        System.out.println(jComboBoxEsponja.getSelectedIndex()+"indice");
         if(jComboBoxEsponja.getSelectedIndex()>=0)
             esponja=colchon.getListaEsponjas().get(jComboBoxEsponja.getSelectedIndex());
         else
             esponja=null;
+            
         medidas=colchon.getListaMedidas().get(jComboBoxMedidas.getSelectedIndex());
         tela = jComboBoxTela.getSelectedItem().toString();
         color = jComboBoxColor.getSelectedItem().toString();
@@ -524,11 +531,12 @@ public class NuevoProductoV extends javax.swing.JFrame {
 
     private void actualizar() {
         limpiarTabla();
+        limpiarCampos();
         llenarListaMedias();
         llenarListaEsponjas();
         llenarjTableProductos();
         llenarAtributosColchon();
-        limpiarCampos();
+        seleccionarCamposVacios();
     }
 
     private void limpiarTabla(){
@@ -549,7 +557,7 @@ public class NuevoProductoV extends javax.swing.JFrame {
         AutoCompleteDecorator.decorate(jComboBoxTipo);
     }
 
-    private void limpiarCampos() {
+    private void seleccionarCamposVacios() {
         jComboBoxColor.setSelectedItem("");
         jComboBoxEsponja.setSelectedItem("");
         jComboBoxMedidas.setSelectedItem("");
@@ -616,6 +624,14 @@ public class NuevoProductoV extends javax.swing.JFrame {
 
     private void valoresPorDefecto() {
         jTextFieldNombre.setText("Auto");
+    }
+
+    private void limpiarCampos() {
+        jComboBoxColor.removeAllItems();
+        jComboBoxEsponja.removeAllItems();
+        jComboBoxMedidas.removeAllItems();
+        jComboBoxTela.removeAllItems();
+        jComboBoxTipo.removeAllItems();
     }
     
        

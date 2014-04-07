@@ -1,5 +1,5 @@
 package Modelo;
-// Generated 08-feb-2014 17:42:54 by Hibernate Tools 3.6.0
+// Generated Feb 21, 2014 9:02:18 AM by Hibernate Tools 3.6.0
 
 
 import java.util.HashSet;
@@ -13,14 +13,16 @@ public class Deposito  implements java.io.Serializable {
 
      private Integer id;
      private String nombre;
+     private String direccion;
      private String detalle;
      private Set transaccions = new HashSet(0);
 
     public Deposito() {
     }
 
-    public Deposito(String nombre, String detalle, Set transaccions) {
+    public Deposito(String nombre, String direccion, String detalle, Set transaccions) {
        this.nombre = nombre;
+       this.direccion = direccion;
        this.detalle = detalle;
        this.transaccions = transaccions;
     }
@@ -38,6 +40,13 @@ public class Deposito  implements java.io.Serializable {
     
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+    public String getDireccion() {
+        return this.direccion;
+    }
+    
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
     }
     public String getDetalle() {
         return this.detalle;

@@ -6,9 +6,7 @@
 
 package Vista;
 
-import Controlador.EsponjaC;
 import Controlador.MedidasC;
-import java.awt.Color;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -79,19 +77,19 @@ public class MedidasV extends javax.swing.JFrame {
 
         jLabel1.setText("Plazas");
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(20, 103, 50, 14);
+        jLabel1.setBounds(20, 103, 50, 16);
 
         jLabel2.setText("Largo");
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(20, 130, 50, 14);
+        jLabel2.setBounds(20, 130, 50, 16);
 
         jLabel3.setText("Ancho");
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(19, 156, 50, 14);
+        jLabel3.setBounds(19, 156, 50, 16);
 
         jLabel4.setText("Grosor");
         jPanel1.add(jLabel4);
-        jLabel4.setBounds(20, 180, 50, 14);
+        jLabel4.setBounds(20, 180, 50, 16);
 
         jTextFieldPlazas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -145,6 +143,7 @@ public class MedidasV extends javax.swing.JFrame {
         jPanel1.add(jTextFieldGrosor);
         jTextFieldGrosor.setBounds(91, 179, 81, 27);
 
+        botonGuardar.setMnemonic('g');
         botonGuardar.setText("Guardar");
         botonGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -152,8 +151,9 @@ public class MedidasV extends javax.swing.JFrame {
             }
         });
         jPanel1.add(botonGuardar);
-        botonGuardar.setBounds(10, 217, 90, 23);
+        botonGuardar.setBounds(10, 217, 90, 28);
 
+        botonCancelar.setMnemonic('c');
         botonCancelar.setText("Cancelar");
         botonCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -161,7 +161,7 @@ public class MedidasV extends javax.swing.JFrame {
             }
         });
         jPanel1.add(botonCancelar);
-        botonCancelar.setBounds(110, 220, 90, 23);
+        botonCancelar.setBounds(110, 220, 90, 28);
 
         jTableMedidas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -191,8 +191,9 @@ public class MedidasV extends javax.swing.JFrame {
 
         jLabel5.setText("Medidas");
         jPanel1.add(jLabel5);
-        jLabel5.setBounds(26, 22, 60, 14);
+        jLabel5.setBounds(26, 22, 60, 16);
 
+        jButton1.setMnemonic('a');
         jButton1.setText("Actualizar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -200,8 +201,9 @@ public class MedidasV extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton1);
-        jButton1.setBounds(26, 42, 100, 23);
+        jButton1.setBounds(26, 42, 100, 28);
 
+        jButtonVer.setMnemonic('v');
         jButtonVer.setText("Ver");
         jButtonVer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -209,8 +211,9 @@ public class MedidasV extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButtonVer);
-        jButtonVer.setBounds(270, 280, 49, 23);
+        jButtonVer.setBounds(270, 280, 46, 28);
 
+        jButtonEliminar.setMnemonic('e');
         jButtonEliminar.setText("Eliminar");
         jButtonEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -218,8 +221,9 @@ public class MedidasV extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButtonEliminar);
-        jButtonEliminar.setBounds(350, 280, 90, 23);
+        jButtonEliminar.setBounds(350, 280, 90, 28);
 
+        jButtonModificar.setMnemonic('m');
         jButtonModificar.setText("Modificar");
         jButtonModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -227,7 +231,7 @@ public class MedidasV extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButtonModificar);
-        jButtonModificar.setBounds(10, 246, 90, 23);
+        jButtonModificar.setBounds(10, 246, 90, 28);
 
         jTextFieldCodigo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -239,7 +243,7 @@ public class MedidasV extends javax.swing.JFrame {
 
         jLabel6.setText("Codigo");
         jPanel1.add(jLabel6);
-        jLabel6.setBounds(20, 80, 50, 14);
+        jLabel6.setBounds(20, 80, 50, 16);
 
         fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fondo.jpg"))); // NOI18N
         jPanel1.add(fondo);
@@ -508,7 +512,6 @@ public class MedidasV extends javax.swing.JFrame {
         llenarTableMedidas();
     }
     public void llenarTableMedidas(){
-        //medidas=new MedidasC();
         medidas.llenarJTableEsponjas(jTableMedidas);
     }
     private void limpiarTabla(){

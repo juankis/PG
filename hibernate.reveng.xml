@@ -3,11 +3,11 @@
 <hibernate-reverse-engineering>
   <schema-selection match-catalog="sisinventarios"/>
   <table-filter match-name="colchon"/>
-  <table-filter match-name="acolchado"/>
-  <table-filter match-name="dobleacolchado"/>
   <table-filter match-name="deposito"/>
+  <table-filter match-name="dobleacolchado"/>
+  <table-filter match-name="acolchado"/>
   <table-filter match-name="esponja"/>
   <table-filter match-name="transaccion"/>
-  <table-filter match-name="resortes"/>
   <table-filter match-name="medidas"/>
+  <table-filter match-name="resortes"/>
 </hibernate-reverse-engineering>

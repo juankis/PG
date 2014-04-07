@@ -8,12 +8,12 @@
     <property name="hibernate.connection.username">root</property>
     <property name="hibernate.connection.password">mysql</property>
     <mapping resource="Modelo/Medidas.hbm.xml"/>
-    <mapping resource="Modelo/Transaccion.hbm.xml"/>
-    <mapping resource="Modelo/Deposito.hbm.xml"/>
-    <mapping resource="Modelo/Resortes.hbm.xml"/>
+    <mapping resource="Modelo/Acolchado.hbm.xml"/>
     <mapping resource="Modelo/Dobleacolchado.hbm.xml"/>
     <mapping resource="Modelo/Esponja.hbm.xml"/>
-    <mapping resource="Modelo/Acolchado.hbm.xml"/>
     <mapping resource="Modelo/Colchon.hbm.xml"/>
+    <mapping resource="Modelo/Deposito.hbm.xml"/>
+    <mapping resource="Modelo/Transaccion.hbm.xml"/>
+    <mapping resource="Modelo/Resortes.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>
