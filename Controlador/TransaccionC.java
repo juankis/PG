@@ -7,6 +7,7 @@
 package Controlador;
 
 import Modelo.Colchon;
+import Modelo.Deposito;
 import Modelo.Esponja;
 import Modelo.Transaccion;
 import Vista.TransaccionV;
@@ -25,10 +26,10 @@ public class TransaccionC {
     Conexion conexion=new Conexion();
     private ArrayList<Transaccion> transacciones;
     private ArrayList<Colchon> listaProductos;
+    private ArrayList<Deposito> listaDepositos;
     
     public void guardar(TransaccionV transaccionV) {
-        //transaccion = new Transaccion(transaccionV.getProducto(), transaccionV.getCodigo(), transaccionV.isTipo(), transaccionV.getFecha(), transaccionV.getDetalle(), transaccionV.getPrecioUnitario(), transaccionV.getCantidad(), transaccionV.getPrecioCosto(), transaccionV.getPrecioMayor());
-        transaccion = new Transaccion(transaccionV.getProducto(), null, transaccionV.getCodigo(), transaccionV.isTipo(),
+        transaccion = new Transaccion(transaccionV.getProducto(), transaccionV.getDeposito(), transaccionV.getCodigo(), transaccionV.isTipo(),
                 transaccionV.getFecha(), transaccionV.getDetalle(), transaccionV.getCantidad(), transaccionV.getCostoUnitario(),
                 transaccionV.getPrecioUnitario(), transaccionV.getPrecioCosto(), transaccionV.getPrecioMayor());
     }
@@ -125,6 +126,29 @@ public class TransaccionC {
         return  !res;*/
         //aun no depende de nadie
         return false;
+    }
+
+    public void llenarListaDepositos(JComboBox jComboBoxDepositos) {
+        jComboBoxDepositos.removeAllItems();
+        setListaDepositos(new ArrayList<Deposito>());
+        conexion.getListaDepositos(getListaDepositos());
+        for(int i=0;i<getListaDepositos().size();i++){
+            jComboBoxDepositos.addItem(getListaDepositos().get(i).getNombre());
+        }
+    }
+
+    /**
+     * @return the listaDepositos
+     */
+    public ArrayList<Deposito> getListaDepositos() {
+        return listaDepositos;
+    }
+
+    /**
+     * @param listaDepositos the listaDepositos to set
+     */
+    public void setListaDepositos(ArrayList<Deposito> listaDepositos) {
+        this.listaDepositos = listaDepositos;
     }
     
 }

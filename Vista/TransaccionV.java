@@ -33,6 +33,7 @@ public class TransaccionV extends javax.swing.JFrame {
     private Double precioMayor;
     private int idProducto;
     private Colchon producto;
+    private Modelo.Deposito deposito;
     
     public TransaccionV() {
         initComponents();
@@ -80,7 +81,7 @@ public class TransaccionV extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jTextFieldCostoUnitario = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
+        jComboBoxDepositos = new javax.swing.JComboBox();
         fondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -173,6 +174,11 @@ public class TransaccionV extends javax.swing.JFrame {
         jPanel1.add(jButtonAceptar);
         jButtonAceptar.setBounds(50, 340, 90, 28);
 
+        jComboBoxProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxProductoActionPerformed(evt);
+            }
+        });
         jPanel1.add(jComboBoxProducto);
         jComboBoxProducto.setBounds(100, 80, 110, 26);
 
@@ -210,9 +216,9 @@ public class TransaccionV extends javax.swing.JFrame {
         jPanel1.add(jLabel3);
         jLabel3.setBounds(10, 294, 60, 16);
 
-        jComboBox1.setEditable(true);
-        jPanel1.add(jComboBox1);
-        jComboBox1.setBounds(100, 290, 130, 28);
+        jComboBoxDepositos.setEditable(true);
+        jPanel1.add(jComboBoxDepositos);
+        jComboBoxDepositos.setBounds(100, 290, 130, 28);
 
         fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fondo.jpg"))); // NOI18N
         jPanel1.add(fondo);
@@ -263,6 +269,10 @@ public class TransaccionV extends javax.swing.JFrame {
         np.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jComboBoxProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxProductoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxProductoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -305,7 +315,7 @@ public class TransaccionV extends javax.swing.JFrame {
     private javax.swing.JButton jButtonAceptar;
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonGuardar;
-    private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JComboBox jComboBoxDepositos;
     private javax.swing.JComboBox jComboBoxProducto;
     private com.toedter.calendar.JDateChooser jDateChooser;
     private javax.swing.JLabel jLabel1;
@@ -500,13 +510,14 @@ public class TransaccionV extends javax.swing.JFrame {
         cantidad=Double.parseDouble(jTextFieldCantidad.getText());
         precioCosto=Double.parseDouble(jTextFieldPrecioCosto.getText());
         precioMayor=Double.parseDouble(jTextFieldPrecioMayor.getText());
-        System.out.println(jComboBoxProducto.getSelectedIndex());
         producto=transaccion.getListaProductos().get(jComboBoxProducto.getSelectedIndex());
+        deposito=transaccion.getListaDepositos().get(jComboBoxDepositos.getSelectedIndex());
             return true;
     }
 
     private void actualizar() {
         llenarListaProductos();
+        llenarListaDepositos();
     }
     private void llenarListaProductos(){
         transaccion.llenarListaProductos(jComboBoxProducto);
@@ -558,6 +569,24 @@ public class TransaccionV extends javax.swing.JFrame {
     public void setCostoUnitario(Double costoUnitario) {
         this.costoUnitario = costoUnitario;
         jTextFieldCostoUnitario.setText(costoUnitario.toString());
+    }
+
+    private void llenarListaDepositos() {
+        transaccion.llenarListaDepositos(jComboBoxDepositos);
+    }
+
+    /**
+     * @return the deposito
+     */
+    public Modelo.Deposito getDeposito() {
+        return deposito;
+    }
+
+    /**
+     * @param deposito the deposito to set
+     */
+    public void setDeposito(Modelo.Deposito deposito) {
+        this.deposito = deposito;
     }
 
     
