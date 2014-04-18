@@ -8,7 +8,9 @@ package Vista;
 import Modelo.Colchon;
 import Controlador.TransaccionC;
 import Controlador.Util;
+import Controlador.Validacion;
 import java.util.Date;
+import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 
 /**
@@ -34,7 +36,7 @@ public class TransaccionV extends javax.swing.JFrame {
     private int idProducto;
     private Colchon producto;
     private Modelo.Deposito deposito;
-    
+    private Validacion validacion;
     public TransaccionV() {
         initComponents();
         iniciarComponentes();
@@ -76,12 +78,13 @@ public class TransaccionV extends javax.swing.JFrame {
         jRadioButtonEntrada = new javax.swing.JRadioButton();
         jRadioButtonSalida = new javax.swing.JRadioButton();
         jTextFieldPrecioCosto = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        jButtonAddProducto = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jTextFieldCostoUnitario = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jComboBoxDepositos = new javax.swing.JComboBox();
+        jButton2 = new javax.swing.JButton();
         fondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -90,7 +93,7 @@ public class TransaccionV extends javax.swing.JFrame {
 
         jLabel1.setText("Transaccion");
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(149, 11, 90, 16);
+        jLabel1.setBounds(180, 20, 90, 16);
 
         jLabel2.setText("Producto");
         jPanel1.add(jLabel2);
@@ -105,24 +108,48 @@ public class TransaccionV extends javax.swing.JFrame {
                 jTextFieldDetalleActionPerformed(evt);
             }
         });
+        jTextFieldDetalle.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextFieldDetalleKeyTyped(evt);
+            }
+        });
         jPanel1.add(jTextFieldDetalle);
-        jTextFieldDetalle.setBounds(100, 260, 310, 27);
+        jTextFieldDetalle.setBounds(100, 300, 310, 27);
 
         jLabel5.setText("Detalle");
         jPanel1.add(jLabel5);
-        jLabel5.setBounds(10, 260, 50, 24);
+        jLabel5.setBounds(10, 300, 50, 24);
 
+        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
         jLabel6.setText("Precio Unitario");
         jPanel1.add(jLabel6);
-        jLabel6.setBounds(200, 140, 90, 16);
+        jLabel6.setBounds(200, 210, 90, 16);
 
         jLabel7.setText("Cantidad");
         jPanel1.add(jLabel7);
-        jLabel7.setBounds(10, 170, 70, 16);
+        jLabel7.setBounds(10, 180, 70, 16);
+
+        jTextFieldPrecioUnitario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextFieldPrecioUnitarioKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextFieldPrecioUnitarioKeyTyped(evt);
+            }
+        });
         jPanel1.add(jTextFieldPrecioUnitario);
-        jTextFieldPrecioUnitario.setBounds(290, 140, 86, 27);
+        jTextFieldPrecioUnitario.setBounds(290, 210, 86, 27);
+
+        jTextFieldCantidad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextFieldCantidadKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextFieldCantidadKeyTyped(evt);
+            }
+        });
         jPanel1.add(jTextFieldCantidad);
-        jTextFieldCantidad.setBounds(100, 170, 86, 27);
+        jTextFieldCantidad.setBounds(100, 180, 86, 27);
 
         jLabel8.setText("Codigo");
         jPanel1.add(jLabel8);
@@ -133,16 +160,30 @@ public class TransaccionV extends javax.swing.JFrame {
                 jTextFieldCodigoActionPerformed(evt);
             }
         });
+        jTextFieldCodigo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextFieldCodigoKeyReleased(evt);
+            }
+        });
         jPanel1.add(jTextFieldCodigo);
         jTextFieldCodigo.setBounds(100, 50, 91, 27);
         jPanel1.add(jDateChooser);
         jDateChooser.setBounds(280, 50, 127, 24);
 
+        jLabel9.setForeground(new java.awt.Color(0, 0, 0));
         jLabel9.setText("Precio Mayor");
         jPanel1.add(jLabel9);
-        jLabel9.setBounds(10, 230, 80, 16);
+        jLabel9.setBounds(200, 240, 80, 16);
+
+        jTextFieldPrecioMayor.setEditable(false);
+        jTextFieldPrecioMayor.setBackground(new java.awt.Color(204, 204, 255));
+        jTextFieldPrecioMayor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldPrecioMayorActionPerformed(evt);
+            }
+        });
         jPanel1.add(jTextFieldPrecioMayor);
-        jTextFieldPrecioMayor.setBounds(100, 230, 87, 27);
+        jTextFieldPrecioMayor.setBounds(290, 240, 87, 27);
 
         jButtonGuardar.setMnemonic('g');
         jButtonGuardar.setText("Guardar");
@@ -180,49 +221,71 @@ public class TransaccionV extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jComboBoxProducto);
-        jComboBoxProducto.setBounds(100, 80, 110, 26);
+        jComboBoxProducto.setBounds(100, 80, 130, 26);
 
         jRadioButtonEntrada.setText("Entrada");
         jPanel1.add(jRadioButtonEntrada);
-        jRadioButtonEntrada.setBounds(20, 110, 70, 18);
+        jRadioButtonEntrada.setBounds(20, 150, 70, 18);
 
         jRadioButtonSalida.setText("Salida");
         jPanel1.add(jRadioButtonSalida);
-        jRadioButtonSalida.setBounds(100, 110, 70, 18);
-        jPanel1.add(jTextFieldPrecioCosto);
-        jTextFieldPrecioCosto.setBounds(100, 200, 86, 27);
+        jRadioButtonSalida.setBounds(100, 150, 70, 18);
 
-        jButton1.setMnemonic('d');
-        jButton1.setText("add");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jTextFieldPrecioCosto.setEditable(false);
+        jTextFieldPrecioCosto.setBackground(new java.awt.Color(204, 204, 255));
+        jPanel1.add(jTextFieldPrecioCosto);
+        jTextFieldPrecioCosto.setBounds(100, 240, 86, 27);
+
+        jButtonAddProducto.setMnemonic('d');
+        jButtonAddProducto.setText("add");
+        jButtonAddProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonAddProductoActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1);
-        jButton1.setBounds(230, 80, 49, 28);
+        jPanel1.add(jButtonAddProducto);
+        jButtonAddProducto.setBounds(240, 80, 49, 28);
 
         jLabel10.setText("PrecioCosto");
         jPanel1.add(jLabel10);
-        jLabel10.setBounds(10, 200, 70, 16);
+        jLabel10.setBounds(10, 240, 70, 16);
 
         jLabel11.setText("Costo Unitario");
         jPanel1.add(jLabel11);
-        jLabel11.setBounds(10, 140, 90, 16);
+        jLabel11.setBounds(10, 210, 90, 16);
+
+        jTextFieldCostoUnitario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextFieldCostoUnitarioKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextFieldCostoUnitarioKeyTyped(evt);
+            }
+        });
         jPanel1.add(jTextFieldCostoUnitario);
-        jTextFieldCostoUnitario.setBounds(100, 140, 86, 27);
+        jTextFieldCostoUnitario.setBounds(100, 210, 86, 27);
 
         jLabel3.setText("Deposito");
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(10, 294, 60, 16);
+        jLabel3.setBounds(10, 110, 60, 16);
 
         jComboBoxDepositos.setEditable(true);
         jPanel1.add(jComboBoxDepositos);
-        jComboBoxDepositos.setBounds(100, 290, 130, 28);
+        jComboBoxDepositos.setBounds(100, 110, 130, 28);
+
+        jButton2.setMnemonic('d');
+        jButton2.setText("add");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton2);
+        jButton2.setBounds(240, 110, 49, 28);
 
         fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fondo.jpg"))); // NOI18N
         jPanel1.add(fondo);
-        fondo.setBounds(-140, -20, 1730, 1050);
+        fondo.setBounds(-250, -30, 1730, 1050);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -264,14 +327,58 @@ public class TransaccionV extends javax.swing.JFrame {
        dispose();
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButtonAddProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddProductoActionPerformed
         NuevoProductoV np=new NuevoProductoV(this);
         np.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jButtonAddProductoActionPerformed
 
     private void jComboBoxProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxProductoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBoxProductoActionPerformed
+
+    private void jTextFieldPrecioMayorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldPrecioMayorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldPrecioMayorActionPerformed
+
+    private void jTextFieldCantidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldCantidadKeyTyped
+        validacion.validacionesSoloNumeros(evt);
+    }//GEN-LAST:event_jTextFieldCantidadKeyTyped
+
+    private void jTextFieldCostoUnitarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldCostoUnitarioKeyTyped
+        validacion.validacionesSoloNumeros(evt);
+        
+    }//GEN-LAST:event_jTextFieldCostoUnitarioKeyTyped
+
+    private void jTextFieldPrecioUnitarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldPrecioUnitarioKeyTyped
+        validacion.validacionesSoloNumeros(evt);
+        
+    }//GEN-LAST:event_jTextFieldPrecioUnitarioKeyTyped
+
+    private void jTextFieldDetalleKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldDetalleKeyTyped
+       validacion.validacionCantidadCaracteres(jTextFieldDetalle.getText(), 300, evt);
+    }//GEN-LAST:event_jTextFieldDetalleKeyTyped
+
+    private void jTextFieldCantidadKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldCantidadKeyReleased
+        calularTotalPrecioMayoro();
+        calularTotalPrecioCosto();
+    }//GEN-LAST:event_jTextFieldCantidadKeyReleased
+
+    private void jTextFieldCostoUnitarioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldCostoUnitarioKeyReleased
+        calularTotalPrecioCosto();
+    }//GEN-LAST:event_jTextFieldCostoUnitarioKeyReleased
+
+    private void jTextFieldPrecioUnitarioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldPrecioUnitarioKeyReleased
+        calularTotalPrecioMayoro();
+    }//GEN-LAST:event_jTextFieldPrecioUnitarioKeyReleased
+
+    private void jTextFieldCodigoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldCodigoKeyReleased
+        validacion.esVacioJTextField(jTextFieldCodigo);
+    }//GEN-LAST:event_jTextFieldCodigoKeyReleased
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        DepositoV dep=new DepositoV();
+        dep.setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -311,8 +418,9 @@ public class TransaccionV extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroupTipo;
     private javax.swing.JLabel fondo;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButtonAceptar;
+    private javax.swing.JButton jButtonAddProducto;
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonGuardar;
     private javax.swing.JComboBox jComboBoxDepositos;
@@ -496,25 +604,44 @@ public class TransaccionV extends javax.swing.JFrame {
         if(validar()){
             transaccion.guardar(this);
             transaccion.guardar();
-        }
-        dispose();
+            dispose();
+        }        
     }
 
     private boolean validar() {
-        codigo=jTextFieldCodigo.getText();
-        tipo=isEntrada();
-        fecha=jDateChooser.getDate();
-        detalle=jTextFieldDetalle.getText();
-        precioUnitario=Double.parseDouble(jTextFieldPrecioUnitario.getText());
-        costoUnitario=Double.parseDouble(jTextFieldCostoUnitario.getText());
-        cantidad=Double.parseDouble(jTextFieldCantidad.getText());
-        precioCosto=Double.parseDouble(jTextFieldPrecioCosto.getText());
-        precioMayor=Double.parseDouble(jTextFieldPrecioMayor.getText());
-        producto=transaccion.getListaProductos().get(jComboBoxProducto.getSelectedIndex());
-        deposito=transaccion.getListaDepositos().get(jComboBoxDepositos.getSelectedIndex());
-            return true;
+        boolean res;
+        if(!validacion.esVacioJTextField(jTextFieldCodigo)){
+            if(!validacion.esVacioJTextField(jTextFieldPrecioUnitario)){
+                if(!validacion.esVacioJTextField(jTextFieldCostoUnitario)){
+                    codigo=jTextFieldCodigo.getText();
+                    tipo=isEntrada();
+                    fecha=jDateChooser.getDate();
+                    detalle=jTextFieldDetalle.getText();
+                    precioUnitario=Double.parseDouble(jTextFieldPrecioUnitario.getText());
+                    costoUnitario=Double.parseDouble(jTextFieldCostoUnitario.getText());
+                    cantidad=Double.parseDouble(jTextFieldCantidad.getText());
+                    precioCosto=Double.parseDouble(jTextFieldPrecioCosto.getText());
+                    precioMayor=Double.parseDouble(jTextFieldPrecioMayor.getText());
+                    producto=transaccion.getListaProductos().get(jComboBoxProducto.getSelectedIndex());
+                    deposito=transaccion.getListaDepositos().get(jComboBoxDepositos.getSelectedIndex());
+                    res= true;
+                }else{
+                    res=false;
+                    mostrarMensaje("debe introducir el costo unitario");
+                }
+            }else{
+                res=false;
+                mostrarMensaje("debe introducir el precio unitario");
+            }
+        }else{
+            res=false;
+            mostrarMensaje("debe introducir el codigo de la transaccion");
+        }
+        return res;
     }
-
+    private void mostrarMensaje(String mensaje){
+        JOptionPane.showMessageDialog(null, mensaje);
+    }
     private void actualizar() {
         llenarListaProductos();
         llenarListaDepositos();
@@ -527,6 +654,11 @@ public class TransaccionV extends javax.swing.JFrame {
         jDateChooser.setDate(new Date());
         buttonGroupTipo.add(jRadioButtonEntrada);
         buttonGroupTipo.add(jRadioButtonSalida);
+        validacion=new Validacion();
+        validacion.esVacioJTextField(jTextFieldCodigo);
+        validacion.esVacioJTextField(jTextFieldCantidad);
+        validacion.esVacioJTextField(jTextFieldCostoUnitario);
+        validacion.esVacioJTextField(jTextFieldPrecioUnitario);
     }
 
     private boolean isEntrada() {
@@ -587,6 +719,19 @@ public class TransaccionV extends javax.swing.JFrame {
      */
     public void setDeposito(Modelo.Deposito deposito) {
         this.deposito = deposito;
+    }
+    
+    private void calularTotalPrecioMayoro(){
+        if(!(validacion.esVacioJTextField(jTextFieldCantidad))&&!(validacion.esVacioJTextField(jTextFieldPrecioUnitario)))
+            jTextFieldPrecioMayor.setText(""+(Integer.parseInt(jTextFieldPrecioUnitario.getText()))*(Integer.parseInt(jTextFieldCantidad.getText())));
+        else
+            jTextFieldPrecioMayor.setText("");
+    }
+    private void calularTotalPrecioCosto(){
+        if(!(validacion.esVacioJTextField(jTextFieldCantidad))&&!(validacion.esVacioJTextField(jTextFieldCostoUnitario)))
+            jTextFieldPrecioCosto.setText(""+(Integer.parseInt(jTextFieldCostoUnitario.getText()))*(Integer.parseInt(jTextFieldCantidad.getText())));
+        else
+            jTextFieldPrecioCosto.setText("");
     }
 
     

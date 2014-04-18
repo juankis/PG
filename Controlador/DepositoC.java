@@ -20,7 +20,7 @@ public class DepositoC {
    private ArrayList<Deposito> listaDepositos;
    private Conexion conexion=new Conexion();
 
-    public DepositoC(Vista.Deposito depositoVista) {
+    public DepositoC(Vista.DepositoV depositoVista) {
         deposito = new Deposito(depositoVista.getNombre(), depositoVista.getDireccion(), depositoVista.getDetalle(), null);
     }
 
