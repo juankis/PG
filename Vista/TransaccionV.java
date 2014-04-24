@@ -328,7 +328,7 @@ public class TransaccionV extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     private void jButtonAddProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddProductoActionPerformed
-        NuevoProductoV np=new NuevoProductoV(this);
+        ProductosV np=new ProductosV(this);
         np.setVisible(true);
     }//GEN-LAST:event_jButtonAddProductoActionPerformed
 
@@ -627,21 +627,19 @@ public class TransaccionV extends javax.swing.JFrame {
                     res= true;
                 }else{
                     res=false;
-                    mostrarMensaje("debe introducir el costo unitario");
+                    validacion.mostrarMensaje("debe introducir el costo unitario");
                 }
             }else{
                 res=false;
-                mostrarMensaje("debe introducir el precio unitario");
+                validacion.mostrarMensaje("debe introducir el precio unitario");
             }
         }else{
             res=false;
-            mostrarMensaje("debe introducir el codigo de la transaccion");
+            validacion.mostrarMensaje("debe introducir el codigo de la transaccion");
         }
         return res;
     }
-    private void mostrarMensaje(String mensaje){
-        JOptionPane.showMessageDialog(null, mensaje);
-    }
+    
     private void actualizar() {
         llenarListaProductos();
         llenarListaDepositos();

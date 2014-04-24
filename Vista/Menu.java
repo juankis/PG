@@ -137,7 +137,7 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButtonCrearProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCrearProductoActionPerformed
-        NuevoProductoV nuevoProducto=new NuevoProductoV();
+        ProductosV nuevoProducto=new ProductosV();
         nuevoProducto.setVisible(true);
         
     }//GEN-LAST:event_jButtonCrearProductoActionPerformed

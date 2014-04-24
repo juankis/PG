@@ -7,6 +7,7 @@
 package Controlador;
 
 import java.awt.Color;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 /**
@@ -22,6 +23,10 @@ public class Validacion {
         else
             res=false;
         return res;
+    }
+    
+    public void mostrarMensaje(String mensaje){
+        JOptionPane.showMessageDialog(null, mensaje);
     }
     
     public void validacionCantidadCaracteres(String texto, int cantidadLimite,java.awt.event.KeyEvent evt ){

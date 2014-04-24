@@ -9,7 +9,8 @@ package Controlador;
 import Modelo.Esponja;
 import Modelo.Medidas;
 import Modelo.Colchon;
-import Vista.NuevoProductoV;
+import Vista.ProductoFormulario;
+import Vista.ProductosV;
 import java.util.ArrayList;
 import javax.swing.JComboBox;
 import javax.swing.JTable;
@@ -31,7 +32,7 @@ public class ColchonC {
     
     }
 
-    public ColchonC(NuevoProductoV colchonV) {
+    public ColchonC(ProductoFormulario colchonV) {
         colchon=new Colchon(colchonV.getEsponja(), colchonV.getMedidas(), colchonV.getNombre(), colchonV.getColor(), colchonV.getTela(), colchonV.getTipo(),null );
     }
     
@@ -100,13 +101,19 @@ public class ColchonC {
 
     private void addColchonATabla(Colchon c, DefaultTableModel TableModelProductos,int pos) {
        c=(Colchon)conexion.getObject(c);
-       String  codigo;
+       String  codigoEsponja;
+       String  codigoMedidas;
        try{
-           codigo=c.getEsponja().getCodigo();
+           codigoEsponja=c.getEsponja().getCodigo();
        }catch (NullPointerException e){
-           codigo=null;
+           codigoEsponja=null;
        }
-       String[] arr={c.getNombre(),c.getColor(),c.getTela(),codigo,c.getMedidas().getCodigo(),c.getTipo()};
+       try{
+           codigoMedidas=c.getMedidas().getCodigo();
+       }catch (NullPointerException e){
+           codigoMedidas=null;
+       }
+       String[] arr={c.getNombre(),c.getColor(),c.getTela(),codigoEsponja,codigoMedidas,c.getTipo()};
        TableModelProductos.addRow(arr);
     }
 
@@ -131,22 +138,31 @@ public class ColchonC {
             JComboBoxTipo.addItem(c.getTipo());
         }
        // jTextFieldColor.addItem("");
-        //jTextFieldTela.addItem("");
+       //jTextFieldTela.addItem("");
     }
 
     public void establecerProductoIndex(int filaSeleccionada) {
         colchon=listaColchones.get(filaSeleccionada);
     }
 
-    public void getProducto(NuevoProductoV productoV) {
-        productoV.setNombre(colchon.getNombre());
-        productoV.setColor(colchon.getColor());
-        productoV.setTela(colchon.getTela());
-        productoV.setTipo(colchon.getTipo());
+    public void getProducto(ProductoFormulario productoFormulario) {
+        productoFormulario.setNombre(colchon.getNombre());
+        productoFormulario.setColor(colchon.getColor());
+        productoFormulario.setTela(colchon.getTela());
+        productoFormulario.setTipo(colchon.getTipo());
         conexion.abrir();
-        productoV.setMedidas((Medidas)conexion.getObject(colchon.getMedidas()));
-        productoV.setEsponja((Esponja)conexion.getObject(colchon.getEsponja()));
+        try{
+            productoFormulario.setEsponja((Esponja)conexion.getObject(colchon.getEsponja()));
+        }catch(IllegalArgumentException e){
+            productoFormulario.setEsponja(colchon.getEsponja());
+        }
+        try{
+            productoFormulario.setMedidas((Medidas)conexion.getObject(colchon.getMedidas()));
+        }catch(IllegalArgumentException e){
+            productoFormulario.setMedidas(colchon.getMedidas());
+        }   
         conexion.cerrar();
+        productoFormulario.editar();
     }
 
     public boolean eliminarProducto() {
@@ -166,7 +182,7 @@ public class ColchonC {
         return  !res;
     }
 
-    public void setProducto(NuevoProductoV productoV) {
+    public void setProducto(ProductoFormulario productoV) {
         colchon.setNombre(productoV.getNombre());
         colchon.setColor(productoV.getColor());
         colchon.setTela(productoV.getTela());

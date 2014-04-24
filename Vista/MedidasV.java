@@ -22,7 +22,7 @@ public class MedidasV extends javax.swing.JFrame {
     private String grosor;
     private String codigo;
     private MedidasC medidas;
-    private NuevoProductoV nuevoProducto;
+    private ProductoFormulario productoFormulario;
     public MedidasV() {
         initComponents();
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -31,8 +31,8 @@ public class MedidasV extends javax.swing.JFrame {
         llenarTableMedidas();
     }
 
-    MedidasV(NuevoProductoV aThis) {
-        nuevoProducto=aThis;
+    MedidasV(ProductoFormulario aThis) {
+        productoFormulario=aThis;
         initComponents();
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -360,7 +360,7 @@ public class MedidasV extends javax.swing.JFrame {
 
     private void jTableMedidasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableMedidasMouseClicked
         if(evt.getClickCount()==2){
-            nuevoProducto.setMedidasSeleccionada(jTableMedidas.getModel().getValueAt(filaSeleccionada(), 4));
+            productoFormulario.setMedidasSeleccionada(jTableMedidas.getModel().getValueAt(filaSeleccionada(), 4));
             dispose();
         }
     }//GEN-LAST:event_jTableMedidasMouseClicked

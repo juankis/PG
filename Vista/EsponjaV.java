@@ -13,7 +13,8 @@ import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
-
+import Controlador.Validacion;
+import java.awt.Color;
 /**
  *
  * @author juanki
@@ -24,8 +25,8 @@ public class EsponjaV extends javax.swing.JFrame {
     private String material="";
     private String color="";
     private String codigo="";
-    
-    private NuevoProductoV nuevoProucto;
+    private Validacion validacion;
+    private ProductoFormulario nuevoProucto;
     public EsponjaV() {
         initComponents();
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -33,9 +34,10 @@ public class EsponjaV extends javax.swing.JFrame {
         actualizar();
         iniciarAutoComplete();
         limpiarCampos();
+        iniciarComponentes();
     }
 
-    EsponjaV(NuevoProductoV aThis) {
+    EsponjaV(ProductoFormulario aThis) {
         nuevoProucto=aThis;
         initComponents();
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -44,7 +46,10 @@ public class EsponjaV extends javax.swing.JFrame {
         iniciarAutoComplete();
         limpiarCampos();
     }
-
+    private void iniciarComponentes() {
+        validacion=new Validacion();
+        jTextFieldCodigo.setBackground(Color.pink);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -69,7 +74,7 @@ public class EsponjaV extends javax.swing.JFrame {
         jButtonModificar = new javax.swing.JButton();
         jButtonActualizar = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        codigoCombo = new javax.swing.JTextField();
+        jTextFieldCodigo = new javax.swing.JTextField();
         fondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -190,8 +195,14 @@ public class EsponjaV extends javax.swing.JFrame {
         jLabel4.setText("Codigo");
         jPanel1.add(jLabel4);
         jLabel4.setBounds(20, 77, 50, 16);
-        jPanel1.add(codigoCombo);
-        codigoCombo.setBounds(85, 74, 91, 27);
+
+        jTextFieldCodigo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextFieldCodigoKeyReleased(evt);
+            }
+        });
+        jPanel1.add(jTextFieldCodigo);
+        jTextFieldCodigo.setBounds(85, 74, 91, 27);
 
         fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fondo.jpg"))); // NOI18N
         fondo.setText("jLabel5");
@@ -219,12 +230,7 @@ public class EsponjaV extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGuardarActionPerformed
-        if(validar()){
-            esponja= new Controlador.EsponjaC(this);
-            esponja.guardar();
-            actualizar();
-        }
-        
+        guardar();
     }//GEN-LAST:event_botonGuardarActionPerformed
 
     private void botonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCancelarActionPerformed
@@ -258,6 +264,10 @@ public class EsponjaV extends javax.swing.JFrame {
             dispose();
         }
     }//GEN-LAST:event_jTableEsponjasMouseClicked
+
+    private void jTextFieldCodigoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldCodigoKeyReleased
+        validacion.esVacioJTextField(jTextFieldCodigo);
+    }//GEN-LAST:event_jTextFieldCodigoKeyReleased
     
     /**
      * @param args the command line arguments
@@ -297,7 +307,6 @@ public class EsponjaV extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonCancelar;
     private javax.swing.JButton botonGuardar;
-    private javax.swing.JTextField codigoCombo;
     private javax.swing.JComboBox colorCombo;
     private javax.swing.JLabel fondo;
     private javax.swing.JButton jButtonActualizar;
@@ -311,6 +320,7 @@ public class EsponjaV extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableEsponjas;
+    private javax.swing.JTextField jTextFieldCodigo;
     private javax.swing.JComboBox materialCombo;
     // End of variables declaration//GEN-END:variables
 
@@ -333,10 +343,17 @@ public class EsponjaV extends javax.swing.JFrame {
         
     }
     private boolean validar(){
-        material=""+materialCombo.getSelectedItem();
-        color=""+colorCombo.getSelectedItem();
-        codigo=codigoCombo.getText();//getSelectedItem().toString();
-        return true;
+        boolean res=false;
+        if(!validacion.esVacioJTextField(jTextFieldCodigo)){
+            material=""+materialCombo.getSelectedItem();
+            color=""+colorCombo.getSelectedItem();
+            codigo=jTextFieldCodigo.getText();//getSelectedItem().toString();
+            res= true;
+        }else{
+            validacion.mostrarMensaje("debe llenar el codigo");
+        }
+        return res;
+        
     }
     public void llenarTableEsponjas(){
         esponja=new EsponjaC();
@@ -397,7 +414,7 @@ public class EsponjaV extends javax.swing.JFrame {
      */
     public void setCodigo(String codigo) {
         this.codigo = codigo;
-        codigoCombo.setText(codigo);
+        jTextFieldCodigo.setText(codigo);
     }
     
      private void llenarAtributosEsponja() {
@@ -407,7 +424,7 @@ public class EsponjaV extends javax.swing.JFrame {
     }
 
     private void autoCompletar() {
-        codigoCombo.setText(""+materialCombo.getSelectedItem()+"/"+colorCombo.getSelectedItem());
+        jTextFieldCodigo.setText(""+materialCombo.getSelectedItem()+"/"+colorCombo.getSelectedItem());
     }
     private void iniciarAutoComplete(){
         colorCombo.getEditor().getEditorComponent().addKeyListener(new KeyAdapter() {
@@ -425,8 +442,18 @@ public class EsponjaV extends javax.swing.JFrame {
     }
 
     private void limpiarCampos() {
-        codigoCombo.setText("");
+        jTextFieldCodigo.setText("");
         materialCombo.setSelectedItem("");
         colorCombo.setSelectedItem("");
     }
+
+    private void guardar() {
+        if(validar()){
+            esponja= new Controlador.EsponjaC(this);
+            esponja.guardar();
+            actualizar();
+        }
+    }
+
+    
 }
