@@ -162,7 +162,7 @@ public class ColchonC {
             productoFormulario.setMedidas(colchon.getMedidas());
         }   
         conexion.cerrar();
-        productoFormulario.editar();
+       
     }
 
     public boolean eliminarProducto() {

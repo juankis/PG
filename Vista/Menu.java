@@ -45,7 +45,7 @@ public class Menu extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
-        jButtonCrearProducto = new javax.swing.JButton();
+        jButtonProductos = new javax.swing.JButton();
         jButtonEditar = new javax.swing.JButton();
         jButtonEliminar = new javax.swing.JButton();
         fondo = new javax.swing.JLabel();
@@ -77,15 +77,15 @@ public class Menu extends javax.swing.JFrame {
         jPanel1.add(jButton1);
         jButton1.setBounds(0, 100, 110, 28);
 
-        jButtonCrearProducto.setMnemonic('p');
-        jButtonCrearProducto.setText("Crear Producto");
-        jButtonCrearProducto.addActionListener(new java.awt.event.ActionListener() {
+        jButtonProductos.setMnemonic('p');
+        jButtonProductos.setText("Productos");
+        jButtonProductos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonCrearProductoActionPerformed(evt);
+                jButtonProductosActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonCrearProducto);
-        jButtonCrearProducto.setBounds(117, 11, 130, 65);
+        jPanel1.add(jButtonProductos);
+        jButtonProductos.setBounds(117, 11, 130, 65);
 
         jButtonEditar.setMnemonic('d');
         jButtonEditar.setText("Editar");
@@ -136,11 +136,11 @@ public class Menu extends javax.swing.JFrame {
         transaccionV.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButtonCrearProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCrearProductoActionPerformed
+    private void jButtonProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonProductosActionPerformed
         ProductosV nuevoProducto=new ProductosV();
         nuevoProducto.setVisible(true);
         
-    }//GEN-LAST:event_jButtonCrearProductoActionPerformed
+    }//GEN-LAST:event_jButtonProductosActionPerformed
 
     private void jButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarActionPerformed
         verTransaccion();
@@ -194,9 +194,9 @@ public class Menu extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel fondo;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButtonCrearProducto;
     private javax.swing.JButton jButtonEditar;
     private javax.swing.JButton jButtonEliminar;
+    private javax.swing.JButton jButtonProductos;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;

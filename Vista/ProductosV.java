@@ -186,7 +186,7 @@ public class ProductosV extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonEliminarActionPerformed
 
     private void crearProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearProductoActionPerformed
-        ProductoFormulario form=new ProductoFormulario(colchon,this);
+        ProductoFormulario form=new ProductoFormulario(colchon,this,false);
         form.setVisible(true);
     }//GEN-LAST:event_crearProductoActionPerformed
 
@@ -296,7 +296,7 @@ public class ProductosV extends javax.swing.JFrame {
     private void editarProducto() {
         if(filaSeleccionada()>=0){
             colchon.establecerProductoIndex(filaSeleccionada());
-            ProductoFormulario form=new ProductoFormulario(colchon,this);
+            ProductoFormulario form=new ProductoFormulario(colchon,this,true);
             colchon.getProducto(form);
             form.setVisible(rootPaneCheckingEnabled);
         }

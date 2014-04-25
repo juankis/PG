@@ -37,6 +37,7 @@ public class ProductoFormulario extends javax.swing.JFrame {
     private Conexion conexion;
     private Validacion validacion;
     private ProductosV productos;
+    private boolean esEdicion;
     public ProductoFormulario() {
         initComponents();
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -46,18 +47,23 @@ public class ProductoFormulario extends javax.swing.JFrame {
         iniciarValoresIniciales();
     }
 
-    public ProductoFormulario(ColchonC colcchonC, ProductosV productos) {
+    public ProductoFormulario(ColchonC colcchonC, ProductosV productos,boolean edicion) {
         initComponents();
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
         validacion=new Validacion();
         this.colchon=colcchonC;
         this.productos=productos;
+        this.esEdicion=edicion;
         iniciarValoresIniciales();
     }
     
     private void iniciarValoresIniciales() {
         actualizar();
+        if(esEdicion)
+            jButtonGuardar.setVisible(false);
+        else
+            jButtonModificar.setVisible(false);
     }
     
     
@@ -555,11 +561,6 @@ public class ProductoFormulario extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JTextField jTextFieldNombre;
     // End of variables declaration//GEN-END:variables
-
-    public void editar() {
-        jButtonModificar.setLocation(jButtonGuardar.getLocation().x,jButtonGuardar.getLocation().y);
-        jButtonGuardar.setVisible(false);
-    }
 
     private void guardar() {
         if(validar()){
