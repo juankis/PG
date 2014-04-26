@@ -469,6 +469,7 @@ public class ProductoFormulario extends javax.swing.JFrame {
     
     private void llenarAtributosColchon() {
         colchon.llenarAtributosColchon(this.jComboBoxColor,this.jComboBoxTela,this.jComboBoxTipo);
+        validacion.eliminarRepetidos(this.jComboBoxColor);
         AutoCompleteDecorator.decorate(jComboBoxColor);
         AutoCompleteDecorator.decorate(jComboBoxTela);
         AutoCompleteDecorator.decorate(jComboBoxTipo);

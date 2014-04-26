@@ -45,6 +45,7 @@ public class EsponjaV extends javax.swing.JFrame {
         actualizar();
         iniciarAutoComplete();
         limpiarCampos();
+        iniciarComponentes();
     }
     private void iniciarComponentes() {
         validacion=new Validacion();

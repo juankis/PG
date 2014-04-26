@@ -7,6 +7,7 @@
 package Controlador;
 
 import java.awt.Color;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
@@ -43,5 +44,13 @@ public class Validacion {
             jTextField.setBackground(Color.white);
         
         return res;
+    }
+
+    public void eliminarRepetidos(JComboBox combo) {
+        for(int i=0;i<combo.countComponents()-1;i++){
+            for(int j=i+1;j<combo.countComponents();j++){
+                
+            }
+        }
     }
 }

@@ -47,7 +47,6 @@ public class ColchonC {
         for(int i=0;i<getListaMedidas().size();i++){
             medidas.addItem(getListaMedidas().get(i).getCodigo());
         }
-       // medidas.addItem("");
     }
 
     public void llenarListaEsponjas(JComboBox esponjas) {
@@ -137,6 +136,7 @@ public class ColchonC {
             JComboBoxTela.addItem(c.getTela());
             JComboBoxTipo.addItem(c.getTipo());
         }
+//        validacion.eliminarRepetidosCombo(JComboBoxColor);
        // jTextFieldColor.addItem("");
        //jTextFieldTela.addItem("");
     }

@@ -233,6 +233,7 @@ public class MedidasV extends javax.swing.JFrame {
         jPanel1.add(jButtonModificar);
         jButtonModificar.setBounds(10, 246, 90, 28);
 
+        jTextFieldCodigo.setEditable(false);
         jTextFieldCodigo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldCodigoActionPerformed(evt);
@@ -301,6 +302,15 @@ public class MedidasV extends javax.swing.JFrame {
 
     private void jButtonVerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVerActionPerformed
         verMedidas();
+        if(jTextFieldPlazas.getText().isEmpty()){
+            jTextFieldLargo.setEnabled(true);
+            jTextFieldAncho.setEnabled(true);
+            
+        }else{
+            jTextFieldLargo.setEnabled(false);
+            jTextFieldAncho.setEnabled(false);
+            
+        }
     }//GEN-LAST:event_jButtonVerActionPerformed
 
     private void jButtonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarActionPerformed
