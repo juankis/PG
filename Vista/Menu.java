@@ -48,6 +48,7 @@ public class Menu extends javax.swing.JFrame {
         jButtonProductos = new javax.swing.JButton();
         jButtonEditar = new javax.swing.JButton();
         jButtonEliminar = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         fondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -107,6 +108,15 @@ public class Menu extends javax.swing.JFrame {
         jPanel1.add(jButtonEliminar);
         jButtonEliminar.setBounds(0, 160, 110, 28);
 
+        jButton2.setText("Depositos");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton2);
+        jButton2.setBounds(250, 10, 130, 65);
+
         fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fondo.jpg"))); // NOI18N
         jPanel1.add(fondo);
         fondo.setBounds(0, 0, 1470, 820);
@@ -132,7 +142,7 @@ public class Menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        transaccionV=new TransaccionV();
+        transaccionV=new TransaccionV(this);
         transaccionV.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -149,6 +159,11 @@ public class Menu extends javax.swing.JFrame {
     private void jButtonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarActionPerformed
         eliminarProducto();
     }//GEN-LAST:event_jButtonEliminarActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        DepositoV dep=new DepositoV();
+        dep.setVisible(rootPaneCheckingEnabled);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     public int filaSeleccionada(){
         int fila_select = jTable1.getSelectedRow();
@@ -194,6 +209,7 @@ public class Menu extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel fondo;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButtonEditar;
     private javax.swing.JButton jButtonEliminar;
     private javax.swing.JButton jButtonProductos;
@@ -209,7 +225,7 @@ public class Menu extends javax.swing.JFrame {
 
     private void verTransaccion() {
         if(filaSeleccionada()>=0){
-            transaccionV=new TransaccionV();
+            transaccionV=new TransaccionV(this);
             transaccionC.establecerTransaccionIndex(filaSeleccionada());
             transaccionC.getTransacciones(transaccionV);
             transaccionV.setVisible(true);
@@ -227,7 +243,7 @@ public class Menu extends javax.swing.JFrame {
         
     }
 
-    private void actualizar() {
+    public void actualizar() {
         actualizarTablaTransacciones();
     }
 

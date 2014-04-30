@@ -37,11 +37,13 @@ public class TransaccionV extends javax.swing.JFrame {
     private Colchon producto;
     private Modelo.Deposito deposito;
     private Validacion validacion;
-    public TransaccionV() {
+    private Menu menu;
+    public TransaccionV(Menu menu) {
         initComponents();
         iniciarComponentes();
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
+        this.menu=menu;
         actualizar();
     }
 
@@ -383,12 +385,7 @@ public class TransaccionV extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
+    /*public static void main(String args[]) {
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -405,16 +402,13 @@ public class TransaccionV extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(TransaccionV.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new TransaccionV().setVisible(true);
             }
         });
     }
-
+*/
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroupTipo;
     private javax.swing.JLabel fondo;
@@ -604,6 +598,7 @@ public class TransaccionV extends javax.swing.JFrame {
         if(validar()){
             transaccion.guardar(this);
             transaccion.guardar();
+            menu.actualizar();
             dispose();
         }        
     }
@@ -613,18 +608,23 @@ public class TransaccionV extends javax.swing.JFrame {
         if(!validacion.esVacioJTextField(jTextFieldCodigo)){
             if(!validacion.esVacioJTextField(jTextFieldPrecioUnitario)){
                 if(!validacion.esVacioJTextField(jTextFieldCostoUnitario)){
-                    codigo=jTextFieldCodigo.getText();
-                    tipo=isEntrada();
-                    fecha=jDateChooser.getDate();
-                    detalle=jTextFieldDetalle.getText();
-                    precioUnitario=Double.parseDouble(jTextFieldPrecioUnitario.getText());
-                    costoUnitario=Double.parseDouble(jTextFieldCostoUnitario.getText());
-                    cantidad=Double.parseDouble(jTextFieldCantidad.getText());
-                    precioCosto=Double.parseDouble(jTextFieldPrecioCosto.getText());
-                    precioMayor=Double.parseDouble(jTextFieldPrecioMayor.getText());
-                    producto=transaccion.getListaProductos().get(jComboBoxProducto.getSelectedIndex());
-                    deposito=transaccion.getListaDepositos().get(jComboBoxDepositos.getSelectedIndex());
-                    res= true;
+                    if(isEntrada()){                        
+                        codigo=jTextFieldCodigo.getText();
+                        tipo=isEntrada();
+                        fecha=jDateChooser.getDate();
+                        detalle=jTextFieldDetalle.getText();
+                        precioUnitario=Double.parseDouble(jTextFieldPrecioUnitario.getText());
+                        costoUnitario=Double.parseDouble(jTextFieldCostoUnitario.getText());
+                        cantidad=Double.parseDouble(jTextFieldCantidad.getText());
+                        precioCosto=Double.parseDouble(jTextFieldPrecioCosto.getText());
+                        precioMayor=Double.parseDouble(jTextFieldPrecioMayor.getText());
+                        producto=transaccion.getListaProductos().get(jComboBoxProducto.getSelectedIndex());
+                        deposito=transaccion.getListaDepositos().get(jComboBoxDepositos.getSelectedIndex());
+                        res= true;
+                    }else{
+                        validarSalida();
+                        res= true;
+                    }
                 }else{
                     res=false;
                     validacion.mostrarMensaje("debe introducir el costo unitario");
@@ -730,6 +730,14 @@ public class TransaccionV extends javax.swing.JFrame {
             jTextFieldPrecioCosto.setText(""+(Integer.parseInt(jTextFieldCostoUnitario.getText()))*(Integer.parseInt(jTextFieldCantidad.getText())));
         else
             jTextFieldPrecioCosto.setText("");
+    }
+
+    private void validarSalida() {
+        validarSalidaPEPS();
+    }
+
+    private void validarSalidaPEPS() {
+        
     }
 
     
