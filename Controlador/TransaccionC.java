@@ -23,17 +23,66 @@ import javax.swing.table.DefaultTableModel;
 public class TransaccionC {
 
     Transaccion transaccion;
+    TransaccionV transaccionV;
     Conexion conexion=new Conexion();
     private ArrayList<Transaccion> transacciones;
     private ArrayList<Colchon> listaProductos;
     private ArrayList<Deposito> listaDepositos;
+    private Validacion validacion;
     
-    public void guardar(TransaccionV transaccionV) {
+    public TransaccionC(TransaccionV transaccionV){
+        this.transaccionV=transaccionV;
+        validacion = new Validacion();
+    }
+    
+    public void guardar() {
+        if(transaccionV.validar()){
+            guardarTransaccion();
+        }
+        
+    }
+    
+    /*private boolean validar() {
+        boolean res;
+        if(!validacion.esVacioJTextField(transaccion.jTextFieldCodigo)){
+            if(!validacion.esVacioJTextField(jTextFieldPrecioUnitario)){
+                if(!validacion.esVacioJTextField(jTextFieldCostoUnitario)){
+                    if(isEntrada()){                        
+                        codigo=jTextFieldCodigo.getText();
+                        tipo=isEntrada();
+                        fecha=jDateChooser.getDate();
+                        detalle=jTextFieldDetalle.getText();
+                        precioUnitario=Double.parseDouble(jTextFieldPrecioUnitario.getText());
+                        costoUnitario=Double.parseDouble(jTextFieldCostoUnitario.getText());
+                        cantidad=Double.parseDouble(jTextFieldCantidad.getText());
+                        precioCosto=Double.parseDouble(jTextFieldPrecioCosto.getText());
+                        precioMayor=Double.parseDouble(jTextFieldPrecioMayor.getText());
+                        producto=transaccion.getListaProductos().get(jComboBoxProducto.getSelectedIndex());
+                        deposito=transaccion.getListaDepositos().get(jComboBoxDepositos.getSelectedIndex());
+                        res= true;
+                    }else{
+                        validarSalida();
+                        res= true;
+                    }
+                }else{
+                    res=false;
+                    validacion.mostrarMensaje("debe introducir el costo unitario");
+                }
+            }else{
+                res=false;
+                validacion.mostrarMensaje("debe introducir el precio unitario");
+            }
+        }else{
+            res=false;
+            validacion.mostrarMensaje("debe introducir el codigo de la transaccion");
+        }
+        return res;
+    }*/
+    
+    public void guardarTransaccion() {
         transaccion = new Transaccion(transaccionV.getProducto(), transaccionV.getDeposito(), transaccionV.getCodigo(), transaccionV.isTipo(),
                 transaccionV.getFecha(), transaccionV.getDetalle(), transaccionV.getCantidad(), transaccionV.getCostoUnitario(),
                 transaccionV.getPrecioUnitario(), transaccionV.getPrecioCosto(), transaccionV.getPrecioMayor());
-    }
-    public void guardar() {
         conexion.guardar(transaccion);
     }
 

@@ -23,7 +23,7 @@ public class TransaccionV extends javax.swing.JFrame {
      * Creates new form Transaccion2
      */
     private Util util=new Util();
-    private TransaccionC transaccion=new TransaccionC();
+    private TransaccionC transaccion;
     private String codigo;
     private boolean tipo;
     private Date fecha;
@@ -38,12 +38,14 @@ public class TransaccionV extends javax.swing.JFrame {
     private Modelo.Deposito deposito;
     private Validacion validacion;
     private Menu menu;
+    
     public TransaccionV(Menu menu) {
         initComponents();
         iniciarComponentes();
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
         this.menu=menu;
+        transaccion=new TransaccionC(this);
         actualizar();
     }
 
@@ -314,7 +316,7 @@ public class TransaccionV extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonAceptarActionPerformed
 
     private void jButtonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarActionPerformed
-        guardar();
+        transaccion.guardar();
     }//GEN-LAST:event_jButtonGuardarActionPerformed
 
     private void jTextFieldCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCodigoActionPerformed
@@ -596,14 +598,12 @@ public class TransaccionV extends javax.swing.JFrame {
 
     private void guardar() {
         if(validar()){
-            transaccion.guardar(this);
-            transaccion.guardar();
             menu.actualizar();
             dispose();
         }        
     }
 
-    private boolean validar() {
+    public boolean validar() {
         boolean res;
         if(!validacion.esVacioJTextField(jTextFieldCodigo)){
             if(!validacion.esVacioJTextField(jTextFieldPrecioUnitario)){
