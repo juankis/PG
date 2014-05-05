@@ -219,7 +219,7 @@ public class Menu extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
     
     private void llenarTablaTransacciones(){
-       transaccionC=new TransaccionC();
+       transaccionC=new TransaccionC(transaccionV);
        transaccionC.llenarTablaTransacciones(jTable1);
     }
 
