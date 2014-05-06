@@ -6,24 +6,23 @@
 
 package Vista;
 import Modelo.Colchon;
-import Controlador.TransaccionC;
+import Controlador.EntradaC;
 import Controlador.Util;
 import Controlador.Validacion;
 import java.util.Date;
-import javax.swing.JOptionPane;
-import javax.swing.JRadioButton;
+
 
 /**
  *
  * @author juanki
  */
-public class TransaccionV extends javax.swing.JFrame {
+public class EntradaV extends javax.swing.JFrame {
 
     /**
      * Creates new form Transaccion2
      */
     private Util util=new Util();
-    private TransaccionC transaccion;
+    private EntradaC entrada;
     private String codigo;
     private boolean tipo;
     private Date fecha;
@@ -39,13 +38,13 @@ public class TransaccionV extends javax.swing.JFrame {
     private Validacion validacion;
     private Menu menu;
     
-    public TransaccionV(Menu menu) {
+    public EntradaV(Menu menu) {
         initComponents();
         iniciarComponentes();
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
         this.menu=menu;
-        transaccion=new TransaccionC(this);
+        entrada=new EntradaC(this);
         actualizar();
     }
 
@@ -316,7 +315,7 @@ public class TransaccionV extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonAceptarActionPerformed
 
     private void jButtonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarActionPerformed
-        transaccion.guardar();
+        entrada.guardar();
     }//GEN-LAST:event_jButtonGuardarActionPerformed
 
     private void jTextFieldCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCodigoActionPerformed
@@ -396,17 +395,17 @@ public class TransaccionV extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TransaccionV.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EntradaV.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TransaccionV.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EntradaV.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TransaccionV.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EntradaV.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TransaccionV.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EntradaV.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TransaccionV().setVisible(true);
+                new EntradaV().setVisible(true);
             }
         });
     }
@@ -446,17 +445,17 @@ public class TransaccionV extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     /**
-     * @return the transaccion
+     * @return the entrada
      */
-    public TransaccionC getTransaccion() {
-        return transaccion;
+    public EntradaC getEntrada() {
+        return entrada;
     }
 
     /**
-     * @param transaccion the transaccion to set
+     * @param entrada the entrada to set
      */
-    public void setTransaccion(TransaccionC transaccion) {
-        this.transaccion = transaccion;
+    public void setEntrada(EntradaC entrada) {
+        this.entrada = entrada;
     }
 
     /**
@@ -618,8 +617,8 @@ public class TransaccionV extends javax.swing.JFrame {
                         cantidad=Double.parseDouble(jTextFieldCantidad.getText());
                         precioCosto=Double.parseDouble(jTextFieldPrecioCosto.getText());
                         precioMayor=Double.parseDouble(jTextFieldPrecioMayor.getText());
-                        producto=transaccion.getListaProductos().get(jComboBoxProducto.getSelectedIndex());
-                        deposito=transaccion.getListaDepositos().get(jComboBoxDepositos.getSelectedIndex());
+                        producto=entrada.getListaProductos().get(jComboBoxProducto.getSelectedIndex());
+                        deposito=entrada.getListaDepositos().get(jComboBoxDepositos.getSelectedIndex());
                         res= true;
                     }else{
                         validarSalida();
@@ -645,7 +644,7 @@ public class TransaccionV extends javax.swing.JFrame {
         llenarListaDepositos();
     }
     private void llenarListaProductos(){
-        transaccion.llenarListaProductos(jComboBoxProducto);
+        entrada.llenarListaProductos(jComboBoxProducto);
     }
 
     private void iniciarComponentes() {
@@ -702,7 +701,7 @@ public class TransaccionV extends javax.swing.JFrame {
     }
 
     private void llenarListaDepositos() {
-        transaccion.llenarListaDepositos(jComboBoxDepositos);
+        entrada.llenarListaDepositos(jComboBoxDepositos);
     }
 
     /**
@@ -739,6 +738,5 @@ public class TransaccionV extends javax.swing.JFrame {
     private void validarSalidaPEPS() {
         
     }
-
     
 }

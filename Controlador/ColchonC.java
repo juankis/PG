@@ -10,12 +10,12 @@ import Modelo.Esponja;
 import Modelo.Medidas;
 import Modelo.Colchon;
 import Vista.ProductoFormulario;
-import Vista.ProductosV;
+
 import java.util.ArrayList;
 import javax.swing.JComboBox;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
+
 
 /**
  *

@@ -24,7 +24,7 @@ public class ProductosV extends javax.swing.JFrame {
     EsponjaV vistaEsponja;
     MedidasV vistaMedidas;
     private ColchonC colchon;
-    private TransaccionV transaccion;
+    private EntradaV transaccion;
     public ProductosV() {
         initComponents();
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -33,7 +33,7 @@ public class ProductosV extends javax.swing.JFrame {
         actualizar();
     }
 
-    ProductosV(TransaccionV aThis) {
+    ProductosV(EntradaV aThis) {
         transaccion=aThis;
         initComponents();
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);

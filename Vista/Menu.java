@@ -6,7 +6,7 @@
 
 package Vista;
 
-import Controlador.TransaccionC;
+import Controlador.EntradaC;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -21,8 +21,8 @@ public class Menu extends javax.swing.JFrame {
     /**
      * Creates new form Menu
      */
-    TransaccionC transaccionC;
-    TransaccionV transaccionV;
+    EntradaC transaccionC;
+    EntradaV transaccionV;
     public Menu() {
         this.setBounds(0, 0, 500, 500);
         initComponents();
@@ -142,7 +142,7 @@ public class Menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        transaccionV=new TransaccionV(this);
+        transaccionV=new EntradaV(this);
         transaccionV.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -219,15 +219,15 @@ public class Menu extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
     
     private void llenarTablaTransacciones(){
-       transaccionC=new TransaccionC(transaccionV);
-       transaccionC.llenarTablaTransacciones(jTable1);
+       transaccionC=new EntradaC(transaccionV);
+       transaccionC.llenarTablaEntradas(jTable1);
     }
 
     private void verTransaccion() {
         if(filaSeleccionada()>=0){
-            transaccionV=new TransaccionV(this);
+            transaccionV=new EntradaV(this);
             transaccionC.establecerTransaccionIndex(filaSeleccionada());
-            transaccionC.getTransacciones(transaccionV);
+            transaccionC.getEntradas(transaccionV);
             transaccionV.setVisible(true);
         }
         
@@ -235,7 +235,7 @@ public class Menu extends javax.swing.JFrame {
     private void eliminarProducto(){
         if(filaSeleccionada()>=0){
             transaccionC.establecerTransaccionIndex(filaSeleccionada());
-            if(!transaccionC.eliminarTransaccion())
+            if(!transaccionC.eliminarEntrada())
                 JOptionPane.showMessageDialog(rootPane, "No se pudo eliminar, la transaccion esta relacionado");
             actualizar();
         }

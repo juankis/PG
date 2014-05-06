@@ -8,9 +8,9 @@ package Controlador;
 
 import Modelo.Colchon;
 import Modelo.Deposito;
-import Modelo.Esponja;
+
 import Modelo.Entrada;
-import Vista.TransaccionV;
+import Vista.EntradaV;
 import java.util.ArrayList;
 import javax.swing.JComboBox;
 import javax.swing.JTable;
@@ -20,24 +20,24 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author juanki
  */
-public class TransaccionC {
+public class EntradaC {
 
     Entrada entrada;
-    TransaccionV transaccionV;
+    EntradaV entradaV;
     Conexion conexion=new Conexion();
     private ArrayList<Entrada> entradas;
     private ArrayList<Colchon> listaProductos;
     private ArrayList<Deposito> listaDepositos;
     private Validacion validacion;
     
-    public TransaccionC(TransaccionV transaccionV){
-        this.transaccionV=transaccionV;
+    public EntradaC(EntradaV transaccionV){
+        this.entradaV=transaccionV;
         validacion = new Validacion();
     }
     
     public void guardar() {
-        if(transaccionV.validar()){
-            guardarTransaccion();
+        if(entradaV.validar()){
+            guardarEntrada();
         }
         
     }
@@ -79,11 +79,11 @@ public class TransaccionC {
         return res;
     }*/
     
-    public void guardarTransaccion() {
-        this.entrada = new Entrada(transaccionV.getProducto(), transaccionV.getDeposito(), transaccionV.getCodigo(),
-                transaccionV.isTipo(), transaccionV.getFecha(), transaccionV.getDetalle(), transaccionV.getCantidad(), 
-                transaccionV.getCostoUnitario(), transaccionV.getPrecioUnitario(), transaccionV.getPrecioCosto(), 
-                transaccionV.getPrecioMayor(), transaccionV.getCantidad(), null);
+    public void guardarEntrada() {
+        this.entrada = new Entrada(entradaV.getProducto(), entradaV.getDeposito(), entradaV.getCodigo(),
+                entradaV.isTipo(), entradaV.getFecha(), entradaV.getDetalle(), entradaV.getCantidad(), 
+                entradaV.getCostoUnitario(), entradaV.getPrecioUnitario(), entradaV.getPrecioCosto(), 
+                entradaV.getPrecioMayor(), entradaV.getCantidad(), null);
         conexion.guardar(entrada);
     }
 
@@ -110,9 +110,9 @@ public class TransaccionC {
         this.listaProductos = listaProductos;
     }
 
-    public void llenarTablaTransacciones(JTable jTable1) {
-        setTransacciones(new ArrayList<Entrada>());
-        conexion.getListaTransacciones(getTransacciones());
+    public void llenarTablaEntradas(JTable jTable1) {
+        setEntradas(new ArrayList<Entrada>());
+        conexion.getListaTransacciones(getEntradas());
         conexion.abrir();
         
         for(int i=0;i<entradas.size();i++){
@@ -124,15 +124,15 @@ public class TransaccionC {
     /**
      * @return the entradaes
      */
-    public ArrayList<Entrada> getTransacciones() {
+    public ArrayList<Entrada> getEntradas() {
         return entradas;
     }
 
     /**
-     * @param transacciones the entradaes to set
+     * @param entradas the entradaes to set
      */
-    public void setTransacciones(ArrayList<Entrada> transacciones) {
-        this.entradas = transacciones;
+    public void setEntradas(ArrayList<Entrada> entradas) {
+        this.entradas = entradas;
     }
 
     private void addColchonATabla(Entrada t, DefaultTableModel defaultTableModel, int i) {
@@ -145,21 +145,21 @@ public class TransaccionC {
         entrada=entradas.get(filaSeleccionada);
     }
 
-    public void getTransacciones(TransaccionV transaccionV) {
-        transaccionV.setCodigo(entrada.getCodigo());
-        transaccionV.setFecha(entrada.getFecha());
+    public void getEntradas(EntradaV entradaV) {
+        entradaV.setCodigo(entrada.getCodigo());
+        entradaV.setFecha(entrada.getFecha());
         conexion.abrir();
-        transaccionV.setProducto((Colchon)conexion.getObject(entrada.getColchon()));
+        entradaV.setProducto((Colchon)conexion.getObject(entrada.getColchon()));
         conexion.cerrar();
-        transaccionV.setTipo(entrada.getTipo());
-        transaccionV.setPrecioUnitario(entrada.getPrecioUnitario());
-        transaccionV.setCantidad(entrada.getCantidad());
-        transaccionV.setPrecioCosto(entrada.getTotalCosto());
-        transaccionV.setPrecioMayor(entrada.getTotalMayor());
-        transaccionV.setDetalle(entrada.getDetalle());
+        entradaV.setTipo(entrada.getTipo());
+        entradaV.setPrecioUnitario(entrada.getPrecioUnitario());
+        entradaV.setCantidad(entrada.getCantidad());
+        entradaV.setPrecioCosto(entrada.getTotalCosto());
+        entradaV.setPrecioMayor(entrada.getTotalMayor());
+        entradaV.setDetalle(entrada.getDetalle());
     }
 
-    public boolean eliminarTransaccion() {
+    public boolean eliminarEntrada() {
         boolean exito=false;
         if(!existeDependencia()){
            conexion.eliminar(entrada);
