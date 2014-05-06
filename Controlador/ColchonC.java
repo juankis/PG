@@ -177,7 +177,7 @@ public class ColchonC {
     private boolean existeDependencia() {
         conexion.abrir();
         colchon=(Colchon)conexion.getObject(colchon);
-        boolean res=colchon.getTransaccions().isEmpty();
+        boolean res=colchon.getEntradas().isEmpty();
         conexion.cerrar();
         return  !res;
     }

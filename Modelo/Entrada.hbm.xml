@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Feb 21, 2014 9:02:19 AM by Hibernate Tools 3.6.0 -->
+<!-- Generated May 5, 2014 12:01:49 PM by Hibernate Tools 3.6.0 -->
 <hibernate-mapping>
-    <class name="Modelo.Transaccion" table="transaccion" catalog="sisinventarios">
+    <class name="Modelo.Entrada" table="entrada" catalog="sisinventarios">
         <id name="id" type="java.lang.Integer">
             <column name="id" />
             <generator class="identity" />
@@ -41,5 +41,14 @@
         <property name="totalMayor" type="java.lang.Double">
             <column name="totalMayor" precision="22" scale="0" />
         </property>
+        <property name="stok" type="java.lang.Double">
+            <column name="stok" precision="22" scale="0" />
+        </property>
+        <set name="relacionentradasalidas" table="relacionentradasalida" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Entrada_id" not-null="true" />
+            </key>
+            <one-to-many class="Modelo.Relacionentradasalida" />
+        </set>
     </class>
 </hibernate-mapping>

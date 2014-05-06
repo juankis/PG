@@ -10,7 +10,7 @@ import Modelo.Colchon;
 import Modelo.Deposito;
 import Modelo.Esponja;
 import Modelo.Medidas;
-import Modelo.Transaccion;
+import Modelo.Entrada;
 import java.awt.List;
 import java.util.ArrayList;
 import org.hibernate.Query;
@@ -114,10 +114,10 @@ public class Conexion {
         session = sessionFactory.openSession();
     }
 
-    void getListaTransacciones(ArrayList<Transaccion> transacciones) {
+    void getListaTransacciones(ArrayList<Entrada> entradas) {
         session = sessionFactory.openSession();
-        query = session.createQuery("SELECT t FROM Transaccion t");
-        transacciones.addAll(query.list());
+        query = session.createQuery("SELECT d FROM Entrada d");
+        entradas.addAll(query.list());
         session.close();
     }
 

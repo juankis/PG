@@ -75,7 +75,7 @@ public class DepositoC {
     public boolean existeDependencia(){
         conexion.abrir();
         deposito=(Deposito)conexion.getObject(deposito);
-        boolean res=deposito.getTransaccions().isEmpty();
+        boolean res=deposito.getEntradas().isEmpty();
         conexion.cerrar();
         return  !res;
     }
