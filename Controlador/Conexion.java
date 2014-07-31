@@ -11,7 +11,7 @@ import Modelo.Deposito;
 import Modelo.Esponja;
 import Modelo.Medidas;
 import Modelo.Entrada;
-import java.awt.List;
+
 import java.util.ArrayList;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -28,6 +28,7 @@ public class Conexion {
     
     private Session session;
     private Query query;
+    private Validacion validacion; 
     private static final SessionFactory sessionFactory;
     
     static {
@@ -42,7 +43,7 @@ public class Conexion {
         }
     }
     public Conexion(){
-        
+        //validacion=new Validacion();
     }
     public static SessionFactory getSessionFactory() {
         return sessionFactory;
@@ -106,7 +107,22 @@ public class Conexion {
        Object res=session.merge(objeto);
        return res;
     }
-
+    
+    Object getObjectSql(String sql) {
+       Object res=null;
+       session = sessionFactory.openSession();
+       query = session.createQuery(sql);
+       try{
+           res = query.uniqueResult();
+       }catch(Exception e){
+           validacion.mostrarMensaje("ha ocurrido un error al recuperar el objeto");
+       }finally{
+           session.close();
+           return res;
+       }
+       
+    }
+    
     void cerrar() {
         session.close();
     }

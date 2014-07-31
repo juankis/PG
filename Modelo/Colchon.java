@@ -1,5 +1,5 @@
 package Modelo;
-// Generated May 5, 2014 12:01:48 PM by Hibernate Tools 3.6.0
+// Generated May 6, 2014 10:27:59 PM by Hibernate Tools 3.6.0
 
 
 import java.util.HashSet;
@@ -19,11 +19,12 @@ public class Colchon  implements java.io.Serializable {
      private String tela;
      private String tipo;
      private Set entradas = new HashSet(0);
+     private Set salidas = new HashSet(0);
 
     public Colchon() {
     }
 
-    public Colchon(Esponja esponja, Medidas medidas, String nombre, String color, String tela, String tipo, Set entradas) {
+    public Colchon(Esponja esponja, Medidas medidas, String nombre, String color, String tela, String tipo, Set entradas, Set salidas) {
        this.esponja = esponja;
        this.medidas = medidas;
        this.nombre = nombre;
@@ -31,6 +32,7 @@ public class Colchon  implements java.io.Serializable {
        this.tela = tela;
        this.tipo = tipo;
        this.entradas = entradas;
+       this.salidas = salidas;
     }
    
     public Integer getId() {
@@ -88,6 +90,13 @@ public class Colchon  implements java.io.Serializable {
     
     public void setEntradas(Set entradas) {
         this.entradas = entradas;
+    }
+    public Set getSalidas() {
+        return this.salidas;
+    }
+    
+    public void setSalidas(Set salidas) {
+        this.salidas = salidas;
     }
 
 

@@ -33,9 +33,13 @@ public class ColchonC {
     }
 
     public ColchonC(ProductoFormulario colchonV) {
-        colchon=new Colchon(colchonV.getEsponja(), colchonV.getMedidas(), colchonV.getNombre(), colchonV.getColor(), colchonV.getTela(), colchonV.getTipo(),null );
+        colchon=new Colchon(colchonV.getEsponja(), colchonV.getMedidas(), colchonV.getNombre(), colchonV.getColor(), colchonV.getTela(), colchonV.getTipo(),null,null);
     }
     
+    public Colchon getColchon(String nombre){
+        Object res=conexion.getObjectSql("select c from Colchon c where c.nombre = '"+nombre+"'");
+        return (Colchon)res;
+    }
     public void guardar() {
         conexion.guardar(colchon);
     }
@@ -193,5 +197,14 @@ public class ColchonC {
 
     public void modificar() {
         conexion.modificar(colchon);
+    }
+    
+    public void llenarListaProductos(JComboBox productos) {
+        productos.removeAllItems();
+        setListaColchones(new ArrayList<Colchon>());
+        conexion.getListaColchones(getListaColchones());
+        for(int i=0;i<getListaColchones().size();i++){
+            productos.addItem(getListaColchones().get(i).getNombre());
+        }
     }
 }

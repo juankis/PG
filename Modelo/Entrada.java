@@ -1,5 +1,5 @@
 package Modelo;
-// Generated May 5, 2014 12:01:48 PM by Hibernate Tools 3.6.0
+// Generated May 6, 2014 10:27:59 PM by Hibernate Tools 3.6.0
 
 
 import java.util.Date;
@@ -24,7 +24,7 @@ public class Entrada  implements java.io.Serializable {
      private Double precioUnitario;
      private Double totalCosto;
      private Double totalMayor;
-     private Double stok;
+     private Double stock;
      private Set relacionentradasalidas = new HashSet(0);
 
     public Entrada() {
@@ -35,7 +35,7 @@ public class Entrada  implements java.io.Serializable {
         this.colchon = colchon;
         this.deposito = deposito;
     }
-    public Entrada(Colchon colchon, Deposito deposito, String codigo, Boolean tipo, Date fecha, String detalle, Double cantidad, Double costoUnitario, Double precioUnitario, Double totalCosto, Double totalMayor, Double stok, Set relacionentradasalidas) {
+    public Entrada(Colchon colchon, Deposito deposito, String codigo, Boolean tipo, Date fecha, String detalle, Double cantidad, Double costoUnitario, Double precioUnitario, Double totalCosto, Double totalMayor, Double stock, Set relacionentradasalidas) {
        this.colchon = colchon;
        this.deposito = deposito;
        this.codigo = codigo;
@@ -47,7 +47,7 @@ public class Entrada  implements java.io.Serializable {
        this.precioUnitario = precioUnitario;
        this.totalCosto = totalCosto;
        this.totalMayor = totalMayor;
-       this.stok = stok;
+       this.stock = stock;
        this.relacionentradasalidas = relacionentradasalidas;
     }
    
@@ -135,12 +135,12 @@ public class Entrada  implements java.io.Serializable {
     public void setTotalMayor(Double totalMayor) {
         this.totalMayor = totalMayor;
     }
-    public Double getStok() {
-        return this.stok;
+    public Double getStock() {
+        return this.stock;
     }
     
-    public void setStok(Double stok) {
-        this.stok = stok;
+    public void setStock(Double stock) {
+        this.stock = stock;
     }
     public Set getRelacionentradasalidas() {
         return this.relacionentradasalidas;

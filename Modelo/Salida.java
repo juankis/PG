@@ -1,5 +1,5 @@
 package Modelo;
-// Generated May 5, 2014 12:01:48 PM by Hibernate Tools 3.6.0
+// Generated May 6, 2014 10:27:59 PM by Hibernate Tools 3.6.0
 
 
 import java.util.Date;
@@ -13,6 +13,7 @@ public class Salida  implements java.io.Serializable {
 
 
      private Integer id;
+     private Colchon colchon;
      private Double cantidad;
      private Date fecha;
      private String detalle;
@@ -21,7 +22,12 @@ public class Salida  implements java.io.Serializable {
     public Salida() {
     }
 
-    public Salida(Double cantidad, Date fecha, String detalle, Set relacionentradasalidas) {
+	
+    public Salida(Colchon colchon) {
+        this.colchon = colchon;
+    }
+    public Salida(Colchon colchon, Double cantidad, Date fecha, String detalle, Set relacionentradasalidas) {
+       this.colchon = colchon;
        this.cantidad = cantidad;
        this.fecha = fecha;
        this.detalle = detalle;
@@ -34,6 +40,13 @@ public class Salida  implements java.io.Serializable {
     
     public void setId(Integer id) {
         this.id = id;
+    }
+    public Colchon getColchon() {
+        return this.colchon;
+    }
+    
+    public void setColchon(Colchon colchon) {
+        this.colchon = colchon;
     }
     public Double getCantidad() {
         return this.cantidad;
