@@ -1,5 +1,5 @@
 package Modelo;
-// Generated May 6, 2014 10:27:59 PM by Hibernate Tools 3.6.0
+// Generated Aug 3, 2014 10:33:50 AM by Hibernate Tools 3.6.0
 
 
 import java.util.HashSet;
@@ -11,35 +11,40 @@ import java.util.Set;
 public class Deposito  implements java.io.Serializable {
 
 
-     private Integer id;
-     private String nombre;
+     private int iddeposito;
+     private String nombredeposito;
      private String direccion;
-     private String detalle;
+     private String detalledeposito;
      private Set entradas = new HashSet(0);
 
     public Deposito() {
     }
 
-    public Deposito(String nombre, String direccion, String detalle, Set entradas) {
-       this.nombre = nombre;
+	
+    public Deposito(int iddeposito) {
+        this.iddeposito = iddeposito;
+    }
+    public Deposito(int iddeposito, String nombredeposito, String direccion, String detalledeposito, Set entradas) {
+       this.iddeposito = iddeposito;
+       this.nombredeposito = nombredeposito;
        this.direccion = direccion;
-       this.detalle = detalle;
+       this.detalledeposito = detalledeposito;
        this.entradas = entradas;
     }
    
-    public Integer getId() {
-        return this.id;
+    public int getIddeposito() {
+        return this.iddeposito;
     }
     
-    public void setId(Integer id) {
-        this.id = id;
+    public void setIddeposito(int iddeposito) {
+        this.iddeposito = iddeposito;
     }
-    public String getNombre() {
-        return this.nombre;
+    public String getNombredeposito() {
+        return this.nombredeposito;
     }
     
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setNombredeposito(String nombredeposito) {
+        this.nombredeposito = nombredeposito;
     }
     public String getDireccion() {
         return this.direccion;
@@ -48,12 +53,12 @@ public class Deposito  implements java.io.Serializable {
     public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
-    public String getDetalle() {
-        return this.detalle;
+    public String getDetalledeposito() {
+        return this.detalledeposito;
     }
     
-    public void setDetalle(String detalle) {
-        this.detalle = detalle;
+    public void setDetalledeposito(String detalledeposito) {
+        this.detalledeposito = detalledeposito;
     }
     public Set getEntradas() {
         return this.entradas;

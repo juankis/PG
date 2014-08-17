@@ -27,7 +27,8 @@ public class MedidasC {
     }
 
     public MedidasC(MedidasV medidasV) {
-        medidas = new Medidas(medidasV.getAncho(), medidasV.getLargo(), medidasV.getGrosor(), medidasV.getPlazas(),medidasV.getCodigo(), null);
+        medidas=new Medidas();
+        medidas = new Medidas(medidas.getIdmedidas(),medidasV.getAncho(), medidasV.getLargo(), medidasV.getGrosor(), medidasV.getPlazas(),medidasV.getCodigo(), null);
     }
 
     public void guardar() {
@@ -60,7 +61,7 @@ public class MedidasC {
     }
     
     private void addColchonATabla(Medidas m, DefaultTableModel model,int i) {
-        String[] arr={m.getPlazas().toString(),m.getLargo().toString(),m.getAncho().toString(),m.getGrosor().toString(),m.getCodigo()};
+        String[] arr={m.getPlazas().toString(),m.getLargo().toString(),m.getAncho().toString(),m.getGrosor().toString(),m.getCodigomedidas()};
         model.addRow(arr);
         
     }
@@ -74,7 +75,7 @@ public class MedidasC {
         medidasV.setLargo(medidas.getLargo());
         medidasV.setAncho(medidas.getAncho());
         medidasV.setGrosor(medidas.getGrosor());
-        medidasV.setCodigo(medidas.getCodigo());
+        medidasV.setCodigo(medidas.getCodigomedidas());
     }
 
     public void setMedidas(MedidasV medidasV) {
@@ -82,7 +83,7 @@ public class MedidasC {
         medidas.setLargo(medidasV.getLargo());
         medidas.setAncho(medidasV.getAncho());
         medidas.setGrosor(medidasV.getGrosor());
-        medidas.setCodigo(medidasV.getCodigo());
+        medidas.setCodigomedidas(medidasV.getCodigo());
     }
 
     public void modificar() {

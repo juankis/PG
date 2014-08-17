@@ -1,5 +1,5 @@
 package Modelo;
-// Generated May 6, 2014 10:27:59 PM by Hibernate Tools 3.6.0
+// Generated Aug 3, 2014 10:33:50 AM by Hibernate Tools 3.6.0
 
 
 import java.util.HashSet;
@@ -11,32 +11,37 @@ import java.util.Set;
 public class Medidas  implements java.io.Serializable {
 
 
-     private Integer id;
+     private int idmedidas;
      private String ancho;
      private String largo;
      private String grosor;
      private String plazas;
-     private String codigo;
+     private String codigomedidas;
      private Set colchons = new HashSet(0);
 
     public Medidas() {
     }
 
-    public Medidas(String ancho, String largo, String grosor, String plazas, String codigo, Set colchons) {
+	
+    public Medidas(int idmedidas) {
+        this.idmedidas = idmedidas;
+    }
+    public Medidas(int idmedidas, String ancho, String largo, String grosor, String plazas, String codigomedidas, Set colchons) {
+       this.idmedidas = idmedidas;
        this.ancho = ancho;
        this.largo = largo;
        this.grosor = grosor;
        this.plazas = plazas;
-       this.codigo = codigo;
+       this.codigomedidas = codigomedidas;
        this.colchons = colchons;
     }
    
-    public Integer getId() {
-        return this.id;
+    public int getIdmedidas() {
+        return this.idmedidas;
     }
     
-    public void setId(Integer id) {
-        this.id = id;
+    public void setIdmedidas(int idmedidas) {
+        this.idmedidas = idmedidas;
     }
     public String getAncho() {
         return this.ancho;
@@ -66,12 +71,12 @@ public class Medidas  implements java.io.Serializable {
     public void setPlazas(String plazas) {
         this.plazas = plazas;
     }
-    public String getCodigo() {
-        return this.codigo;
+    public String getCodigomedidas() {
+        return this.codigomedidas;
     }
     
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
+    public void setCodigomedidas(String codigomedidas) {
+        this.codigomedidas = codigomedidas;
     }
     public Set getColchons() {
         return this.colchons;

@@ -80,10 +80,17 @@ public class EntradaC {
     }*/
     
     public void guardarEntrada() {
-        this.entrada = new Entrada(entradaV.getProducto(), entradaV.getDeposito(), entradaV.getCodigo(),
-                entradaV.isTipo(), entradaV.getFecha(), entradaV.getDetalle(), entradaV.getCantidad(), 
-                entradaV.getCostoUnitario(), entradaV.getPrecioUnitario(), entradaV.getPrecioCosto(), 
-                entradaV.getPrecioMayor(), entradaV.getCantidad(), null);
+        entrada=new Entrada();
+        this.entrada = new Entrada(entrada.getIdentrada(),entradaV.getProducto(),
+                entradaV.getDeposito(),
+                entradaV.getCodigo(),
+                entradaV.isTipo(),
+                entradaV.getCostoUnitario(),
+                entradaV.getPrecioUnitario(), entradaV.getPrecioCosto(), 
+                entradaV.getPrecioMayor(),
+                entradaV.getPrecioMayor(), 
+                entradaV.getCantidad(), 
+                entradaV.getFecha(), entradaV.getDetalle(), null);
         conexion.guardar(entrada);
     }
 
@@ -92,7 +99,7 @@ public class EntradaC {
         setListaProductos(new ArrayList<Colchon>());
         conexion.getListaColchones(getListaProductos());
         for(int i=0;i<getListaProductos().size();i++){
-            productos.addItem(getListaProductos().get(i).getNombre());
+            productos.addItem(getListaProductos().get(i).getNombrecolchon());
         }
     }
 
@@ -137,7 +144,7 @@ public class EntradaC {
 
     private void addColchonATabla(Entrada t, DefaultTableModel defaultTableModel, int i) {
         t=(Entrada)conexion.getObject(t);
-        String[] arr={t.getCodigo(),t.getFecha().toString(),t.getColchon().getNombre(),t.getTipo().toString(),t.getPrecioUnitario().toString(),t.getCantidad().toString()};
+        String[] arr={t.getCodigoentrada(),t.getFechaentrada().toString(),t.getColchon().getNombrecolchon(),t.getTipoentrada().toString(),t.getPreciounitario().toString(),t.getCantidadentrada().toString()};
         defaultTableModel.addRow(arr);
     }
 
@@ -146,17 +153,17 @@ public class EntradaC {
     }
 
     public void getEntradas(EntradaV entradaV) {
-        entradaV.setCodigo(entrada.getCodigo());
-        entradaV.setFecha(entrada.getFecha());
+        entradaV.setCodigo(entrada.getCodigoentrada());
+        entradaV.setFecha(entrada.getFechaentrada());
         conexion.abrir();
         entradaV.setProducto((Colchon)conexion.getObject(entrada.getColchon()));
         conexion.cerrar();
-        entradaV.setTipo(entrada.getTipo());
-        entradaV.setPrecioUnitario(entrada.getPrecioUnitario());
-        entradaV.setCantidad(entrada.getCantidad());
-        entradaV.setPrecioCosto(entrada.getTotalCosto());
-        entradaV.setPrecioMayor(entrada.getTotalMayor());
-        entradaV.setDetalle(entrada.getDetalle());
+        entradaV.setTipo(entrada.getTipoentrada());
+        entradaV.setPrecioUnitario(entrada.getPreciounitario());
+        entradaV.setCantidad(entrada.getCantidadentrada());
+        entradaV.setPrecioCosto(entrada.getTotalcosto());
+        entradaV.setPrecioMayor(entrada.getTotalmayor());
+        entradaV.setDetalle(entrada.getDetalleentrada());
     }
 
     public boolean eliminarEntrada() {
@@ -183,7 +190,7 @@ public class EntradaC {
         setListaDepositos(new ArrayList<Deposito>());
         conexion.getListaDepositos(getListaDepositos());
         for(int i=0;i<getListaDepositos().size();i++){
-            jComboBoxDepositos.addItem(getListaDepositos().get(i).getNombre());
+            jComboBoxDepositos.addItem(getListaDepositos().get(i).getNombredeposito());
         }
     }
 

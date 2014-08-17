@@ -28,9 +28,11 @@ public class SalidaC {
     }
     public void guardar() {
         if(validar()){
-            System.out.println(colchon.getColchon(salidaV.getProductos().getModel().getSelectedItem().toString())+""+salidaV.getCantidad()+""+ salidaV.getFecha()+""+ salidaV.getDetalle());
-            salida=new Salida(colchon.getColchon(salidaV.getProductos().getModel().getSelectedItem().toString()),
-                              salidaV.getCantidad(), salidaV.getFecha(), salidaV.getDetalle(), null);
+            //System.out.println(colchon.getColchon(salidaV.getProductos().getModel().getSelectedItem().toString())+""+salidaV.getCantidad()+""+ salidaV.getFecha()+""+ salidaV.getDetalle());
+            salida=new Salida();
+            salida=new Salida(salida.getIdsalida(),
+                    colchon.getColchon(salidaV.getProductos().getModel().getSelectedItem().toString()),
+                    salidaV.getFecha(), salidaV.getCantidad(),salidaV.getDetalle(), null);
             conexion.guardar(salida);
         }
     }

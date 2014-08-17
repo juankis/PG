@@ -33,7 +33,9 @@ public class ColchonC {
     }
 
     public ColchonC(ProductoFormulario colchonV) {
-        colchon=new Colchon(colchonV.getEsponja(), colchonV.getMedidas(), colchonV.getNombre(), colchonV.getColor(), colchonV.getTela(), colchonV.getTipo(),null,null);
+        colchon=new Colchon();
+        colchon=new Colchon(colchon.getIdcolchon(),colchonV.getEsponja(), colchonV.getMedidas(),  colchonV.getColor(), colchonV.getTela(), colchonV.getTipo(),colchonV.getNombre(),null,null);
+        //colchon=new Colchon(idcolchon, null, null, null, null, null, null, null, null)
     }
     
     public Colchon getColchon(String nombre){
@@ -49,7 +51,7 @@ public class ColchonC {
         setListaMedidas(new ArrayList<Medidas>());
         conexion.getListaMedidas(getListaMedidas());
         for(int i=0;i<getListaMedidas().size();i++){
-            medidas.addItem(getListaMedidas().get(i).getCodigo());
+            medidas.addItem(getListaMedidas().get(i).getCodigomedidas());
         }
     }
 
@@ -58,7 +60,7 @@ public class ColchonC {
         setListaEsponjas(new ArrayList<Esponja>());
         conexion.getListaEsponjas(getListaEsponjas());
         for(int i=0;i<getListaEsponjas().size();i++){
-            esponjas.addItem(getListaEsponjas().get(i).getCodigo());
+            esponjas.addItem(getListaEsponjas().get(i).getCodigoesponja());
         }
        // esponjas.addItem("");
     }
@@ -107,16 +109,16 @@ public class ColchonC {
        String  codigoEsponja;
        String  codigoMedidas;
        try{
-           codigoEsponja=c.getEsponja().getCodigo();
+           codigoEsponja=c.getEsponja().getCodigoesponja();
        }catch (NullPointerException e){
            codigoEsponja=null;
        }
        try{
-           codigoMedidas=c.getMedidas().getCodigo();
+           codigoMedidas=c.getMedidas().getCodigomedidas();
        }catch (NullPointerException e){
            codigoMedidas=null;
        }
-       String[] arr={c.getNombre(),c.getColor(),c.getTela(),codigoEsponja,codigoMedidas,c.getTipo()};
+       String[] arr={c.getNombrecolchon(),c.getColorcolchon(),c.getTela(),codigoEsponja,codigoMedidas,c.getTipocolchon()};
        TableModelProductos.addRow(arr);
     }
 
@@ -136,9 +138,9 @@ public class ColchonC {
 
     public void llenarAtributosColchon(JComboBox JComboBoxColor,JComboBox JComboBoxTela,JComboBox JComboBoxTipo) {
         for(Colchon c:listaColchones){
-            JComboBoxColor.addItem(c.getColor());
+            JComboBoxColor.addItem(c.getColorcolchon());
             JComboBoxTela.addItem(c.getTela());
-            JComboBoxTipo.addItem(c.getTipo());
+            JComboBoxTipo.addItem(c.getTipocolchon());
         }
 //        validacion.eliminarRepetidosCombo(JComboBoxColor);
        // jTextFieldColor.addItem("");
@@ -150,10 +152,10 @@ public class ColchonC {
     }
 
     public void getProducto(ProductoFormulario productoFormulario) {
-        productoFormulario.setNombre(colchon.getNombre());
-        productoFormulario.setColor(colchon.getColor());
+        productoFormulario.setNombre(colchon.getNombrecolchon());
+        productoFormulario.setColor(colchon.getColorcolchon());
         productoFormulario.setTela(colchon.getTela());
-        productoFormulario.setTipo(colchon.getTipo());
+        productoFormulario.setTipo(colchon.getTipocolchon());
         conexion.abrir();
         try{
             productoFormulario.setEsponja((Esponja)conexion.getObject(colchon.getEsponja()));
@@ -187,10 +189,10 @@ public class ColchonC {
     }
 
     public void setProducto(ProductoFormulario productoV) {
-        colchon.setNombre(productoV.getNombre());
-        colchon.setColor(productoV.getColor());
+        colchon.setNombrecolchon(productoV.getNombre());
+        colchon.setColorcolchon(productoV.getColor());
         colchon.setTela(productoV.getTela());
-        colchon.setTipo(productoV.getTipo());
+        colchon.setTipocolchon(productoV.getTipo());
         colchon.setMedidas(productoV.getMedidas());
         colchon.setEsponja(productoV.getEsponja());
     }
@@ -204,7 +206,7 @@ public class ColchonC {
         setListaColchones(new ArrayList<Colchon>());
         conexion.getListaColchones(getListaColchones());
         for(int i=0;i<getListaColchones().size();i++){
-            productos.addItem(getListaColchones().get(i).getNombre());
+            productos.addItem(getListaColchones().get(i).getNombrecolchon());
         }
     }
 }

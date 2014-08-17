@@ -9,7 +9,7 @@ package Vista;
 import Controlador.SalidaC;
 import java.util.Date;
 import javax.swing.JComboBox;
-
+import java.math.BigDecimal;
 /**
  *
  * @author fcpa
@@ -217,8 +217,8 @@ public class SalidaV extends javax.swing.JFrame {
     /**
      * @return the cantidad
      */
-    public double getCantidad() {
-        return Double.parseDouble(jTextFieldCantidad.getText());
+    public BigDecimal getCantidad() {
+        return new BigDecimal(jTextFieldCantidad.getText());
     }
 
     /**

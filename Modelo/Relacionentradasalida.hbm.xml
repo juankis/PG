@@ -1,21 +1,21 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated May 6, 2014 10:28:00 PM by Hibernate Tools 3.6.0 -->
+<!-- Generated Aug 3, 2014 10:33:50 AM by Hibernate Tools 3.6.0 -->
 <hibernate-mapping>
-    <class name="Modelo.Relacionentradasalida" table="relacionentradasalida" catalog="sisinventarios">
-        <id name="id" type="java.lang.Integer">
-            <column name="id" />
-            <generator class="identity" />
+    <class name="Modelo.Relacionentradasalida" table="relacionentradasalida" schema="public">
+        <id name="idrelacionentradasalida" type="int">
+            <column name="idrelacionentradasalida" />
+            <generator class="assigned" />
         </id>
         <many-to-one name="entrada" class="Modelo.Entrada" fetch="select">
-            <column name="Entrada_id" not-null="true" />
+            <column name="identrada" />
         </many-to-one>
         <many-to-one name="salida" class="Modelo.Salida" fetch="select">
-            <column name="salida_idSalida" not-null="true" />
+            <column name="idsalida" />
         </many-to-one>
-        <property name="cantidad" type="java.lang.Double">
-            <column name="cantidad" precision="22" scale="0" />
+        <property name="cantidadrelentrsal" type="big_decimal">
+            <column name="cantidadrelentrsal" precision="131089" scale="0" />
         </property>
     </class>
 </hibernate-mapping>

@@ -1,5 +1,5 @@
 package Modelo;
-// Generated May 6, 2014 10:27:59 PM by Hibernate Tools 3.6.0
+// Generated Aug 3, 2014 10:33:50 AM by Hibernate Tools 3.6.0
 
 
 import java.util.HashSet;
@@ -11,36 +11,41 @@ import java.util.Set;
 public class Colchon  implements java.io.Serializable {
 
 
-     private Integer id;
+     private int idcolchon;
      private Esponja esponja;
      private Medidas medidas;
-     private String nombre;
-     private String color;
+     private String colorcolchon;
      private String tela;
-     private String tipo;
+     private String nombrecolchon;
+     private String tipocolchon;
      private Set entradas = new HashSet(0);
      private Set salidas = new HashSet(0);
 
     public Colchon() {
     }
 
-    public Colchon(Esponja esponja, Medidas medidas, String nombre, String color, String tela, String tipo, Set entradas, Set salidas) {
+	
+    public Colchon(int idcolchon) {
+        this.idcolchon = idcolchon;
+    }
+    public Colchon(int idcolchon, Esponja esponja, Medidas medidas, String colorcolchon, String tela, String nombrecolchon, String tipocolchon, Set entradas, Set salidas) {
+       this.idcolchon = idcolchon;
        this.esponja = esponja;
        this.medidas = medidas;
-       this.nombre = nombre;
-       this.color = color;
+       this.colorcolchon = colorcolchon;
        this.tela = tela;
-       this.tipo = tipo;
+       this.nombrecolchon = nombrecolchon;
+       this.tipocolchon = tipocolchon;
        this.entradas = entradas;
        this.salidas = salidas;
     }
    
-    public Integer getId() {
-        return this.id;
+    public int getIdcolchon() {
+        return this.idcolchon;
     }
     
-    public void setId(Integer id) {
-        this.id = id;
+    public void setIdcolchon(int idcolchon) {
+        this.idcolchon = idcolchon;
     }
     public Esponja getEsponja() {
         return this.esponja;
@@ -56,19 +61,12 @@ public class Colchon  implements java.io.Serializable {
     public void setMedidas(Medidas medidas) {
         this.medidas = medidas;
     }
-    public String getNombre() {
-        return this.nombre;
+    public String getColorcolchon() {
+        return this.colorcolchon;
     }
     
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-    public String getColor() {
-        return this.color;
-    }
-    
-    public void setColor(String color) {
-        this.color = color;
+    public void setColorcolchon(String colorcolchon) {
+        this.colorcolchon = colorcolchon;
     }
     public String getTela() {
         return this.tela;
@@ -77,12 +75,19 @@ public class Colchon  implements java.io.Serializable {
     public void setTela(String tela) {
         this.tela = tela;
     }
-    public String getTipo() {
-        return this.tipo;
+    public String getNombrecolchon() {
+        return this.nombrecolchon;
     }
     
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
+    public void setNombrecolchon(String nombrecolchon) {
+        this.nombrecolchon = nombrecolchon;
+    }
+    public String getTipocolchon() {
+        return this.tipocolchon;
+    }
+    
+    public void setTipocolchon(String tipocolchon) {
+        this.tipocolchon = tipocolchon;
     }
     public Set getEntradas() {
         return this.entradas;

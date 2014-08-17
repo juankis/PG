@@ -21,7 +21,8 @@ public class DepositoC {
    private Conexion conexion=new Conexion();
 
     public DepositoC(Vista.DepositoV depositoVista) {
-        deposito = new Deposito(depositoVista.getNombre(), depositoVista.getDireccion(), depositoVista.getDetalle(), null);
+        deposito=new Deposito();
+        deposito = new Deposito(deposito.getIddeposito(),depositoVista.getNombre(), depositoVista.getDireccion(), depositoVista.getDetalle(), null);
     }
 
     public DepositoC() {
@@ -56,7 +57,7 @@ public class DepositoC {
     }
 
     private void addDepositoATabla(Deposito d, DefaultTableModel defaultTableModel, int i) {
-        String[] arr={d.getNombre().toString(),d.getDireccion().toString(),d.getDetalle()};
+        String[] arr={d.getNombredeposito().toString(),d.getDireccion().toString(),d.getDetalledeposito()};
         defaultTableModel.addRow(arr);
     }
 

@@ -1,5 +1,5 @@
 package Modelo;
-// Generated May 6, 2014 10:27:59 PM by Hibernate Tools 3.6.0
+// Generated Aug 3, 2014 10:33:50 AM by Hibernate Tools 3.6.0
 
 
 import java.util.HashSet;
@@ -11,28 +11,33 @@ import java.util.Set;
 public class Esponja  implements java.io.Serializable {
 
 
-     private Integer id;
+     private int idesponja;
      private String material;
-     private String color;
-     private String codigo;
+     private String coloresponja;
+     private String codigoesponja;
      private Set colchons = new HashSet(0);
 
     public Esponja() {
     }
 
-    public Esponja(String material, String color, String codigo, Set colchons) {
+	
+    public Esponja(int idesponja) {
+        this.idesponja = idesponja;
+    }
+    public Esponja(int idesponja, String material, String coloresponja, String codigoesponja, Set colchons) {
+       this.idesponja = idesponja;
        this.material = material;
-       this.color = color;
-       this.codigo = codigo;
+       this.coloresponja = coloresponja;
+       this.codigoesponja = codigoesponja;
        this.colchons = colchons;
     }
    
-    public Integer getId() {
-        return this.id;
+    public int getIdesponja() {
+        return this.idesponja;
     }
     
-    public void setId(Integer id) {
-        this.id = id;
+    public void setIdesponja(int idesponja) {
+        this.idesponja = idesponja;
     }
     public String getMaterial() {
         return this.material;
@@ -41,19 +46,19 @@ public class Esponja  implements java.io.Serializable {
     public void setMaterial(String material) {
         this.material = material;
     }
-    public String getColor() {
-        return this.color;
+    public String getColoresponja() {
+        return this.coloresponja;
     }
     
-    public void setColor(String color) {
-        this.color = color;
+    public void setColoresponja(String coloresponja) {
+        this.coloresponja = coloresponja;
     }
-    public String getCodigo() {
-        return this.codigo;
+    public String getCodigoesponja() {
+        return this.codigoesponja;
     }
     
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
+    public void setCodigoesponja(String codigoesponja) {
+        this.codigoesponja = codigoesponja;
     }
     public Set getColchons() {
         return this.colchons;

@@ -1,7 +1,8 @@
 package Modelo;
-// Generated May 6, 2014 10:27:59 PM by Hibernate Tools 3.6.0
+// Generated Aug 3, 2014 10:33:50 AM by Hibernate Tools 3.6.0
 
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -12,51 +13,51 @@ import java.util.Set;
 public class Entrada  implements java.io.Serializable {
 
 
-     private Integer id;
+     private int identrada;
      private Colchon colchon;
      private Deposito deposito;
-     private String codigo;
-     private Boolean tipo;
-     private Date fecha;
-     private String detalle;
-     private Double cantidad;
-     private Double costoUnitario;
-     private Double precioUnitario;
-     private Double totalCosto;
-     private Double totalMayor;
-     private Double stock;
+     private String codigoentrada;
+     private Boolean tipoentrada;
+     private BigDecimal costounitario;
+     private BigDecimal preciounitario;
+     private BigDecimal totalcosto;
+     private BigDecimal totalmayor;
+     private BigDecimal stock;
+     private BigDecimal cantidadentrada;
+     private Date fechaentrada;
+     private String detalleentrada;
      private Set relacionentradasalidas = new HashSet(0);
 
     public Entrada() {
     }
 
 	
-    public Entrada(Colchon colchon, Deposito deposito) {
-        this.colchon = colchon;
-        this.deposito = deposito;
+    public Entrada(int identrada) {
+        this.identrada = identrada;
     }
-    public Entrada(Colchon colchon, Deposito deposito, String codigo, Boolean tipo, Date fecha, String detalle, Double cantidad, Double costoUnitario, Double precioUnitario, Double totalCosto, Double totalMayor, Double stock, Set relacionentradasalidas) {
+    public Entrada(int identrada, Colchon colchon, Deposito deposito, String codigoentrada, Boolean tipoentrada, BigDecimal costounitario, BigDecimal preciounitario, BigDecimal totalcosto, BigDecimal totalmayor, BigDecimal stock, BigDecimal cantidadentrada, Date fechaentrada, String detalleentrada, Set relacionentradasalidas) {
+       this.identrada = identrada;
        this.colchon = colchon;
        this.deposito = deposito;
-       this.codigo = codigo;
-       this.tipo = tipo;
-       this.fecha = fecha;
-       this.detalle = detalle;
-       this.cantidad = cantidad;
-       this.costoUnitario = costoUnitario;
-       this.precioUnitario = precioUnitario;
-       this.totalCosto = totalCosto;
-       this.totalMayor = totalMayor;
+       this.codigoentrada = codigoentrada;
+       this.tipoentrada = tipoentrada;
+       this.costounitario = costounitario;
+       this.preciounitario = preciounitario;
+       this.totalcosto = totalcosto;
+       this.totalmayor = totalmayor;
        this.stock = stock;
+       this.cantidadentrada = cantidadentrada;
+       this.fechaentrada = fechaentrada;
+       this.detalleentrada = detalleentrada;
        this.relacionentradasalidas = relacionentradasalidas;
     }
    
-    public Integer getId() {
-        return this.id;
+    public int getIdentrada() {
+        return this.identrada;
     }
     
-    public void setId(Integer id) {
-        this.id = id;
+    public void setIdentrada(int identrada) {
+        this.identrada = identrada;
     }
     public Colchon getColchon() {
         return this.colchon;
@@ -72,75 +73,75 @@ public class Entrada  implements java.io.Serializable {
     public void setDeposito(Deposito deposito) {
         this.deposito = deposito;
     }
-    public String getCodigo() {
-        return this.codigo;
+    public String getCodigoentrada() {
+        return this.codigoentrada;
     }
     
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
+    public void setCodigoentrada(String codigoentrada) {
+        this.codigoentrada = codigoentrada;
     }
-    public Boolean getTipo() {
-        return this.tipo;
-    }
-    
-    public void setTipo(Boolean tipo) {
-        this.tipo = tipo;
-    }
-    public Date getFecha() {
-        return this.fecha;
+    public Boolean getTipoentrada() {
+        return this.tipoentrada;
     }
     
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
+    public void setTipoentrada(Boolean tipoentrada) {
+        this.tipoentrada = tipoentrada;
     }
-    public String getDetalle() {
-        return this.detalle;
-    }
-    
-    public void setDetalle(String detalle) {
-        this.detalle = detalle;
-    }
-    public Double getCantidad() {
-        return this.cantidad;
+    public BigDecimal getCostounitario() {
+        return this.costounitario;
     }
     
-    public void setCantidad(Double cantidad) {
-        this.cantidad = cantidad;
+    public void setCostounitario(BigDecimal costounitario) {
+        this.costounitario = costounitario;
     }
-    public Double getCostoUnitario() {
-        return this.costoUnitario;
-    }
-    
-    public void setCostoUnitario(Double costoUnitario) {
-        this.costoUnitario = costoUnitario;
-    }
-    public Double getPrecioUnitario() {
-        return this.precioUnitario;
+    public BigDecimal getPreciounitario() {
+        return this.preciounitario;
     }
     
-    public void setPrecioUnitario(Double precioUnitario) {
-        this.precioUnitario = precioUnitario;
+    public void setPreciounitario(BigDecimal preciounitario) {
+        this.preciounitario = preciounitario;
     }
-    public Double getTotalCosto() {
-        return this.totalCosto;
-    }
-    
-    public void setTotalCosto(Double totalCosto) {
-        this.totalCosto = totalCosto;
-    }
-    public Double getTotalMayor() {
-        return this.totalMayor;
+    public BigDecimal getTotalcosto() {
+        return this.totalcosto;
     }
     
-    public void setTotalMayor(Double totalMayor) {
-        this.totalMayor = totalMayor;
+    public void setTotalcosto(BigDecimal totalcosto) {
+        this.totalcosto = totalcosto;
     }
-    public Double getStock() {
+    public BigDecimal getTotalmayor() {
+        return this.totalmayor;
+    }
+    
+    public void setTotalmayor(BigDecimal totalmayor) {
+        this.totalmayor = totalmayor;
+    }
+    public BigDecimal getStock() {
         return this.stock;
     }
     
-    public void setStock(Double stock) {
+    public void setStock(BigDecimal stock) {
         this.stock = stock;
+    }
+    public BigDecimal getCantidadentrada() {
+        return this.cantidadentrada;
+    }
+    
+    public void setCantidadentrada(BigDecimal cantidadentrada) {
+        this.cantidadentrada = cantidadentrada;
+    }
+    public Date getFechaentrada() {
+        return this.fechaentrada;
+    }
+    
+    public void setFechaentrada(Date fechaentrada) {
+        this.fechaentrada = fechaentrada;
+    }
+    public String getDetalleentrada() {
+        return this.detalleentrada;
+    }
+    
+    public void setDetalleentrada(String detalleentrada) {
+        this.detalleentrada = detalleentrada;
     }
     public Set getRelacionentradasalidas() {
         return this.relacionentradasalidas;

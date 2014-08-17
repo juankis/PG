@@ -1,25 +1,25 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated May 6, 2014 10:28:00 PM by Hibernate Tools 3.6.0 -->
+<!-- Generated Aug 3, 2014 10:33:50 AM by Hibernate Tools 3.6.0 -->
 <hibernate-mapping>
-    <class name="Modelo.Deposito" table="deposito" catalog="sisinventarios">
-        <id name="id" type="java.lang.Integer">
-            <column name="id" />
-            <generator class="identity" />
+    <class name="Modelo.Deposito" table="deposito" schema="public">
+        <id name="iddeposito" type="int">
+            <column name="iddeposito" />
+            <generator class="assigned" />
         </id>
-        <property name="nombre" type="string">
-            <column name="nombre" length="45" />
+        <property name="nombredeposito" type="string">
+            <column name="nombredeposito" length="256" />
         </property>
         <property name="direccion" type="string">
-            <column name="direccion" length="45" />
+            <column name="direccion" length="256" />
         </property>
-        <property name="detalle" type="string">
-            <column name="detalle" length="45" />
+        <property name="detalledeposito" type="string">
+            <column name="detalledeposito" length="256" />
         </property>
         <set name="entradas" table="entrada" inverse="true" lazy="true" fetch="select">
             <key>
-                <column name="Deposito_id" not-null="true" />
+                <column name="iddeposito" />
             </key>
             <one-to-many class="Modelo.Entrada" />
         </set>

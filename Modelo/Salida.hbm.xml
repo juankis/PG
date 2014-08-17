@@ -1,28 +1,28 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated May 6, 2014 10:28:00 PM by Hibernate Tools 3.6.0 -->
+<!-- Generated Aug 3, 2014 10:33:50 AM by Hibernate Tools 3.6.0 -->
 <hibernate-mapping>
-    <class name="Modelo.Salida" table="salida" catalog="sisinventarios">
-        <id name="id" type="java.lang.Integer">
-            <column name="id" />
-            <generator class="identity" />
+    <class name="Modelo.Salida" table="salida" schema="public">
+        <id name="idsalida" type="int">
+            <column name="idsalida" />
+            <generator class="assigned" />
         </id>
         <many-to-one name="colchon" class="Modelo.Colchon" fetch="select">
-            <column name="Colchon_id" not-null="true" />
+            <column name="idcolchon" />
         </many-to-one>
-        <property name="cantidad" type="java.lang.Double">
-            <column name="cantidad" precision="22" scale="0" />
+        <property name="fechasalida" type="date">
+            <column name="fechasalida" length="13" />
         </property>
-        <property name="fecha" type="date">
-            <column name="fecha" length="10" />
+        <property name="cantidadsalida" type="big_decimal">
+            <column name="cantidadsalida" precision="131089" scale="0" />
         </property>
-        <property name="detalle" type="string">
-            <column name="detalle" length="300" />
+        <property name="detallesalida" type="string">
+            <column name="detallesalida" length="256" />
         </property>
         <set name="relacionentradasalidas" table="relacionentradasalida" inverse="true" lazy="true" fetch="select">
             <key>
-                <column name="salida_idSalida" not-null="true" />
+                <column name="idsalida" />
             </key>
             <one-to-many class="Modelo.Relacionentradasalida" />
         </set>

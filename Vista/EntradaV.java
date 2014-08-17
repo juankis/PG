@@ -10,7 +10,7 @@ import Controlador.EntradaC;
 import Controlador.Util;
 import Controlador.Validacion;
 import java.util.Date;
-
+import java.math.BigDecimal;
 
 /**
  *
@@ -27,11 +27,11 @@ public class EntradaV extends javax.swing.JFrame {
     private boolean tipo;
     private Date fecha;
     private String detalle;
-    private Double precioUnitario;
-    private Double costoUnitario;
-    private Double cantidad;
-    private Double precioCosto;
-    private Double precioMayor;
+    private BigDecimal precioUnitario;
+    private BigDecimal costoUnitario;
+    private BigDecimal cantidad;
+    private BigDecimal precioCosto;
+    private BigDecimal precioMayor;
     private int idProducto;
     private Colchon producto;
     private Modelo.Deposito deposito;
@@ -524,14 +524,14 @@ public class EntradaV extends javax.swing.JFrame {
     /**
      * @return the precioUnitario
      */
-    public Double getPrecioUnitario() {
+    public BigDecimal getPrecioUnitario() {
         return precioUnitario;
     }
 
     /**
      * @param precioUnitario the precioUnitario to set
      */
-    public void setPrecioUnitario(Double precioUnitario) {
+    public void setPrecioUnitario(BigDecimal precioUnitario) {
         this.precioUnitario = precioUnitario;
         jTextFieldPrecioUnitario.setText(precioUnitario.toString());
     }
@@ -539,14 +539,14 @@ public class EntradaV extends javax.swing.JFrame {
     /**
      * @return the cantidad
      */
-    public Double getCantidad() {
+    public BigDecimal getCantidad() {
         return cantidad;
     }
 
     /**
      * @param cantidad the cantidad to set
      */
-    public void setCantidad(Double cantidad) {
+    public void setCantidad(BigDecimal cantidad) {
         this.cantidad = cantidad;
         jTextFieldCantidad.setText(cantidad.toString());
     }
@@ -554,14 +554,14 @@ public class EntradaV extends javax.swing.JFrame {
     /**
      * @return the precioCosto
      */
-    public Double getPrecioCosto() {
+    public BigDecimal getPrecioCosto() {
         return precioCosto;
     }
 
     /**
      * @param precioCosto the precioCosto to set
      */
-    public void setPrecioCosto(Double precioCosto) {
+    public void setPrecioCosto(BigDecimal precioCosto) {
         this.precioCosto = precioCosto;
         jTextFieldPrecioCosto.setText(precioCosto.toString());
     }
@@ -569,14 +569,14 @@ public class EntradaV extends javax.swing.JFrame {
     /**
      * @return the precioMayor
      */
-    public Double getPrecioMayor() {
+    public BigDecimal getPrecioMayor() {
         return precioMayor;
     }
 
     /**
      * @param precioMayor the precioMayor to set
      */
-    public void setPrecioMayor(Double precioMayor) {
+    public void setPrecioMayor(BigDecimal precioMayor) {
         this.precioMayor = precioMayor;
         jTextFieldPrecioMayor.setText(precioMayor.toString());
     }
@@ -612,11 +612,11 @@ public class EntradaV extends javax.swing.JFrame {
                         tipo=isEntrada();
                         fecha=jDateChooser.getDate();
                         detalle=jTextFieldDetalle.getText();
-                        precioUnitario=Double.parseDouble(jTextFieldPrecioUnitario.getText());
-                        costoUnitario=Double.parseDouble(jTextFieldCostoUnitario.getText());
-                        cantidad=Double.parseDouble(jTextFieldCantidad.getText());
-                        precioCosto=Double.parseDouble(jTextFieldPrecioCosto.getText());
-                        precioMayor=Double.parseDouble(jTextFieldPrecioMayor.getText());
+                        precioUnitario=new BigDecimal(jTextFieldPrecioUnitario.getText());
+                        costoUnitario=new BigDecimal(jTextFieldCostoUnitario.getText());
+                        cantidad=new BigDecimal(jTextFieldCantidad.getText());
+                        precioCosto=new BigDecimal(jTextFieldPrecioCosto.getText());
+                        precioMayor=new BigDecimal(jTextFieldPrecioMayor.getText());
                         producto=entrada.getListaProductos().get(jComboBoxProducto.getSelectedIndex());
                         deposito=entrada.getListaDepositos().get(jComboBoxDepositos.getSelectedIndex());
                         res= true;
@@ -677,7 +677,7 @@ public class EntradaV extends javax.swing.JFrame {
      */
     public void setProducto(Colchon producto) {
         this.producto = producto;
-        jComboBoxProducto.setSelectedItem(producto.getNombre());
+        jComboBoxProducto.setSelectedItem(producto.getNombrecolchon());
     }
 
     void setProductoSeleccionado(Object algo) {
@@ -688,14 +688,14 @@ public class EntradaV extends javax.swing.JFrame {
     /**
      * @return the costoUnitario
      */
-    public Double getCostoUnitario() {
+    public BigDecimal getCostoUnitario() {
         return costoUnitario;
     }
 
     /**
      * @param costoUnitario the costoUnitario to set
      */
-    public void setCostoUnitario(Double costoUnitario) {
+    public void setCostoUnitario(BigDecimal costoUnitario) {
         this.costoUnitario = costoUnitario;
         jTextFieldCostoUnitario.setText(costoUnitario.toString());
     }

@@ -1,52 +1,52 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated May 6, 2014 10:28:00 PM by Hibernate Tools 3.6.0 -->
+<!-- Generated Aug 3, 2014 10:33:50 AM by Hibernate Tools 3.6.0 -->
 <hibernate-mapping>
-    <class name="Modelo.Entrada" table="entrada" catalog="sisinventarios">
-        <id name="id" type="java.lang.Integer">
-            <column name="id" />
-            <generator class="identity" />
+    <class name="Modelo.Entrada" table="entrada" schema="public">
+        <id name="identrada" type="int">
+            <column name="identrada" />
+            <generator class="assigned" />
         </id>
         <many-to-one name="colchon" class="Modelo.Colchon" fetch="select">
-            <column name="Colchon_id" not-null="true" />
+            <column name="idcolchon" />
         </many-to-one>
         <many-to-one name="deposito" class="Modelo.Deposito" fetch="select">
-            <column name="Deposito_id" not-null="true" />
+            <column name="iddeposito" />
         </many-to-one>
-        <property name="codigo" type="string">
-            <column name="Codigo" length="45" />
+        <property name="codigoentrada" type="string">
+            <column name="codigoentrada" length="256" />
         </property>
-        <property name="tipo" type="java.lang.Boolean">
-            <column name="tipo" />
+        <property name="tipoentrada" type="java.lang.Boolean">
+            <column name="tipoentrada" />
         </property>
-        <property name="fecha" type="timestamp">
-            <column name="fecha" length="19" />
+        <property name="costounitario" type="big_decimal">
+            <column name="costounitario" precision="131089" scale="0" />
         </property>
-        <property name="detalle" type="string">
-            <column name="detalle" length="300" />
+        <property name="preciounitario" type="big_decimal">
+            <column name="preciounitario" precision="131089" scale="0" />
         </property>
-        <property name="cantidad" type="java.lang.Double">
-            <column name="cantidad" precision="22" scale="0" />
+        <property name="totalcosto" type="big_decimal">
+            <column name="totalcosto" precision="131089" scale="0" />
         </property>
-        <property name="costoUnitario" type="java.lang.Double">
-            <column name="costoUnitario" precision="22" scale="0" />
+        <property name="totalmayor" type="big_decimal">
+            <column name="totalmayor" precision="131089" scale="0" />
         </property>
-        <property name="precioUnitario" type="java.lang.Double">
-            <column name="precioUnitario" precision="22" scale="0" />
+        <property name="stock" type="big_decimal">
+            <column name="stock" precision="131089" scale="0" />
         </property>
-        <property name="totalCosto" type="java.lang.Double">
-            <column name="totalCosto" precision="22" scale="0" />
+        <property name="cantidadentrada" type="big_decimal">
+            <column name="cantidadentrada" precision="131089" scale="0" />
         </property>
-        <property name="totalMayor" type="java.lang.Double">
-            <column name="totalMayor" precision="22" scale="0" />
+        <property name="fechaentrada" type="date">
+            <column name="fechaentrada" length="13" />
         </property>
-        <property name="stock" type="java.lang.Double">
-            <column name="stock" precision="22" scale="0" />
+        <property name="detalleentrada" type="string">
+            <column name="detalleentrada" length="256" />
         </property>
         <set name="relacionentradasalidas" table="relacionentradasalida" inverse="true" lazy="true" fetch="select">
             <key>
-                <column name="Entrada_id" not-null="true" />
+                <column name="identrada" />
             </key>
             <one-to-many class="Modelo.Relacionentradasalida" />
         </set>

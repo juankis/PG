@@ -372,7 +372,7 @@ public class ProductoFormulario extends javax.swing.JFrame {
     public void setEsponja(Esponja esponja) {
         this.esponja = esponja;
         try{
-            jComboBoxEsponja.setSelectedItem(esponja.getCodigo());
+            jComboBoxEsponja.setSelectedItem(esponja.getCodigoesponja());
         }catch(NullPointerException e){
             jComboBoxEsponja.setSelectedItem("");
         }
@@ -392,7 +392,7 @@ public class ProductoFormulario extends javax.swing.JFrame {
     public void setMedidas(Medidas medidas) {
         this.medidas = medidas;
         try{
-            jComboBoxMedidas.setSelectedItem(medidas.getCodigo());
+            jComboBoxMedidas.setSelectedItem(medidas.getCodigomedidas());
         }catch(NullPointerException e){
             jComboBoxMedidas.setSelectedItem("");
         }

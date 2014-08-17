@@ -30,7 +30,8 @@ public class EsponjaC {
     }
 
     public EsponjaC(EsponjaV esponjaV) {
-        esponja=new Esponja(esponjaV.getMaterial(), esponjaV.getColor(),esponjaV.getCodigo(), null);
+        esponja=new Esponja();
+        esponja=new Esponja(esponja.getIdesponja(),esponjaV.getMaterial(), esponjaV.getColor(),esponjaV.getCodigo(), null);
         
     }
     public void guardar(){
@@ -63,7 +64,7 @@ public class EsponjaC {
     }
 
     private void addColchonATabla(Esponja e, DefaultTableModel model,int i) {
-        String[] arr={e.getMaterial(),e.getColor(),e.getCodigo()};
+        String[] arr={e.getMaterial(),e.getColoresponja(),e.getCodigoesponja()};
         model.addRow(arr);
         
     }
@@ -73,9 +74,9 @@ public class EsponjaC {
     }
 
     public void getEsponja(EsponjaV esponjaV) {
-        esponjaV.setColor(esponja.getColor());
+        esponjaV.setColor(esponja.getColoresponja());
         esponjaV.setMaterial(esponja.getMaterial());
-        esponjaV.setCodigo(esponja.getCodigo());
+        esponjaV.setCodigo(esponja.getCodigoesponja());
     }
 
     public void modificar() {
@@ -83,9 +84,9 @@ public class EsponjaC {
     }
 
     public void setEsponja(EsponjaV esponjaV) {
-        esponja.setColor(esponjaV.getColor());
+        esponja.setColoresponja(esponjaV.getColor());
         esponja.setMaterial(esponjaV.getMaterial());
-        esponja.setCodigo(esponjaV.getCodigo());
+        esponja.setCodigoesponja(esponjaV.getCodigo());
     }
 
     public boolean eliminarEsponja() {
@@ -109,7 +110,7 @@ public class EsponjaC {
         for(Esponja e:listaEsponjas){
             if(true)
             materialCombo.addItem(e.getMaterial());
-            colorCombo.addItem(e.getColor());
+            colorCombo.addItem(e.getColoresponja());
             //materialCombo.setInheritsPopupMenu
         }
             

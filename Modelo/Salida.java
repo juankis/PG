@@ -1,7 +1,8 @@
 package Modelo;
-// Generated May 6, 2014 10:27:59 PM by Hibernate Tools 3.6.0
+// Generated Aug 3, 2014 10:33:50 AM by Hibernate Tools 3.6.0
 
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -12,34 +13,35 @@ import java.util.Set;
 public class Salida  implements java.io.Serializable {
 
 
-     private Integer id;
+     private int idsalida;
      private Colchon colchon;
-     private Double cantidad;
-     private Date fecha;
-     private String detalle;
+     private Date fechasalida;
+     private BigDecimal cantidadsalida;
+     private String detallesalida;
      private Set relacionentradasalidas = new HashSet(0);
 
     public Salida() {
     }
 
 	
-    public Salida(Colchon colchon) {
-        this.colchon = colchon;
+    public Salida(int idsalida) {
+        this.idsalida = idsalida;
     }
-    public Salida(Colchon colchon, Double cantidad, Date fecha, String detalle, Set relacionentradasalidas) {
+    public Salida(int idsalida, Colchon colchon, Date fechasalida, BigDecimal cantidadsalida, String detallesalida, Set relacionentradasalidas) {
+       this.idsalida = idsalida;
        this.colchon = colchon;
-       this.cantidad = cantidad;
-       this.fecha = fecha;
-       this.detalle = detalle;
+       this.fechasalida = fechasalida;
+       this.cantidadsalida = cantidadsalida;
+       this.detallesalida = detallesalida;
        this.relacionentradasalidas = relacionentradasalidas;
     }
    
-    public Integer getId() {
-        return this.id;
+    public int getIdsalida() {
+        return this.idsalida;
     }
     
-    public void setId(Integer id) {
-        this.id = id;
+    public void setIdsalida(int idsalida) {
+        this.idsalida = idsalida;
     }
     public Colchon getColchon() {
         return this.colchon;
@@ -48,26 +50,26 @@ public class Salida  implements java.io.Serializable {
     public void setColchon(Colchon colchon) {
         this.colchon = colchon;
     }
-    public Double getCantidad() {
-        return this.cantidad;
+    public Date getFechasalida() {
+        return this.fechasalida;
     }
     
-    public void setCantidad(Double cantidad) {
-        this.cantidad = cantidad;
+    public void setFechasalida(Date fechasalida) {
+        this.fechasalida = fechasalida;
     }
-    public Date getFecha() {
-        return this.fecha;
-    }
-    
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
-    }
-    public String getDetalle() {
-        return this.detalle;
+    public BigDecimal getCantidadsalida() {
+        return this.cantidadsalida;
     }
     
-    public void setDetalle(String detalle) {
-        this.detalle = detalle;
+    public void setCantidadsalida(BigDecimal cantidadsalida) {
+        this.cantidadsalida = cantidadsalida;
+    }
+    public String getDetallesalida() {
+        return this.detallesalida;
+    }
+    
+    public void setDetallesalida(String detallesalida) {
+        this.detallesalida = detallesalida;
     }
     public Set getRelacionentradasalidas() {
         return this.relacionentradasalidas;
