@@ -272,7 +272,6 @@ public class EntradaV extends javax.swing.JFrame {
         jPanel1.add(jLabel3);
         jLabel3.setBounds(10, 110, 60, 16);
 
-        jComboBoxDepositos.setEditable(true);
         jPanel1.add(jComboBoxDepositos);
         jComboBoxDepositos.setBounds(100, 110, 130, 28);
 
@@ -315,7 +314,11 @@ public class EntradaV extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonAceptarActionPerformed
 
     private void jButtonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarActionPerformed
-        entrada.guardar();
+        if(entrada.guardar()){
+            dispose();
+            menu.actualizar();
+        }
+            
     }//GEN-LAST:event_jButtonGuardarActionPerformed
 
     private void jTextFieldCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCodigoActionPerformed

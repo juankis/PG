@@ -144,5 +144,19 @@ public class Conexion {
         session.close();
     }
 
-    
+    int getNextValue(String sql) {
+       Object res=null;
+       session = sessionFactory.openSession();
+       query = session.createQuery(sql);
+       try{
+           res = query.uniqueResult();
+       }catch(Exception e){
+           validacion.mostrarMensaje("ha ocurrido un error al recuperar el objeto "+e.getMessage());
+       }finally{
+           session.close();
+           return ((int)res)+1;
+       }
+       
+    }
+
 }

@@ -35,11 +35,11 @@ public class EntradaC {
         validacion = new Validacion();
     }
     
-    public void guardar() {
+    public boolean guardar() {
         if(entradaV.validar()){
             guardarEntrada();
         }
-        
+        return true;
     }
     
     /*private boolean validar() {
@@ -80,8 +80,9 @@ public class EntradaC {
     }*/
     
     public void guardarEntrada() {
-        entrada=new Entrada();
-        this.entrada = new Entrada(entrada.getIdentrada(),entradaV.getProducto(),
+        int id=conexion.getNextValue("SELECT MAX(identrada) FROM Entrada");
+        this.entrada = new Entrada(id,
+                entradaV.getProducto(),
                 entradaV.getDeposito(),
                 entradaV.getCodigo(),
                 entradaV.isTipo(),
