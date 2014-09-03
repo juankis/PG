@@ -1,5 +1,5 @@
 package Modelo;
-// Generated Aug 3, 2014 10:33:50 AM by Hibernate Tools 3.6.0
+// Generated Aug 31, 2014 8:32:31 PM by Hibernate Tools 3.6.0
 
 
 import java.math.BigDecimal;
@@ -22,7 +22,6 @@ public class Entrada  implements java.io.Serializable {
      private BigDecimal preciounitario;
      private BigDecimal totalcosto;
      private BigDecimal totalmayor;
-     private BigDecimal stock;
      private BigDecimal cantidadentrada;
      private Date fechaentrada;
      private String detalleentrada;
@@ -35,7 +34,7 @@ public class Entrada  implements java.io.Serializable {
     public Entrada(int identrada) {
         this.identrada = identrada;
     }
-    public Entrada(int identrada, Colchon colchon, Deposito deposito, String codigoentrada, Boolean tipoentrada, BigDecimal costounitario, BigDecimal preciounitario, BigDecimal totalcosto, BigDecimal totalmayor, BigDecimal stock, BigDecimal cantidadentrada, Date fechaentrada, String detalleentrada, Set relacionentradasalidas) {
+    public Entrada(int identrada, Colchon colchon, Deposito deposito, String codigoentrada, Boolean tipoentrada, BigDecimal costounitario, BigDecimal preciounitario, BigDecimal totalcosto, BigDecimal totalmayor, BigDecimal cantidadentrada, Date fechaentrada, String detalleentrada, Set relacionentradasalidas) {
        this.identrada = identrada;
        this.colchon = colchon;
        this.deposito = deposito;
@@ -45,7 +44,6 @@ public class Entrada  implements java.io.Serializable {
        this.preciounitario = preciounitario;
        this.totalcosto = totalcosto;
        this.totalmayor = totalmayor;
-       this.stock = stock;
        this.cantidadentrada = cantidadentrada;
        this.fechaentrada = fechaentrada;
        this.detalleentrada = detalleentrada;
@@ -114,13 +112,6 @@ public class Entrada  implements java.io.Serializable {
     
     public void setTotalmayor(BigDecimal totalmayor) {
         this.totalmayor = totalmayor;
-    }
-    public BigDecimal getStock() {
-        return this.stock;
-    }
-    
-    public void setStock(BigDecimal stock) {
-        this.stock = stock;
     }
     public BigDecimal getCantidadentrada() {
         return this.cantidadentrada;

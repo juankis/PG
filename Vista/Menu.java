@@ -23,6 +23,8 @@ public class Menu extends javax.swing.JFrame {
      */
     EntradaC transaccionC;
     EntradaV transaccionV;
+    //SalidaC salidaC;
+    SalidaV salidaV;
     public Menu() {
         this.setBounds(0, 0, 500, 500);
         initComponents();
@@ -44,11 +46,12 @@ public class Menu extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        jButtonEntrada = new javax.swing.JButton();
         jButtonProductos = new javax.swing.JButton();
         jButtonEditar = new javax.swing.JButton();
         jButtonEliminar = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jButtonSalida = new javax.swing.JButton();
         fondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -68,15 +71,15 @@ public class Menu extends javax.swing.JFrame {
         jPanel1.add(jScrollPane1);
         jScrollPane1.setBounds(120, 100, 492, 402);
 
-        jButton1.setMnemonic('t');
-        jButton1.setText("Transaccion");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonEntrada.setMnemonic('t');
+        jButtonEntrada.setText("Entrada");
+        jButtonEntrada.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonEntradaActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1);
-        jButton1.setBounds(0, 100, 110, 28);
+        jPanel1.add(jButtonEntrada);
+        jButtonEntrada.setBounds(0, 190, 110, 28);
 
         jButtonProductos.setMnemonic('p');
         jButtonProductos.setText("Productos");
@@ -117,6 +120,16 @@ public class Menu extends javax.swing.JFrame {
         jPanel1.add(jButton2);
         jButton2.setBounds(250, 10, 130, 65);
 
+        jButtonSalida.setMnemonic('t');
+        jButtonSalida.setText("Salida");
+        jButtonSalida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSalidaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButtonSalida);
+        jButtonSalida.setBounds(0, 220, 110, 28);
+
         fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fondo.jpg"))); // NOI18N
         jPanel1.add(fondo);
         fondo.setBounds(0, 0, 1470, 820);
@@ -141,10 +154,10 @@ public class Menu extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButtonEntradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEntradaActionPerformed
         transaccionV=new EntradaV(this);
         transaccionV.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jButtonEntradaActionPerformed
 
     private void jButtonProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonProductosActionPerformed
         ProductosV nuevoProducto=new ProductosV();
@@ -164,6 +177,11 @@ public class Menu extends javax.swing.JFrame {
         DepositoV dep=new DepositoV();
         dep.setVisible(rootPaneCheckingEnabled);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButtonSalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalidaActionPerformed
+       salidaV = new SalidaV(this);
+       salidaV.setVisible(rootPaneCheckingEnabled);
+    }//GEN-LAST:event_jButtonSalidaActionPerformed
 
     public int filaSeleccionada(){
         int fila_select = jTable1.getSelectedRow();
@@ -208,11 +226,12 @@ public class Menu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel fondo;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButtonEditar;
     private javax.swing.JButton jButtonEliminar;
+    private javax.swing.JButton jButtonEntrada;
     private javax.swing.JButton jButtonProductos;
+    private javax.swing.JButton jButtonSalida;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;

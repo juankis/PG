@@ -81,17 +81,18 @@ public class EntradaC {
     
     public void guardarEntrada() {
         int id=conexion.getNextValue("SELECT MAX(identrada) FROM Entrada");
-        this.entrada = new Entrada(id,
+       this.entrada = new Entrada(id,
                 entradaV.getProducto(),
                 entradaV.getDeposito(),
                 entradaV.getCodigo(),
                 entradaV.isTipo(),
                 entradaV.getCostoUnitario(),
-                entradaV.getPrecioUnitario(), entradaV.getPrecioCosto(), 
+                entradaV.getPrecioUnitario(),
+                entradaV.getPrecioCosto(), 
                 entradaV.getPrecioMayor(),
-                entradaV.getPrecioMayor(), 
                 entradaV.getCantidad(), 
-                entradaV.getFecha(), entradaV.getDetalle(), null);
+                entradaV.getFecha(), 
+                entradaV.getDetalle(), null);
         conexion.guardar(entrada);
     }
 

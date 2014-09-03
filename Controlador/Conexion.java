@@ -154,6 +154,8 @@ public class Conexion {
            validacion.mostrarMensaje("ha ocurrido un error al recuperar el objeto "+e.getMessage());
        }finally{
            session.close();
+           if(res==null)
+               res=0;
            return ((int)res)+1;
        }
        

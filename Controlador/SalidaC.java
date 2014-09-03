@@ -6,8 +6,10 @@
 
 package Controlador;
 
+import Modelo.Colchon;
 import Modelo.Salida;
 import Vista.SalidaV;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -20,25 +22,32 @@ public class SalidaC {
     private SalidaV salidaV;
     private Salida salida;
     private Conexion conexion;
-    private ColchonC colchon;
+    private ColchonC colchonC;
+    Colchon colchon;
     public SalidaC(SalidaV aThis) {
         this.salidaV=aThis;
         conexion=new Conexion();
-        colchon=new ColchonC();
+        colchonC=new ColchonC();
     }
-    public void guardar() {
+    public boolean guardar() {
+        int id=conexion.getNextValue("SELECT MAX(idsalida) FROM Salida");
+            colchon = colchonC.getColchon(salidaV.getProductos().getModel().getSelectedItem().toString());
+            
         if(validar()){
-            //System.out.println(colchon.getColchon(salidaV.getProductos().getModel().getSelectedItem().toString())+""+salidaV.getCantidad()+""+ salidaV.getFecha()+""+ salidaV.getDetalle());
-            salida=new Salida();
-            salida=new Salida(salida.getIdsalida(),
-                    colchon.getColchon(salidaV.getProductos().getModel().getSelectedItem().toString()),
-                    salidaV.getFecha(), salidaV.getCantidad(),salidaV.getDetalle(), null);
+            salida=new Salida(id,colchon,
+            salidaV.getFecha(), salidaV.getCantidad(),salidaV.getDetalle(), null);
             conexion.guardar(salida);
+            return true;
+        }else{
+            JOptionPane.showMessageDialog(null,"no exxiste suficiente stock");
+            return false;
         }
+        
     }
 
     private boolean validar() {
-        return true;
+        int res = colchon.getStockactual().compareTo(salidaV.getCantidad());
+        return res>=0;
     }
 
     public void actualizar() {
@@ -46,7 +55,7 @@ public class SalidaC {
     }
 
     private void llenarListaProductos() {
-        colchon.llenarListaProductos(salidaV.getProductos());
+        colchonC.llenarListaProductos(salidaV.getProductos());
     }
 
 }

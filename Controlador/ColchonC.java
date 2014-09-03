@@ -10,6 +10,7 @@ import Modelo.Esponja;
 import Modelo.Medidas;
 import Modelo.Colchon;
 import Vista.ProductoFormulario;
+import java.math.BigDecimal;
 
 import java.util.ArrayList;
 import javax.swing.JComboBox;
@@ -33,13 +34,13 @@ public class ColchonC {
     }
 
     public ColchonC(ProductoFormulario colchonV) {
-        colchon=new Colchon();
-        colchon=new Colchon(colchon.getIdcolchon(),colchonV.getEsponja(), colchonV.getMedidas(),  colchonV.getColor(), colchonV.getTela(), colchonV.getTipo(),colchonV.getNombre(),null,null);
-        //colchon=new Colchon(idcolchon, null, null, null, null, null, null, null, null)
+        int id=conexion.getNextValue("SELECT MAX(idcolchon) FROM Colchon");
+        colchon=new Colchon(id,colchonV.getEsponja(), colchonV.getMedidas(),  colchonV.getColor(), colchonV.getTela(), colchonV.getTipo(),colchonV.getNombre(), new BigDecimal(0) ,null,null);
+        
     }
     
     public Colchon getColchon(String nombre){
-        Object res=conexion.getObjectSql("select c from Colchon c where c.nombre = '"+nombre+"'");
+        Object res=conexion.getObjectSql("select c from Colchon c where c.nombrecolchon = '"+nombre+"'");
         return (Colchon)res;
     }
     public void guardar() {
