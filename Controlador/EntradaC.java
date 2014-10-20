@@ -81,19 +81,23 @@ public class EntradaC {
     
     public void guardarEntrada() {
         int id=conexion.getNextValue("SELECT MAX(identrada) FROM Entrada");
+        System.out.println("saltin");
+        System.out.println(entradaV.getCodigo());
        this.entrada = new Entrada(id,
                 entradaV.getProducto(),
                 entradaV.getDeposito(),
                 entradaV.getCodigo(),
-                entradaV.isTipo(),
                 entradaV.getCostoUnitario(),
                 entradaV.getPrecioUnitario(),
                 entradaV.getPrecioCosto(), 
                 entradaV.getPrecioMayor(),
-                entradaV.getCantidad(), 
+                entradaV.getCantidad(),
+                entradaV.getCantidad(),
                 entradaV.getFecha(), 
                 entradaV.getDetalle(), null);
         conexion.guardar(entrada);
+        
+        
     }
 
     public void llenarListaProductos(JComboBox productos) {
@@ -146,7 +150,7 @@ public class EntradaC {
 
     private void addColchonATabla(Entrada t, DefaultTableModel defaultTableModel, int i) {
         t=(Entrada)conexion.getObject(t);
-        String[] arr={t.getCodigoentrada(),t.getFechaentrada().toString(),t.getColchon().getNombrecolchon(),t.getTipoentrada().toString(),t.getPreciounitario().toString(),t.getCantidadentrada().toString()};
+        String[] arr={t.getCodigoentrada(),t.getFechaentrada().toString(),t.getColchon().getNombrecolchon(),t.getPreciounitario().toString(),t.getCantidadentrada().toString()};
         defaultTableModel.addRow(arr);
     }
 
@@ -160,7 +164,6 @@ public class EntradaC {
         conexion.abrir();
         entradaV.setProducto((Colchon)conexion.getObject(entrada.getColchon()));
         conexion.cerrar();
-        entradaV.setTipo(entrada.getTipoentrada());
         entradaV.setPrecioUnitario(entrada.getPreciounitario());
         entradaV.setCantidad(entrada.getCantidadentrada());
         entradaV.setPrecioCosto(entrada.getTotalcosto());

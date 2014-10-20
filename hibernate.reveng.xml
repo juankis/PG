@@ -2,11 +2,11 @@
 <!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd">
 <hibernate-reverse-engineering>
   <schema-selection match-catalog="sisinventarios" match-schema="public"/>
-  <table-filter match-name="salida"/>
   <table-filter match-name="deposito"/>
+  <table-filter match-name="colchon"/>
+  <table-filter match-name="medidas"/>
   <table-filter match-name="relacionentradasalida"/>
   <table-filter match-name="esponja"/>
-  <table-filter match-name="medidas"/>
   <table-filter match-name="entrada"/>
-  <table-filter match-name="colchon"/>
+  <table-filter match-name="salida"/>
 </hibernate-reverse-engineering>

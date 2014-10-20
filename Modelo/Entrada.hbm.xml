@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Aug 31, 2014 8:32:33 PM by Hibernate Tools 3.6.0 -->
+<!-- Generated Sep 14, 2014 5:19:06 PM by Hibernate Tools 3.6.0 -->
 <hibernate-mapping>
     <class name="Modelo.Entrada" table="entrada" schema="public">
         <id name="identrada" type="int">
@@ -17,9 +17,6 @@
         <property name="codigoentrada" type="string">
             <column name="codigoentrada" length="256" />
         </property>
-        <property name="tipoentrada" type="java.lang.Boolean">
-            <column name="tipoentrada" />
-        </property>
         <property name="costounitario" type="big_decimal">
             <column name="costounitario" precision="131089" scale="0" />
         </property>
@@ -31,6 +28,9 @@
         </property>
         <property name="totalmayor" type="big_decimal">
             <column name="totalmayor" precision="131089" scale="0" />
+        </property>
+        <property name="stockentrada" type="big_decimal">
+            <column name="stockentrada" precision="131089" scale="0" />
         </property>
         <property name="cantidadentrada" type="big_decimal">
             <column name="cantidadentrada" precision="131089" scale="0" />

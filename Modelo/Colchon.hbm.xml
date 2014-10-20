@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Aug 31, 2014 8:32:33 PM by Hibernate Tools 3.6.0 -->
+<!-- Generated Sep 14, 2014 5:19:06 PM by Hibernate Tools 3.6.0 -->
 <hibernate-mapping>
     <class name="Modelo.Colchon" table="colchon" schema="public">
         <id name="idcolchon" type="int">
@@ -27,7 +27,7 @@
             <column name="tipocolchon" length="256" />
         </property>
         <property name="stockactual" type="big_decimal">
-            <column name="stockactual" precision="131089" scale="0" />
+            <column name="stockactual" precision="256" scale="0" />
         </property>
         <set name="entradas" table="entrada" inverse="true" lazy="true" fetch="select">
             <key>

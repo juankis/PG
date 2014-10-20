@@ -1,5 +1,5 @@
 package Modelo;
-// Generated Aug 31, 2014 8:32:31 PM by Hibernate Tools 3.6.0
+// Generated Sep 14, 2014 5:19:05 PM by Hibernate Tools 3.6.0
 
 
 import java.math.BigDecimal;
@@ -17,11 +17,11 @@ public class Entrada  implements java.io.Serializable {
      private Colchon colchon;
      private Deposito deposito;
      private String codigoentrada;
-     private Boolean tipoentrada;
      private BigDecimal costounitario;
      private BigDecimal preciounitario;
      private BigDecimal totalcosto;
      private BigDecimal totalmayor;
+     private BigDecimal stockentrada;
      private BigDecimal cantidadentrada;
      private Date fechaentrada;
      private String detalleentrada;
@@ -34,16 +34,16 @@ public class Entrada  implements java.io.Serializable {
     public Entrada(int identrada) {
         this.identrada = identrada;
     }
-    public Entrada(int identrada, Colchon colchon, Deposito deposito, String codigoentrada, Boolean tipoentrada, BigDecimal costounitario, BigDecimal preciounitario, BigDecimal totalcosto, BigDecimal totalmayor, BigDecimal cantidadentrada, Date fechaentrada, String detalleentrada, Set relacionentradasalidas) {
+    public Entrada(int identrada, Colchon colchon, Deposito deposito, String codigoentrada, BigDecimal costounitario, BigDecimal preciounitario, BigDecimal totalcosto, BigDecimal totalmayor, BigDecimal stockentrada, BigDecimal cantidadentrada, Date fechaentrada, String detalleentrada, Set relacionentradasalidas) {
        this.identrada = identrada;
        this.colchon = colchon;
        this.deposito = deposito;
        this.codigoentrada = codigoentrada;
-       this.tipoentrada = tipoentrada;
        this.costounitario = costounitario;
        this.preciounitario = preciounitario;
        this.totalcosto = totalcosto;
        this.totalmayor = totalmayor;
+       this.stockentrada = stockentrada;
        this.cantidadentrada = cantidadentrada;
        this.fechaentrada = fechaentrada;
        this.detalleentrada = detalleentrada;
@@ -78,13 +78,6 @@ public class Entrada  implements java.io.Serializable {
     public void setCodigoentrada(String codigoentrada) {
         this.codigoentrada = codigoentrada;
     }
-    public Boolean getTipoentrada() {
-        return this.tipoentrada;
-    }
-    
-    public void setTipoentrada(Boolean tipoentrada) {
-        this.tipoentrada = tipoentrada;
-    }
     public BigDecimal getCostounitario() {
         return this.costounitario;
     }
@@ -112,6 +105,13 @@ public class Entrada  implements java.io.Serializable {
     
     public void setTotalmayor(BigDecimal totalmayor) {
         this.totalmayor = totalmayor;
+    }
+    public BigDecimal getStockentrada() {
+        return this.stockentrada;
+    }
+    
+    public void setStockentrada(BigDecimal stockentrada) {
+        this.stockentrada = stockentrada;
     }
     public BigDecimal getCantidadentrada() {
         return this.cantidadentrada;
