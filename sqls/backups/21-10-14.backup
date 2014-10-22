@@ -1,0 +1,845 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 9.3.4
+-- Dumped by pg_dump version 9.3.4
+-- Started on 2014-10-22 09:36:44
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+--
+-- TOC entry 184 (class 3079 OID 11750)
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- TOC entry 2040 (class 0 OID 0)
+-- Dependencies: 184
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET search_path = public, pg_catalog;
+
+--
+-- TOC entry 191 (class 1255 OID 49535)
+-- Name: actualizarstock(); Type: FUNCTION; Schema: public; Owner: postgres
+--
+
+CREATE FUNCTION actualizarstock() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$
+DECLARE
+    stockActualVar decimal;
+BEGIN
+	stockActualVar:=(select c.stockActual from colchon  c where idcolchon=NEW.idcolchon);
+	update colchon set stockActual = stockActual+NEW.cantidadEntrada where idcolchon=NEW.idcolchon;
+    RETURN null;
+END;
+$$;
+
+
+ALTER FUNCTION public.actualizarstock() OWNER TO postgres;
+
+--
+-- TOC entry 198 (class 1255 OID 49537)
+-- Name: descontarstock(); Type: FUNCTION; Schema: public; Owner: postgres
+--
+
+CREATE FUNCTION descontarstock() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$
+DECLARE
+    requerido decimal:=NEW.cantidadSalida;
+    entradaV Record;
+BEGIN
+	FOR entradaV in select e.* from entrada e where e.idcolchon = NEW.idcolchon  LOOP
+	        IF entradaV.stockEntrada > requerido THEN
+			insert into relacionentradaSalida (cantidadrelentrsal) values (requerido);
+			update entrada set stockEntrada = stockEntrada - requerido;
+			Exit;
+		ELSE
+			insert into relacionentradaSalida (cantidadrelentrsal) values (entradaV.cantidadentrada);
+			update entrada set stockEntrada = 0;
+		END IF;
+		update colchon set stockActual = stockActual - requerido;
+	END LOOP;
+    RETURN null;
+END;
+$$;
+
+
+ALTER FUNCTION public.descontarstock() OWNER TO postgres;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- TOC entry 171 (class 1259 OID 49410)
+-- Name: colchon; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE colchon (
+    idcolchon integer NOT NULL,
+    idesponja integer,
+    idmedidas integer,
+    colorcolchon character(256),
+    tela character(256),
+    nombrecolchon character(256),
+    tipocolchon character(256),
+    stockactual numeric(256,0)
+);
+
+
+ALTER TABLE public.colchon OWNER TO postgres;
+
+--
+-- TOC entry 170 (class 1259 OID 49408)
+-- Name: colchon_idcolchon_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE colchon_idcolchon_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.colchon_idcolchon_seq OWNER TO postgres;
+
+--
+-- TOC entry 2041 (class 0 OID 0)
+-- Dependencies: 170
+-- Name: colchon_idcolchon_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE colchon_idcolchon_seq OWNED BY colchon.idcolchon;
+
+
+--
+-- TOC entry 173 (class 1259 OID 49424)
+-- Name: deposito; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE deposito (
+    iddeposito integer NOT NULL,
+    nombredeposito character(256),
+    direccion character(256),
+    detalledeposito character(256)
+);
+
+
+ALTER TABLE public.deposito OWNER TO postgres;
+
+--
+-- TOC entry 172 (class 1259 OID 49422)
+-- Name: deposito_iddeposito_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE deposito_iddeposito_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.deposito_iddeposito_seq OWNER TO postgres;
+
+--
+-- TOC entry 2042 (class 0 OID 0)
+-- Dependencies: 172
+-- Name: deposito_iddeposito_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE deposito_iddeposito_seq OWNED BY deposito.iddeposito;
+
+
+--
+-- TOC entry 175 (class 1259 OID 49436)
+-- Name: entrada; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE entrada (
+    identrada integer NOT NULL,
+    iddeposito integer,
+    idcolchon integer,
+    codigoentrada character(256),
+    costounitario numeric,
+    preciounitario numeric,
+    totalcosto numeric,
+    totalmayor numeric,
+    stockentrada numeric,
+    cantidadentrada numeric,
+    fechaentrada date,
+    detalleentrada character(256)
+);
+
+
+ALTER TABLE public.entrada OWNER TO postgres;
+
+--
+-- TOC entry 174 (class 1259 OID 49434)
+-- Name: entrada_identrada_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE entrada_identrada_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.entrada_identrada_seq OWNER TO postgres;
+
+--
+-- TOC entry 2043 (class 0 OID 0)
+-- Dependencies: 174
+-- Name: entrada_identrada_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE entrada_identrada_seq OWNED BY entrada.identrada;
+
+
+--
+-- TOC entry 177 (class 1259 OID 49450)
+-- Name: esponja; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE esponja (
+    idesponja integer NOT NULL,
+    material character(256),
+    coloresponja character(256),
+    codigoesponja character(256)
+);
+
+
+ALTER TABLE public.esponja OWNER TO postgres;
+
+--
+-- TOC entry 176 (class 1259 OID 49448)
+-- Name: esponja_idesponja_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE esponja_idesponja_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.esponja_idesponja_seq OWNER TO postgres;
+
+--
+-- TOC entry 2044 (class 0 OID 0)
+-- Dependencies: 176
+-- Name: esponja_idesponja_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE esponja_idesponja_seq OWNED BY esponja.idesponja;
+
+
+--
+-- TOC entry 179 (class 1259 OID 49462)
+-- Name: medidas; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE medidas (
+    idmedidas integer NOT NULL,
+    ancho character(256),
+    largo character(256),
+    grosor character(256),
+    plazas character(256),
+    codigomedidas character(256)
+);
+
+
+ALTER TABLE public.medidas OWNER TO postgres;
+
+--
+-- TOC entry 178 (class 1259 OID 49460)
+-- Name: medidas_idmedidas_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE medidas_idmedidas_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.medidas_idmedidas_seq OWNER TO postgres;
+
+--
+-- TOC entry 2045 (class 0 OID 0)
+-- Dependencies: 178
+-- Name: medidas_idmedidas_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE medidas_idmedidas_seq OWNED BY medidas.idmedidas;
+
+
+--
+-- TOC entry 181 (class 1259 OID 49474)
+-- Name: relacionentradasalida; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE relacionentradasalida (
+    idrelacionentradasalida integer NOT NULL,
+    idsalida integer,
+    identrada integer,
+    cantidadrelentrsal numeric
+);
+
+
+ALTER TABLE public.relacionentradasalida OWNER TO postgres;
+
+--
+-- TOC entry 180 (class 1259 OID 49472)
+-- Name: relacionentradasalida_idrelacionentradasalida_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE relacionentradasalida_idrelacionentradasalida_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.relacionentradasalida_idrelacionentradasalida_seq OWNER TO postgres;
+
+--
+-- TOC entry 2046 (class 0 OID 0)
+-- Dependencies: 180
+-- Name: relacionentradasalida_idrelacionentradasalida_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE relacionentradasalida_idrelacionentradasalida_seq OWNED BY relacionentradasalida.idrelacionentradasalida;
+
+
+--
+-- TOC entry 183 (class 1259 OID 49488)
+-- Name: salida; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE salida (
+    idsalida integer NOT NULL,
+    idcolchon integer,
+    fechasalida date,
+    cantidadsalida numeric,
+    detallesalida character(256)
+);
+
+
+ALTER TABLE public.salida OWNER TO postgres;
+
+--
+-- TOC entry 182 (class 1259 OID 49486)
+-- Name: salida_idsalida_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE salida_idsalida_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.salida_idsalida_seq OWNER TO postgres;
+
+--
+-- TOC entry 2047 (class 0 OID 0)
+-- Dependencies: 182
+-- Name: salida_idsalida_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE salida_idsalida_seq OWNED BY salida.idsalida;
+
+
+--
+-- TOC entry 1868 (class 2604 OID 49413)
+-- Name: idcolchon; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY colchon ALTER COLUMN idcolchon SET DEFAULT nextval('colchon_idcolchon_seq'::regclass);
+
+
+--
+-- TOC entry 1869 (class 2604 OID 49427)
+-- Name: iddeposito; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY deposito ALTER COLUMN iddeposito SET DEFAULT nextval('deposito_iddeposito_seq'::regclass);
+
+
+--
+-- TOC entry 1870 (class 2604 OID 49439)
+-- Name: identrada; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY entrada ALTER COLUMN identrada SET DEFAULT nextval('entrada_identrada_seq'::regclass);
+
+
+--
+-- TOC entry 1871 (class 2604 OID 49453)
+-- Name: idesponja; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY esponja ALTER COLUMN idesponja SET DEFAULT nextval('esponja_idesponja_seq'::regclass);
+
+
+--
+-- TOC entry 1872 (class 2604 OID 49465)
+-- Name: idmedidas; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY medidas ALTER COLUMN idmedidas SET DEFAULT nextval('medidas_idmedidas_seq'::regclass);
+
+
+--
+-- TOC entry 1873 (class 2604 OID 49477)
+-- Name: idrelacionentradasalida; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY relacionentradasalida ALTER COLUMN idrelacionentradasalida SET DEFAULT nextval('relacionentradasalida_idrelacionentradasalida_seq'::regclass);
+
+
+--
+-- TOC entry 1874 (class 2604 OID 49491)
+-- Name: idsalida; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY salida ALTER COLUMN idsalida SET DEFAULT nextval('salida_idsalida_seq'::regclass);
+
+
+--
+-- TOC entry 2020 (class 0 OID 49410)
+-- Dependencies: 171
+-- Data for Name: colchon; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY colchon (idcolchon, idesponja, idmedidas, colorcolchon, tela, nombrecolchon, tipocolchon, stockactual) FROM stdin;
+1	0	0	                                                                                                                                                                                                                                                                	                                                                                                                                                                                                                                                                	p1                                                                                                                                                                                                                                                              	p1                                                                                                                                                                                                                                                              	0
+\.
+
+
+--
+-- TOC entry 2048 (class 0 OID 0)
+-- Dependencies: 170
+-- Name: colchon_idcolchon_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('colchon_idcolchon_seq', 1, false);
+
+
+--
+-- TOC entry 2022 (class 0 OID 49424)
+-- Dependencies: 173
+-- Data for Name: deposito; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY deposito (iddeposito, nombredeposito, direccion, detalledeposito) FROM stdin;
+0	d1                                                                                                                                                                                                                                                              	san martin                                                                                                                                                                                                                                                      	                                                                                                                                                                                                                                                                
+\.
+
+
+--
+-- TOC entry 2049 (class 0 OID 0)
+-- Dependencies: 172
+-- Name: deposito_iddeposito_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('deposito_iddeposito_seq', 1, false);
+
+
+--
+-- TOC entry 2024 (class 0 OID 49436)
+-- Dependencies: 175
+-- Data for Name: entrada; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY entrada (identrada, iddeposito, idcolchon, codigoentrada, costounitario, preciounitario, totalcosto, totalmayor, stockentrada, cantidadentrada, fechaentrada, detalleentrada) FROM stdin;
+1	0	1	1                                                                                                                                                                                                                                                               	1	2	10	20	0	10	2014-10-21	                                                                                                                                                                                                                                                                
+\.
+
+
+--
+-- TOC entry 2050 (class 0 OID 0)
+-- Dependencies: 174
+-- Name: entrada_identrada_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('entrada_identrada_seq', 1, false);
+
+
+--
+-- TOC entry 2026 (class 0 OID 49450)
+-- Dependencies: 177
+-- Data for Name: esponja; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY esponja (idesponja, material, coloresponja, codigoesponja) FROM stdin;
+0	economico                                                                                                                                                                                                                                                       	blanco                                                                                                                                                                                                                                                          	economico/blanco                                                                                                                                                                                                                                                
+\.
+
+
+--
+-- TOC entry 2051 (class 0 OID 0)
+-- Dependencies: 176
+-- Name: esponja_idesponja_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('esponja_idesponja_seq', 1, false);
+
+
+--
+-- TOC entry 2028 (class 0 OID 49462)
+-- Dependencies: 179
+-- Data for Name: medidas; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY medidas (idmedidas, ancho, largo, grosor, plazas, codigomedidas) FROM stdin;
+0	                                                                                                                                                                                                                                                                	                                                                                                                                                                                                                                                                	15                                                                                                                                                                                                                                                              	2                                                                                                                                                                                                                                                               	2x15                                                                                                                                                                                                                                                            
+\.
+
+
+--
+-- TOC entry 2052 (class 0 OID 0)
+-- Dependencies: 178
+-- Name: medidas_idmedidas_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('medidas_idmedidas_seq', 1, false);
+
+
+--
+-- TOC entry 2030 (class 0 OID 49474)
+-- Dependencies: 181
+-- Data for Name: relacionentradasalida; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY relacionentradasalida (idrelacionentradasalida, idsalida, identrada, cantidadrelentrsal) FROM stdin;
+29	\N	\N	5
+30	\N	\N	10
+31	\N	\N	10
+\.
+
+
+--
+-- TOC entry 2053 (class 0 OID 0)
+-- Dependencies: 180
+-- Name: relacionentradasalida_idrelacionentradasalida_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('relacionentradasalida_idrelacionentradasalida_seq', 31, true);
+
+
+--
+-- TOC entry 2032 (class 0 OID 49488)
+-- Dependencies: 183
+-- Data for Name: salida; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY salida (idsalida, idcolchon, fechasalida, cantidadsalida, detallesalida) FROM stdin;
+\.
+
+
+--
+-- TOC entry 2054 (class 0 OID 0)
+-- Dependencies: 182
+-- Name: salida_idsalida_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('salida_idsalida_seq', 1, false);
+
+
+--
+-- TOC entry 1877 (class 2606 OID 49418)
+-- Name: pk_colchon; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY colchon
+    ADD CONSTRAINT pk_colchon PRIMARY KEY (idcolchon);
+
+
+--
+-- TOC entry 1882 (class 2606 OID 49432)
+-- Name: pk_deposito; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY deposito
+    ADD CONSTRAINT pk_deposito PRIMARY KEY (iddeposito);
+
+
+--
+-- TOC entry 1885 (class 2606 OID 49444)
+-- Name: pk_entrada; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY entrada
+    ADD CONSTRAINT pk_entrada PRIMARY KEY (identrada);
+
+
+--
+-- TOC entry 1890 (class 2606 OID 49458)
+-- Name: pk_esponja; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY esponja
+    ADD CONSTRAINT pk_esponja PRIMARY KEY (idesponja);
+
+
+--
+-- TOC entry 1893 (class 2606 OID 49470)
+-- Name: pk_medidas; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY medidas
+    ADD CONSTRAINT pk_medidas PRIMARY KEY (idmedidas);
+
+
+--
+-- TOC entry 1895 (class 2606 OID 49482)
+-- Name: pk_relacionentradasalida; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY relacionentradasalida
+    ADD CONSTRAINT pk_relacionentradasalida PRIMARY KEY (idrelacionentradasalida);
+
+
+--
+-- TOC entry 1900 (class 2606 OID 49496)
+-- Name: pk_salida; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY salida
+    ADD CONSTRAINT pk_salida PRIMARY KEY (idsalida);
+
+
+--
+-- TOC entry 1875 (class 1259 OID 49419)
+-- Name: colchon_pk; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE UNIQUE INDEX colchon_pk ON colchon USING btree (idcolchon);
+
+
+--
+-- TOC entry 1880 (class 1259 OID 49433)
+-- Name: deposito_pk; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE UNIQUE INDEX deposito_pk ON deposito USING btree (iddeposito);
+
+
+--
+-- TOC entry 1883 (class 1259 OID 49445)
+-- Name: entrada_pk; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE UNIQUE INDEX entrada_pk ON entrada USING btree (identrada);
+
+
+--
+-- TOC entry 1888 (class 1259 OID 49459)
+-- Name: esponja_pk; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE UNIQUE INDEX esponja_pk ON esponja USING btree (idesponja);
+
+
+--
+-- TOC entry 1891 (class 1259 OID 49471)
+-- Name: medidas_pk; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE UNIQUE INDEX medidas_pk ON medidas USING btree (idmedidas);
+
+
+--
+-- TOC entry 1896 (class 1259 OID 49483)
+-- Name: relacionentradasalida_pk; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE UNIQUE INDEX relacionentradasalida_pk ON relacionentradasalida USING btree (idrelacionentradasalida);
+
+
+--
+-- TOC entry 1897 (class 1259 OID 49484)
+-- Name: relationship_1_fk; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX relationship_1_fk ON relacionentradasalida USING btree (identrada);
+
+
+--
+-- TOC entry 1898 (class 1259 OID 49485)
+-- Name: relationship_2_fk; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX relationship_2_fk ON relacionentradasalida USING btree (idsalida);
+
+
+--
+-- TOC entry 1886 (class 1259 OID 49446)
+-- Name: relationship_3_fk; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX relationship_3_fk ON entrada USING btree (iddeposito);
+
+
+--
+-- TOC entry 1887 (class 1259 OID 49447)
+-- Name: relationship_4_fk; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX relationship_4_fk ON entrada USING btree (idcolchon);
+
+
+--
+-- TOC entry 1901 (class 1259 OID 49498)
+-- Name: relationship_5_fk; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX relationship_5_fk ON salida USING btree (idcolchon);
+
+
+--
+-- TOC entry 1878 (class 1259 OID 49420)
+-- Name: relationship_6_fk; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX relationship_6_fk ON colchon USING btree (idesponja);
+
+
+--
+-- TOC entry 1879 (class 1259 OID 49421)
+-- Name: relationship_7_fk; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX relationship_7_fk ON colchon USING btree (idmedidas);
+
+
+--
+-- TOC entry 1902 (class 1259 OID 49497)
+-- Name: salida_pk; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE UNIQUE INDEX salida_pk ON salida USING btree (idsalida);
+
+
+--
+-- TOC entry 1910 (class 2620 OID 49536)
+-- Name: actualizarstock; Type: TRIGGER; Schema: public; Owner: postgres
+--
+
+CREATE TRIGGER actualizarstock AFTER INSERT ON entrada FOR EACH ROW EXECUTE PROCEDURE actualizarstock();
+
+
+--
+-- TOC entry 1911 (class 2620 OID 49539)
+-- Name: descontarstock; Type: TRIGGER; Schema: public; Owner: postgres
+--
+
+CREATE TRIGGER descontarstock BEFORE INSERT ON salida FOR EACH ROW EXECUTE PROCEDURE descontarstock();
+
+
+--
+-- TOC entry 1903 (class 2606 OID 49499)
+-- Name: fk_colchon_relations_esponja; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY colchon
+    ADD CONSTRAINT fk_colchon_relations_esponja FOREIGN KEY (idesponja) REFERENCES esponja(idesponja) ON UPDATE RESTRICT ON DELETE RESTRICT;
+
+
+--
+-- TOC entry 1904 (class 2606 OID 49504)
+-- Name: fk_colchon_relations_medidas; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY colchon
+    ADD CONSTRAINT fk_colchon_relations_medidas FOREIGN KEY (idmedidas) REFERENCES medidas(idmedidas) ON UPDATE RESTRICT ON DELETE RESTRICT;
+
+
+--
+-- TOC entry 1906 (class 2606 OID 49514)
+-- Name: fk_entrada_relations_colchon; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY entrada
+    ADD CONSTRAINT fk_entrada_relations_colchon FOREIGN KEY (idcolchon) REFERENCES colchon(idcolchon) ON UPDATE RESTRICT ON DELETE RESTRICT;
+
+
+--
+-- TOC entry 1905 (class 2606 OID 49509)
+-- Name: fk_entrada_relations_deposito; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY entrada
+    ADD CONSTRAINT fk_entrada_relations_deposito FOREIGN KEY (iddeposito) REFERENCES deposito(iddeposito) ON UPDATE RESTRICT ON DELETE RESTRICT;
+
+
+--
+-- TOC entry 1907 (class 2606 OID 49519)
+-- Name: fk_relacion_relations_entrada; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY relacionentradasalida
+    ADD CONSTRAINT fk_relacion_relations_entrada FOREIGN KEY (identrada) REFERENCES entrada(identrada) ON UPDATE RESTRICT ON DELETE RESTRICT;
+
+
+--
+-- TOC entry 1908 (class 2606 OID 49524)
+-- Name: fk_relacion_relations_salida; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY relacionentradasalida
+    ADD CONSTRAINT fk_relacion_relations_salida FOREIGN KEY (idsalida) REFERENCES salida(idsalida) ON UPDATE RESTRICT ON DELETE RESTRICT;
+
+
+--
+-- TOC entry 1909 (class 2606 OID 49529)
+-- Name: fk_salida_relations_colchon; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY salida
+    ADD CONSTRAINT fk_salida_relations_colchon FOREIGN KEY (idcolchon) REFERENCES colchon(idcolchon) ON UPDATE RESTRICT ON DELETE RESTRICT;
+
+
+--
+-- TOC entry 2039 (class 0 OID 0)
+-- Dependencies: 5
+-- Name: public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM postgres;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+-- Completed on 2014-10-22 09:36:44
+
+--
+-- PostgreSQL database dump complete
+--
+
