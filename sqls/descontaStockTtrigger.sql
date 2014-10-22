@@ -1,26 +1,29 @@
 ﻿
-CREATE OR REPLACE FUNCTION descontarStock()
+CREATE OR REPLACE FUNCTION descontarstock()
   RETURNS trigger AS
 $BODY$
 DECLARE
     requerido decimal:=NEW.cantidadSalida;
-    entredaV Record;
+    entradaV Record;
 BEGIN
-	FOR entredaV in select e.* from entrada e where e.identrada and e.stockactual>0 LOOP
-		IF entradaV.cantidadentrada > requerido THEN
+	FOR entradaV in select e.* from entrada e where e.idcolchon = NEW.idcolchon and e.stockEntrada > 0 LOOP
+	        IF entradaV.stockEntrada > requerido THEN
 			insert into relacionentradaSalida (cantidadrelentrsal) values (requerido);
-			update entrada set stockEntrada = cantidadStock - requerido;
-			EXIT;
+			update entrada set stockEntrada = stockEntrada - requerido;
+			Exit;
 		ELSE
 			insert into relacionentradaSalida (cantidadrelentrsal) values (entradaV.cantidadentrada);
 			update entrada set stockEntrada = 0;
 		END IF;
-		update colchon set cantidadStock = cantidadStock - requerido;
+		update colchon set stockActual = stockActual - requerido;
 	END LOOP;
     RETURN null;
 END;
 $BODY$
-  LANGUAGE plpgsql;
+  LANGUAGE plpgsql VOLATILE
+  COST 100;
+ALTER FUNCTION descontarstock()
+  OWNER TO postgres;
 
 
 CREATE TRIGGER descontarStock
