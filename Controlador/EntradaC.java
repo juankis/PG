@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -33,6 +34,9 @@ public class EntradaC {
     public EntradaC(EntradaV transaccionV){
         this.entradaV=transaccionV;
         validacion = new Validacion();
+    }
+    public EntradaC(){
+        conexion.getListaEntradas(getEntradas());
     }
     
     public boolean guardar() {
@@ -123,9 +127,9 @@ public class EntradaC {
         this.listaProductos = listaProductos;
     }
 
-    public void llenarTablaEntradas(JTable jTable1) {
+   public void llenarTablaEntradas(JTable jTable1) {
         setEntradas(new ArrayList<Entrada>());
-        conexion.getListaTransacciones(getEntradas());
+        conexion.getListaEntradas(getEntradas());
         conexion.abrir();
         
         for(int i=0;i<entradas.size();i++){

@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Sep 14, 2014 5:19:06 PM by Hibernate Tools 3.6.0 -->
+<!-- Generated 27-oct-2014 19:38:50 by Hibernate Tools 3.6.0 -->
 <hibernate-mapping>
     <class name="Modelo.Salida" table="salida" schema="public">
         <id name="idsalida" type="int">
@@ -14,8 +14,8 @@
         <property name="fechasalida" type="date">
             <column name="fechasalida" length="13" />
         </property>
-        <property name="cantidadsalida" type="big_decimal">
-            <column name="cantidadsalida" precision="131089" scale="0" />
+        <property name="cantidadsalida" type="java.lang.Float">
+            <column name="cantidadsalida" precision="8" scale="8" />
         </property>
         <property name="detallesalida" type="string">
             <column name="detallesalida" length="256" />

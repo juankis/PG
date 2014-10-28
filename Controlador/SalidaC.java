@@ -7,8 +7,11 @@
 package Controlador;
 
 import Modelo.Colchon;
+import Modelo.Entrada;
 import Modelo.Salida;
 import Vista.SalidaV;
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
@@ -34,8 +37,8 @@ public class SalidaC {
             colchon = colchonC.getColchon(salidaV.getProductos().getModel().getSelectedItem().toString());
             
         if(validar()){
-            salida=new Salida(id,colchon,
-            salidaV.getFecha(), salidaV.getCantidad(),salidaV.getDetalle(), null);
+            descontarEntradas();
+            salida=new Salida(id,colchon,salidaV.getFecha(), salidaV.getCantidad,salidaV.getDetalle(), null);
             conexion.guardar(salida);
             return true;
         }else{
@@ -44,7 +47,25 @@ public class SalidaC {
         }
         
     }
-
+    private void descontarEntradas(){
+    
+    BigDecimal requerido = salidaV.getCantidad();
+    EntradaC entradasC=new EntradaC();
+    ArrayList<Entrada> entradas = entradasC.getEntradas();
+    RelacionEntradaSalidaC relacion;
+        
+        for(Entrada e: entradas){
+            int resCompare = e.getStockentrada().compareTo(requerido);
+            if(resCompare >=0) {
+                relacion= new RelacionEntradaSalidaC(salida, e, requerido.intValue());
+                relacion.guardar();
+                e.setStockentrada(e.getStockentrada() - requerido);
+            } else {
+                
+            }
+        }
+    }
+    
     private boolean validar() {
         int res = colchon.getStockactual().compareTo(salidaV.getCantidad());
         return res>=0;

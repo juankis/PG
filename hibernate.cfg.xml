@@ -8,11 +8,11 @@
     <property name="hibernate.connection.username">postgres</property>
     <property name="hibernate.connection.password">postgres</property>
     <mapping resource="Modelo/Medidas.hbm.xml"/>
+    <mapping resource="Modelo/Deposito.hbm.xml"/>
     <mapping resource="Modelo/Relacionentradasalida.hbm.xml"/>
+    <mapping resource="Modelo/Salida.hbm.xml"/>
     <mapping resource="Modelo/Entrada.hbm.xml"/>
     <mapping resource="Modelo/Esponja.hbm.xml"/>
-    <mapping resource="Modelo/Salida.hbm.xml"/>
     <mapping resource="Modelo/Colchon.hbm.xml"/>
-    <mapping resource="Modelo/Deposito.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

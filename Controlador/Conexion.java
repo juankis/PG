@@ -130,7 +130,7 @@ public class Conexion {
         session = sessionFactory.openSession();
     }
 
-    void getListaTransacciones(ArrayList<Entrada> entradas) {
+    void getListaEntradas(ArrayList<Entrada> entradas) {
         session = sessionFactory.openSession();
         query = session.createQuery("SELECT d FROM Entrada d");
         entradas.addAll(query.list());

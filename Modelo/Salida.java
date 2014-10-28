@@ -1,8 +1,7 @@
 package Modelo;
-// Generated Sep 14, 2014 5:19:05 PM by Hibernate Tools 3.6.0
+// Generated 27-oct-2014 19:38:49 by Hibernate Tools 3.6.0
 
 
-import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -16,7 +15,7 @@ public class Salida  implements java.io.Serializable {
      private int idsalida;
      private Colchon colchon;
      private Date fechasalida;
-     private BigDecimal cantidadsalida;
+     private Float cantidadsalida;
      private String detallesalida;
      private Set relacionentradasalidas = new HashSet(0);
 
@@ -27,7 +26,7 @@ public class Salida  implements java.io.Serializable {
     public Salida(int idsalida) {
         this.idsalida = idsalida;
     }
-    public Salida(int idsalida, Colchon colchon, Date fechasalida, BigDecimal cantidadsalida, String detallesalida, Set relacionentradasalidas) {
+    public Salida(int idsalida, Colchon colchon, Date fechasalida, Float cantidadsalida, String detallesalida, Set relacionentradasalidas) {
        this.idsalida = idsalida;
        this.colchon = colchon;
        this.fechasalida = fechasalida;
@@ -57,11 +56,11 @@ public class Salida  implements java.io.Serializable {
     public void setFechasalida(Date fechasalida) {
         this.fechasalida = fechasalida;
     }
-    public BigDecimal getCantidadsalida() {
+    public Float getCantidadsalida() {
         return this.cantidadsalida;
     }
     
-    public void setCantidadsalida(BigDecimal cantidadsalida) {
+    public void setCantidadsalida(Float cantidadsalida) {
         this.cantidadsalida = cantidadsalida;
     }
     public String getDetallesalida() {
