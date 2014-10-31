@@ -31,11 +31,12 @@ public class EntradaC {
     private ArrayList<Deposito> listaDepositos;
     private Validacion validacion;
     
-    public EntradaC(EntradaV transaccionV){
-        this.entradaV=transaccionV;
+    public EntradaC(EntradaV entradaV){
+        this.entradaV=entradaV;
         validacion = new Validacion();
     }
     public EntradaC(){
+        entradas=new ArrayList<Entrada>();
         conexion.getListaEntradas(getEntradas());
     }
     

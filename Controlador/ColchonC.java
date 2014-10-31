@@ -119,7 +119,7 @@ public class ColchonC {
        }catch (NullPointerException e){
            codigoMedidas=null;
        }
-       String[] arr={c.getNombrecolchon(),c.getColorcolchon(),c.getTela(),codigoEsponja,codigoMedidas,c.getTipocolchon()};
+       String[] arr={c.getNombrecolchon(),c.getStockactual().toString(),codigoEsponja,codigoMedidas};
        TableModelProductos.addRow(arr);
     }
 

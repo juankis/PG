@@ -6,6 +6,7 @@
 
 package Vista;
 
+import Controlador.ColchonC;
 import Controlador.EntradaC;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -21,8 +22,9 @@ public class Menu extends javax.swing.JFrame {
     /**
      * Creates new form Menu
      */
-    EntradaC transaccionC;
-    EntradaV transaccionV;
+    EntradaC entradaC;
+    EntradaV entradaV;
+    ColchonC conchonC;
     //SalidaC salidaC;
     SalidaV salidaV;
     public Menu() {
@@ -30,7 +32,8 @@ public class Menu extends javax.swing.JFrame {
         initComponents();
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
-        llenarTablaTransacciones();
+        //llenarTablaTransacciones();
+        llenarTablaProductos();
     }
     
 
@@ -50,8 +53,9 @@ public class Menu extends javax.swing.JFrame {
         jButtonProductos = new javax.swing.JButton();
         jButtonEditar = new javax.swing.JButton();
         jButtonEliminar = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jButtonKardex = new javax.swing.JButton();
         jButtonSalida = new javax.swing.JButton();
+        jButtonDepositos1 = new javax.swing.JButton();
         fondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -63,7 +67,7 @@ public class Menu extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Codigo", "Fecha", "Producto", "Movimiento", "Precio Unitario", "Cantidad"
+                "Nombre", "Stock", "Colchon", "Medidas"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -111,14 +115,14 @@ public class Menu extends javax.swing.JFrame {
         jPanel1.add(jButtonEliminar);
         jButtonEliminar.setBounds(0, 160, 110, 28);
 
-        jButton2.setText("Depositos");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jButtonKardex.setText("Kardex");
+        jButtonKardex.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jButtonKardexActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2);
-        jButton2.setBounds(250, 10, 130, 65);
+        jPanel1.add(jButtonKardex);
+        jButtonKardex.setBounds(390, 10, 130, 65);
 
         jButtonSalida.setMnemonic('t');
         jButtonSalida.setText("Salida");
@@ -129,6 +133,15 @@ public class Menu extends javax.swing.JFrame {
         });
         jPanel1.add(jButtonSalida);
         jButtonSalida.setBounds(0, 220, 110, 28);
+
+        jButtonDepositos1.setText("Depositos");
+        jButtonDepositos1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonDepositos1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButtonDepositos1);
+        jButtonDepositos1.setBounds(250, 10, 130, 65);
 
         fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fondo.jpg"))); // NOI18N
         jPanel1.add(fondo);
@@ -155,8 +168,8 @@ public class Menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonEntradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEntradaActionPerformed
-        transaccionV=new EntradaV(this);
-        transaccionV.setVisible(true);
+        entradaV=new EntradaV(this);
+        entradaV.setVisible(true);
     }//GEN-LAST:event_jButtonEntradaActionPerformed
 
     private void jButtonProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonProductosActionPerformed
@@ -173,15 +186,19 @@ public class Menu extends javax.swing.JFrame {
         eliminarProducto();
     }//GEN-LAST:event_jButtonEliminarActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jButtonKardexActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonKardexActionPerformed
         DepositoV dep=new DepositoV();
         dep.setVisible(rootPaneCheckingEnabled);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jButtonKardexActionPerformed
 
     private void jButtonSalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalidaActionPerformed
        salidaV = new SalidaV(this);
        salidaV.setVisible(rootPaneCheckingEnabled);
     }//GEN-LAST:event_jButtonSalidaActionPerformed
+
+    private void jButtonDepositos1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDepositos1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonDepositos1ActionPerformed
 
     public int filaSeleccionada(){
         int fila_select = jTable1.getSelectedRow();
@@ -226,10 +243,11 @@ public class Menu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel fondo;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButtonDepositos1;
     private javax.swing.JButton jButtonEditar;
     private javax.swing.JButton jButtonEliminar;
     private javax.swing.JButton jButtonEntrada;
+    private javax.swing.JButton jButtonKardex;
     private javax.swing.JButton jButtonProductos;
     private javax.swing.JButton jButtonSalida;
     private javax.swing.JPanel jPanel1;
@@ -238,23 +256,23 @@ public class Menu extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
     
     private void llenarTablaTransacciones(){
-       transaccionC=new EntradaC(transaccionV);
-       transaccionC.llenarTablaEntradas(jTable1);
+       entradaC=new EntradaC(entradaV);
+       entradaC.llenarTablaEntradas(jTable1);
     }
 
     private void verTransaccion() {
         if(filaSeleccionada()>=0){
-            transaccionV=new EntradaV(this);
-            transaccionC.establecerTransaccionIndex(filaSeleccionada());
-            transaccionC.getEntradas(transaccionV);
-            transaccionV.setVisible(true);
+            entradaV=new EntradaV(this);
+            entradaC.establecerTransaccionIndex(filaSeleccionada());
+            entradaC.getEntradas(entradaV);
+            entradaV.setVisible(true);
         }
         
     }
     private void eliminarProducto(){
         if(filaSeleccionada()>=0){
-            transaccionC.establecerTransaccionIndex(filaSeleccionada());
-            if(!transaccionC.eliminarEntrada())
+            entradaC.establecerTransaccionIndex(filaSeleccionada());
+            if(!entradaC.eliminarEntrada())
                 JOptionPane.showMessageDialog(rootPane, "No se pudo eliminar, la transaccion esta relacionado");
             actualizar();
         }
@@ -276,6 +294,11 @@ public class Menu extends javax.swing.JFrame {
         for(int tam=dm.getRowCount()-1;tam>=0;tam--){
             dm.removeRow(tam);
         }
+    }
+
+    private void llenarTablaProductos() {
+        conchonC=new ColchonC();
+        conchonC.llenarJTableProductos(jTable1);
     }
     
 }

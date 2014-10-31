@@ -11,6 +11,7 @@ import Modelo.Entrada;
 import Modelo.Salida;
 import Vista.SalidaV;
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -38,7 +39,7 @@ public class SalidaC {
             
         if(validar()){
             descontarEntradas();
-            salida=new Salida(id,colchon,salidaV.getFecha(), salidaV.getCantidad,salidaV.getDetalle(), null);
+            salida=new Salida(id,colchon,salidaV.getFecha(), salidaV.getCantidad(), salidaV.getDetalle(), null);
             conexion.guardar(salida);
             return true;
         }else{
@@ -56,13 +57,28 @@ public class SalidaC {
         
         for(Entrada e: entradas){
             int resCompare = e.getStockentrada().compareTo(requerido);
+            
             if(resCompare >=0) {
-                relacion= new RelacionEntradaSalidaC(salida, e, requerido.intValue());
+                relacion= new RelacionEntradaSalidaC(salida, e, requerido);
                 relacion.guardar();
-                e.setStockentrada(e.getStockentrada() - requerido);
-            } else {
                 
-            }
+                colchon.setStockactual(e.getStockentrada().subtract(requerido));
+                conexion.modificar(colchon);
+                
+                e.setStockentrada(e.getStockentrada().subtract(requerido));
+                conexion.modificar(e);
+                break;
+            } else {
+                colchon.setStockactual(colchon.getStockactual().subtract(e.getStockentrada()));
+                conexion.modificar(colchon);
+                requerido=requerido.subtract(e.getStockentrada());
+                
+                relacion= new RelacionEntradaSalidaC(salida, e, e.getStockentrada());
+                relacion.guardar();
+                
+                e.setStockentrada(BigDecimal.ZERO);
+                conexion.modificar(e);
+            }   
         }
     }
     

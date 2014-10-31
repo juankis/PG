@@ -20,9 +20,9 @@ public class RelacionEntradaSalidaC {
      private Conexion conexion=new Conexion();
      Relacionentradasalida relacion;
      
-    public RelacionEntradaSalidaC(Salida idSalida, Entrada idEntrada, int cantidadrelentrsal){
+    public RelacionEntradaSalidaC(Salida idSalida, Entrada idEntrada, BigDecimal cantidadrelentrsal){
         int id=conexion.getNextValue("SELECT MAX(idrelacionentradasalida) FROM Relacionentradasalida");
-        relacion = new Relacionentradasalida(id, idEntrada, idSalida, new BigDecimal(cantidadrelentrsal));
+        relacion = new Relacionentradasalida(id, idEntrada, idSalida, cantidadrelentrsal);
     }
     
     public void guardar() {
